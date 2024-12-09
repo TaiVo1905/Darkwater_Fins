@@ -9,8 +9,8 @@
         }
 
         protected function model($model) {
-            if(file_exists("./app/models/" . $view . "Model.php")) {
-                require_once("./app/models/" . $view . "Model.php");
+            if(file_exists("./app/models/" . $model . "Model.php")) {
+                require_once("./app/models/" . $model . "Model.php");
             } else {
                 die($model . "Model.php does not exist.");
             }

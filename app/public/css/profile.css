@@ -1,0 +1,77 @@
+.profile-card{
+    border: 1px solid #B8BBB3;
+    border-radius: 10px;
+    overflow: hidden;
+    /* height: 100vh; */
+    /* position: relative; */
+}
+.profile-title{
+    color: black;
+}
+.profile-card .profile-header{
+    background: linear-gradient(90deg, #0066ff, #66ccff);
+    height: 150px;
+    position: relative;
+}
+
+.profile-card .profile-footer{
+    height: 150px;
+}
+
+.image-container {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    cursor: pointer;
+    bottom: -60px;
+    left: 15%;
+}
+  
+.image-user {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+  
+.icon-overlay {
+    position: absolute;
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+  
+.icon-overlay .camera-icon {
+font-size: 2rem;
+color: white;
+}
+  
+.image-container:hover .icon-overlay {
+opacity: 1;
+}
+  
+.file-input {
+display: none;
+}
+.camera-image-user{
+    color: white;
+    font-size: 30px;
+    line-height: 30px;
+}
+/* phần nhập liệu */
+.profile-update-file{
+    border: 1px solid #B8BBB3;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.profile-update-file, .profile-card{
+    border-radius: 0 !important;
+}
