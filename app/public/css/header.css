@@ -1,0 +1,74 @@
+.header_container {
+    background-color: var(--primary-color2);
+}
+
+.header {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.nav_text {
+    display: flex;
+    color: var(--primary-color1);
+    margin-top: 49px;
+    gap: 80px;
+}
+
+.logo img {
+    width: 263px;
+    height: 110px;
+    object-fit: cover;
+    margin-left: -55px;
+}
+
+.icon_header {
+    color: var(--primary-color1);
+    margin-top: 49px;
+    display: flex;
+    gap: 80px;
+    margin-left: 80px;
+}
+
+.nav_text p:hover {
+    color: var(--primary-color3);
+    cursor: pointer;
+}
+
+.icon_header i:hover {
+    color: var(--primary-color3);
+    cursor: pointer;
+}
+
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    top: -21px;
+}
+
+.search-input {
+    padding: 5px 10px 5px 30px;
+    width: 0;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    outline: none;
+    font-size: 15px;
+    transition: width 0.3s ease-in-out;
+    visibility: hidden;
+}
+
+.icon-header-search:hover .search-input {
+    width: 200px;
+    visibility: visible;
+}
+
+.icon-header-search i {
+    position: absolute;
+    left: 10px;
+    color: var(--primary-color1);
+    transition: color 0.3s ease-in-out;
+}
+
+.icon-header-search:hover i {
+    color: var(--primary-color3);
+}
