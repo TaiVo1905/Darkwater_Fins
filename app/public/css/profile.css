@@ -1,12 +1,12 @@
 .profile-card{
-    border: 1px solid #B8BBB3;
+    border: 1px solid var(--primary-color4);
     border-radius: 10px;
     overflow: hidden;
     /* height: 100vh; */
     /* position: relative; */
 }
 .profile-title{
-    color: black;
+    color: var(--primary-color2);
 }
 .profile-card .profile-header{
     background: linear-gradient(90deg, #0066ff, #66ccff);
@@ -50,8 +50,8 @@
 }
   
 .icon-overlay .camera-icon {
-font-size: 2rem;
-color: white;
+    font-size: 2rem;
+    color: var(--primary-color1);
 }
   
 .image-container:hover .icon-overlay {
@@ -62,13 +62,13 @@ opacity: 1;
 display: none;
 }
 .camera-image-user{
-    color: white;
+    color: var(--primary-color1);
     font-size: 30px;
     line-height: 30px;
 }
 /* phần nhập liệu */
 .profile-update-file{
-    border: 1px solid #B8BBB3;
+    border: 1px solid var(--primary-color4);
     border-radius: 10px;
     overflow: hidden;
 }
