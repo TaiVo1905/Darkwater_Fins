@@ -1,5 +1,8 @@
 .header_container {
     background-color: var(--primary-color2);
+    position: sticky; 
+    top: 0; 
+    z-index: 1000;
 }
 
 .header {
@@ -43,7 +46,7 @@
     position: relative;
     display: flex;
     align-items: center;
-    top: -21px;
+    top: -17px;
 }
 
 .search-input {

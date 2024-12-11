@@ -1,0 +1,102 @@
+.container {
+    padding: 20px 70px 20px 90px;
+}
+
+.title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 70px 0;
+}
+
+.card {
+    position: relative;
+    width: 18rem;
+    border: none !important;
+    background-color: transparent;
+    text-align: center;
+    margin: 20px 10px;
+}
+
+.card-img-top {
+    height: 270px;
+    object-fit: cover;
+    transition: opacity 0.3s;
+}
+
+.icon-overlay {
+    position: absolute;
+    top: -120px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    /* Ban đầu icon nó mờ k thấy nhưng khi hover vào thì nó tăng lên 1 */
+    /* transition: opacity 0.1s ease-in-out; */
+}
+
+.icon-overlay i {
+    font-size: 2rem;
+    margin: 0 10px;
+    color:var(--primary-color1);
+    cursor: pointer;
+    transition: color 0.5s ease-in-out,
+        border 0.5s ease-in-out,
+        padding 0.5s ease-in-out,
+        background-color 0.5s ease-in-out;
+}
+
+.card:hover .card-img-top {
+    opacity: 0.3;
+}
+
+.card:hover .icon-overlay {
+    opacity: 1;
+}
+
+.card:hover .icon-overlay i {
+    color: var(--primary-color2);
+    border: 1px solid var(--primary-color2);
+    padding: 4px 10px;
+}
+
+.card:hover .icon-overlay i:hover {
+    color:var(--primary-color1);
+    background-color: var(--primary-color2);
+}
+
+.card-title {
+    font-weight: 500;
+    font-size: 1.2rem;
+    margin: 35px 0;
+    height: 55px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.card:hover .card-title {
+    color: var(--primary-color3);
+}
+
+.card-text {
+    color: #8C8C8C;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.fish-price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-color3);
+    margin-top: 30px;
+}
+
+.row {
+    justify-content: center;
+}
