@@ -12,14 +12,15 @@
 </head>
 <body>
     <?php include_once './app/components/banner.php';
-        echo showBanner('Home', ['Home','Profile']);
+        echo showBanner('Account setting', ['Home','Profile']);
+        
     ?>
     <div class="container mx-auto mt-5" style="width:50%; ">
         <h3 class = "profile-title mb-4">Profile Image</h3>
         <div class="profile-card">
             <div class="profile-header">
                 <div class="image-container">
-                    <img id = "img-user" src="" alt="User Img" class="image-user">
+                    <img id = "img-user" src="app/public/img/background/backgroundHeader.png" alt="User Img" class="image-user">
                     <div class="icon-overlay">
                         <i  class="bi bi-camera-fill camera-image-user"></i>
                     </div>
@@ -32,23 +33,23 @@
         <div class="profile-update-file p-5 pt-3 ">
             <div class="mb-3">
                 <label for="fullname-user" class="form-label">Full name</label>
-                <input type="text" class="form-control" id="fullname-user" value="">
+                <input type="text" class="form-control" id="fullname-user" value="<?php echo $data -> user_name?>">
             </div>
             <div class="mb-3">
                 <label for="email-user" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email-user"  readonly >
+                <input type="email" class="form-control" id="email-user"  readonly value="<?php echo $data -> email?>">
             </div>
             <div class="mb-3">
                 <label for="password-user" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password-user">
+                <input type="text" class="form-control" id="password-user"value="<?php echo $data -> passwords?>">
             </div>
             <div class="mb-3">
                 <label for="phone-user" class="form-label">Phone</label>
-                <input type="text" class="form-control" id="phone-user" value="">
+                <input type="text" class="form-control" id="phone-user" value="<?php echo $data -> phone_number?>">
             </div>
             <div class="mb-3">
                 <label for="address-user" class="form-label">Address</label>
-                <input type="text" class="form-control" id="address-user">
+                <input type="text" class="form-control" id="address-user" value="<?php echo $data -> address?>">
             </div>
         </div>
         <button type="button" class="btn btn-primary float-end m-1 w-25 mt-4">Save</button>
