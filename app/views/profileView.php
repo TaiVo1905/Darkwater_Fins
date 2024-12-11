@@ -8,19 +8,22 @@
     <link rel="stylesheet" href="./app/public/css/common.css">
     <link rel="stylesheet" href="./app/public/css/profile.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./app/public/css/banner.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="./app/public/css/header.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="./app/public/css/footer.css?v=<?php echo time(); ?>">
 
 </head>
 <body>
+    <?php include_once './app/components/header.php'?>
     <?php include_once './app/components/banner.php';
         echo showBanner('Account setting', ['Home','Profile']);
         
     ?>
-    <div class="container mx-auto mt-5" style="width:50%; ">
+    <div class="container body-profile mx-auto mt-5" style="width:50%; ">
         <h3 class = "profile-title mb-4">Profile Image</h3>
         <div class="profile-card">
             <div class="profile-header">
                 <div class="image-container">
-                    <img id = "img-user" src="app/public/img/background/backgroundHeader.png" alt="User Img" class="image-user">
+                    <img id = "img-user" src="<?php echo $data -> user_img_url?>" alt="User Img" class="image-user">
                     <div class="icon-overlay">
                         <i  class="bi bi-camera-fill camera-image-user"></i>
                     </div>
@@ -52,8 +55,9 @@
                 <input type="text" class="form-control" id="address-user" value="<?php echo $data -> address?>">
             </div>
         </div>
-        <button type="button" class="btn btn-primary float-end m-1 w-25 mt-4">Save</button>
+        <button type="button" class="btn btn-primary float-end m-1 w-25 mt-4 ">Save</button>
     </div>
+    <?php include_once  './app/components/footer.php'?>
     <script src="./app/public/js/profile.js?v=<?php echo time(); ?>"></script>
 </body>
 </html>

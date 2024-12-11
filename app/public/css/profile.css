@@ -1,3 +1,6 @@
+.body-profile{
+    margin-bottom: 150px;
+}
 .profile-card{
     border: 1px solid var(--primary-color4);
     border-radius: 10px;
