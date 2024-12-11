@@ -6,8 +6,8 @@
     <title>Register</title>
     <?php include_once("./app/components/bootStrapAndFontLink.php"); ?>
     <base href="http://localhost/Darkwater_fins/">
-    <link rel="stylesheet" href="./app/public/css/common.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="./app/public/css/register.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="/public/css/common.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="./public/css/register.css?v=<?php echo time(); ?>">
 </head>
 <body>
     <div class="container-fluid container-background">
@@ -38,5 +38,5 @@
         </div>
     </div>
 </body>
-<script src="./app/public/js/registerAndLogin.js?v=<?php echo time(); ?>"></script>
+<script src="./public/js/registerAndLogin.js?v=<?php echo time(); ?>"></script>
 </html>
