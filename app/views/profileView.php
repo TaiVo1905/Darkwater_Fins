@@ -6,7 +6,6 @@
     <title>Document</title>
     <link rel="stylesheet" href="./app/public/css/common.css">
     <link rel="stylesheet" href="./app/public/css/profile.css?v=<?php echo time(); ?>">
-
 </head>
 <body>
     <?php include_once './app/components/bootStrapAndFontLink.php'?>
