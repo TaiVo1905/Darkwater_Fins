@@ -26,7 +26,7 @@
                     <div class="invalid-feedback">Please provide your name</div>
                 </div>
                 <div class="mb-3">
-                    <input type="email" class="form-control form-control custom-opacity-form" id="user_email" name="user_email" placeholder="Email" required minlength="8" value="<?php echo isset($data["user_email"]) ? $data["user_email"] : "" ?>">
+                    <input type="email" class="form-control form-control custom-opacity-form" id="user_email" name="user_email" placeholder="Email" required value="<?php echo isset($data["user_email"]) ? $data["user_email"] : "" ?>">
                     <div class="invalid-feedback">Invalid email</div>
                 </div>
                 <div class="mb-3">
@@ -34,8 +34,8 @@
                     <div class="invalid-feedback">Password must be more than 8 characters</div>
                 </div>
                 <div class="mb-3">
-                    <input type="password" class="form-control form-control custom-opacity-form" id="user_confirm_password" name="user_confirm_password" placeholder="Password confirmation" required value="<?php echo isset($data["user_confirm_password"]) ? $data["user_confirm_password"] : "" ?>">
-                    <div class="invalid-feedback">Invalid password confirmation</div>
+                    <input type="password" class="form-control form-control custom-opacity-form" id="user_confirm_password" name="user_confirm_password" placeholder="Password confirmation" minlength="8" required value="<?php echo isset($data["user_confirm_password"]) ? $data["user_confirm_password"] : "" ?>">
+                    <div class="invalid-feedback">Password must be more than 8 characters</div>
                 </div>
                 <div class="mb-3">
                     <div class="row g-3">
@@ -55,6 +55,22 @@
             </form>
         </div>
     </div>
+    <?php include_once  './app/components/toast.php';
+    $message = "";
+    if(isset($data)) {
+        $message = "Invalid email or code";
+        echo displayToast($message);
+        echo '<script>
+            const toast = new bootstrap.Toast(document.querySelector("#liveToast"));
+            toast.show();
+            setTimeout(() => {
+            toast.hide();
+            }, 5000);
+        </script>';
+    } else{
+        echo displayToast($message);
+
+    } ?>
 </body>
 <script src="./public/js/registerAndLogin.js?v=<?php echo time(); ?>"></script>
 </html>

@@ -14,11 +14,10 @@
                     $user = $userModel->verifyAccount($user_email, $user_password);
                     if(!empty($user)) {
                         session_start();
-                        $_SESSION["userId"] = $user->user_id;
+                        $_SESSION["user_id"] = $user->user_id;
                         header("location: home");
                         exit();
                     } else {
-                        echo 123;
                         return ["user_email" => $user_email, "user_password" => $user_password];
                     }
                 }

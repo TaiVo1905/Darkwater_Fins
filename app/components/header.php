@@ -19,7 +19,6 @@
             <i class="bi bi-person"></i>
             <div class="dropdown-menu" id="dropdown-menu">
                 <?php
-                    session_start();
                     if(isset($_SESSION["user_id"])) {
                         echo '
                                 <div style="background-color: black;border-radius: 20px;margin-bottom: 5px;">

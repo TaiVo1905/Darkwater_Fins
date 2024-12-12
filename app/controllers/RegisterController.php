@@ -17,7 +17,8 @@
                     $user_confirm_password = $_POST["user_confirm_password"];
                     $user_authentication_code = $_POST["user_authentication_code"];
                     $codeCookie = isset($_COOKIE["code"]) ? $_COOKIE["code"] : "";
-                    if ($user_authentication_code != $codeCookie) {
+                    $emailCookie = isset($_COOKIE["email"]) ? $_COOKIE["email"] : "";
+                    if ($user_authentication_code != $codeCookie && $user_email != $emailCookie) {
                         return 
                             ["user_name" => $user_name,
                             "user_password" => $user_password,
@@ -28,7 +29,9 @@
                     } else {
                         $this->model("User");
                         $userModel = new UserModel();
-                        return $userModel->addUser($user_name, $user_email, $user_password);
+                        if($userModel->addUser($user_name, $user_email, $user_password)){
+                            header("location: LogIn");
+                        };
                     }
                 }
             } catch(PDOException $e) {
