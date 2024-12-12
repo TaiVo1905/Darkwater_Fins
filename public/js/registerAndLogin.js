@@ -7,10 +7,10 @@ const $$ = document.querySelectorAll.bind(document);
     const forms = document.querySelectorAll('.needs-validation')
     Array.from(forms).forEach(form => {
         form.addEventListener('submit', event => {
-        if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
 
         form.classList.add('was-validated')
         }, false)
@@ -32,8 +32,17 @@ function sendEmailCode(email, user_name) {
 
 
 //Handle send code for user
-$("#register-form button[type=button]").addEventListener("click", () => {
+$("#register-form button[type=button]")?.addEventListener("click", () => {
     const email = $("#user_email").value;
     const user_name = $("#user_name").value;
     sendEmailCode(email, user_name);
+})
+
+$("#register-form")?.addEventListener("submit", (e) => {
+    const pass = $("#user_password").value;
+    const passConfirm = $("#user_confirm_password").value;
+    if(pass != passConfirm) {
+        alert("Invalid password confirmation!");
+        e.preventDefault();
+    }
 })
