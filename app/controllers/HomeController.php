@@ -4,7 +4,7 @@ class HomeController extends Controller {
         $this->model('AquariumFish');
         $aquariumFishModel = new AquariumFishModel();
         $topFishes = $aquariumFishModel->getTopPurchasedFishes();
-        $this->view('home', ['fishes' => $topFishes]);
+        $this->view('home', $topFishes);
     }
 }
 ?>

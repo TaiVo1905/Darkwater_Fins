@@ -1,0 +1,49 @@
+.slider {
+    background-image: url(../images/backgroundFish/bg2.jpg);
+    background-size: cover;
+    background-position: center;
+    color: var( --primary-color1);
+    height: 830px;
+    position: relative;
+    overflow: hidden;
+}
+
+ .btn_contact {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: var(--primary-color3);
+    --bs-btn-border-color: var(--primary-color3);
+    --bs-btn-border-radius: none;
+    margin-left: 50px;
+    padding: 15px 15px;
+    margin-bottom: 105px;
+}
+.slider p {
+    margin-left: 50px;
+    padding-top: 135px;
+    font-size: 58px;
+    font-weight: 700;
+    width: 35%;
+    line-height: 1.3;
+    padding-bottom: 30px;
+}
+
+.slider h6 {
+    margin-left: 50px;
+    color: var(--primary-color4);
+    font-size: 20px;
+    width: 28%;
+    padding-bottom: 45px;
+}
+
+.icon_social_media {
+    margin-left: 50px;
+    display: flex;
+    gap: 25px;
+    color: var(--primary-color4);
+    font-size: 18px;
+}
+
+.icon_social_media i {
+    border: 1px solidv var(--primary-color4);
+    padding: 5px 10px;
+}
