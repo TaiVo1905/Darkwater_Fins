@@ -3,7 +3,7 @@
             public function index(){
                 $this -> model('User');
                 $user = new UserModel();
-                $id = $_SESSION['user_id']; 
+                $id =2; 
                 $data = $user->getUser($id);
                 $this->view('profile', $data);
             }
