@@ -37,6 +37,17 @@
             </form>
         </div>
     </div>
+    <?php include_once  './app/components/toast.php';
+    if(isset($data)) {
+        echo displayToast("Invalid your email or password");
+        echo '<script>
+            const toast = new bootstrap.Toast(document.querySelector("#liveToast"));
+            toast.show();
+            setTimeout(() => {
+            toast.hide();
+            }, 5000);
+        </script>';
+    } ?>
 </body>
 <script src="./public/js/registerAndLogin.js?v=<?php echo time(); ?>"></script>
 </html>
