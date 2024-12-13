@@ -58,7 +58,7 @@
     <?php include_once  './app/components/toast.php';
     $message = "";
     if(isset($data)) {
-        $message = "Invalid email or code";
+        $message = "Email exists, or your code is not valid";
         echo displayToast($message);
         echo '<script>
             const toast = new bootstrap.Toast(document.querySelector("#liveToast"));
