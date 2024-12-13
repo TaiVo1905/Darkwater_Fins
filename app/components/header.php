@@ -4,10 +4,10 @@
             <img class="img_logo" src="./public/images/logo/Darkwater_Fins.png" alt="">
         </div>
         <div class="nav_text">
-            <p>Home</p>
-            <p>Aquarium</p>
-            <p>Fish Food</p>
-            <p>Fish</p>
+            <p><a href="home">Home</a></p>
+            <p><a href="products/aquariums">Aquarium</a></p>
+            <p><a href="products/fishFoods">Fish Food</a></p>
+            <p><a href="products/fishes">Fish</a></p>
             <p>About us</p>
         </div>
         <div class="icon_header">

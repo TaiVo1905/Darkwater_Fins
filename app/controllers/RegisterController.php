@@ -20,7 +20,7 @@
                     $user_authentication_code = $_POST["user_authentication_code"];
                     $codeCookie = isset($_COOKIE["code"]) ? $_COOKIE["code"] : "";
                     $emailCookie = isset($_COOKIE["email"]) ? $_COOKIE["email"] : "";
-                    if (($user_authentication_code != $codeCookie && $user_email != $emailCookie) || getUserByEmail($user_email)) {
+                    if (($user_authentication_code != $codeCookie && $user_email != $emailCookie) || $userModel->getUserByEmail($user_email)) {
                         return 
                             ["user_name" => $user_name,
                             "user_password" => $user_password,

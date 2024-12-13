@@ -1,7 +1,5 @@
 <?php
     class UserModel extends Model{
-        protected $userModel;
-
         public function getUser($id){
             $query = $this->db->prepare("SELECT * FROM users WHERE user_id = :id");
             $query->execute(['id' => $id]);
@@ -9,7 +7,7 @@
         }
 
         public function getUserByEmail($email){
-            $query = $this->db->prepare("SELECT * FROM users WHERE emailemail = ?");
+            $query = $this->db->prepare("SELECT * FROM users WHERE email = ?");
             $query->execute([$email]);
             return $query->fetch(PDO::FETCH_OBJ);
         }

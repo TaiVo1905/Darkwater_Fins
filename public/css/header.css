@@ -35,9 +35,14 @@
     margin-left: 80px;
 }
 
-.nav_text p:hover {
+.nav_text a:hover {
     color: var(--primary-color3);
     cursor: pointer;
+}
+
+.nav_text a {
+    text-decoration: none;
+    color: var(--primary-color1)
 }
 
 .icon_header i:hover {

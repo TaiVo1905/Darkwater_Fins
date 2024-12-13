@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Darkwater Fins</title>
     <?php include_once './app/components/bootStrapAndFontLink.php'?>
     <link rel="stylesheet" href="./public/css/common.css">
     <link rel="stylesheet" href="./public/css/header.css?v=<?php echo time(); ?>">
@@ -32,14 +32,16 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-4 text-center">
-                        <div class="product-card">
-                            <div class="outer-box">
-                                <img src="./public/images/productFish/fish1.webp" alt="Aquarium Image">
+                        <a href="products/aquariums">
+                            <div class="product-card">
+                                <div class="outer-box">
+                                    <img src="./public/images/productFish/fish1.webp" alt="Aquarium Image">
+                                </div>
+                                <div class="inner-box">
+                                    <i class="bi bi-basket3"></i>
+                                </div>
                             </div>
-                            <div class="inner-box">
-                                <i class="bi bi-basket3"></i>
-                            </div>
-                        </div>
+                        </a>
                         <div class="product-text">
                             <h4>Aquarium</h4>
                             <p>Darkwater Fins has a wide range of aquariums available for both commercial.</p>
@@ -47,14 +49,16 @@
                         </div>
                     </div>
                     <div class="col-md-4 text-center">
-                        <div class="product-card">
-                            <div class="outer-box">
-                                <img src="./public/images/productFish/fish2.webp" alt="Aquarium Image">
+                        <a href="products/fishes">
+                            <div class="product-card">
+                                <div class="outer-box">
+                                    <img src="./public/images/productFish/fish2.webp" alt="Aquarium Image">
+                                </div>
+                                <div class="inner-box">
+                                    <i class="bi bi-droplet"></i>
+                                </div>
                             </div>
-                            <div class="inner-box">
-                                <i class="bi bi-droplet"></i>
-                            </div>
-                        </div>
+                        </a>
                         <div class="product-text">
                             <h4>Fish</h4>
                             <p>Darkwater Fins offers a variety of fish for your aquarium needs.</p>
@@ -62,14 +66,16 @@
                         </div>
                     </div>
                     <div class="col-md-4 text-center">
-                        <div class="product-card">
-                            <div class="outer-box">
-                                <img src="./public/images/productFish/fish3.webp" alt="Aquarium Image">
+                        <a href="products/fishFoods">
+                            <div class="product-card">
+                                <div class="outer-box">
+                                    <img src="./public/images/productFish/fish3.webp" alt="Aquarium Image">
+                                </div>
+                                <div class="inner-box">
+                                    <i class="bi bi-backpack"></i>
+                                </div>
                             </div>
-                            <div class="inner-box">
-                                <i class="bi bi-backpack"></i>
-                            </div>
-                        </div>
+                        </a>
                         <div class="product-text">
                             <h4>Fish food</h4>
                             <p>Darkwater Fins provides high-quality food for all types of aquarium fish.</p>
