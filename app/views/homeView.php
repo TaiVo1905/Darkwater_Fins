@@ -27,14 +27,18 @@
             </div>
         </div>
         <div class="big_container">
-        <section class="products-section">
+        <div class="products-section">
             <h1>Our Products</h1>
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-4 text-center">
                         <div class="product-card">
-                            <img src="./app/public/images/backgroundFish/bg1.png" alt="Aquarium Image">
-                            <i class="bi bi-bag"></i>
+                            <div class="outer-box">
+                                <img src="./app/public/images/productFish/fish1.webp" alt="Aquarium Image">
+                            </div>
+                            <div class="inner-box">
+                                <i class="bi bi-basket3"></i>
+                            </div>
                         </div>
                         <div class="product-text">
                             <h4>Aquarium</h4>
@@ -44,8 +48,12 @@
                     </div>
                     <div class="col-md-4 text-center">
                         <div class="product-card">
-                            <img src="./app/public/images/backgroundFish/bg2.jpg" alt="Fish Image">
-                            <i class="bi bi-droplet"></i>
+                            <div class="outer-box">
+                                <img src="./app/public/images/productFish/fish2.webp" alt="Aquarium Image">
+                            </div>
+                            <div class="inner-box">
+                                <i class="bi bi-droplet"></i>
+                            </div>
                         </div>
                         <div class="product-text">
                             <h4>Fish</h4>
@@ -55,8 +63,12 @@
                     </div>
                     <div class="col-md-4 text-center">
                         <div class="product-card">
-                            <img src="./app/public/images/backgroundFish/bg3.jpg" alt="Fish Food Image">
-                            <i class="bi bi-backpack"></i>
+                            <div class="outer-box">
+                                <img src="./app/public/images/productFish/fish3.webp" alt="Aquarium Image">
+                            </div>
+                            <div class="inner-box">
+                                <i class="bi bi-backpack"></i>
+                            </div>
                         </div>
                         <div class="product-text">
                             <h4>Fish food</h4>
@@ -66,7 +78,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     </div>
        <?php include_once './app/components/products.php'?>
         <h1 class="title">Hot fishes</h1>
@@ -90,8 +102,6 @@
             <button type="button" class="btn btn-primary">VIEW OUR PORTFOLIO</button>
         </div>
         <?php include_once './app/components/footer.php'?>
-
-    
     <script src="./app/public/js/header.js?v=<?php echo time(); ?>"></script>
 </body>
 </html>

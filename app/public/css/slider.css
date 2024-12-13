@@ -1,11 +1,10 @@
 .slider {
-    background-image: url(../images/backgroundFish/bg2.jpg);
+    background-image: url(../images/backgroundFish/bg5.gif);
     background-size: cover;
     background-position: center;
     color: var( --primary-color1);
     height: 830px;
     position: relative;
-    overflow: hidden;
 }
 
  .btn_contact {
