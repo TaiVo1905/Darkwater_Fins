@@ -1,0 +1,36 @@
+.text_banner {
+    background-image: url(../images/backgroundFish/bg1.png);
+    background-size: cover;
+    background-position: center;
+    color: var( --primary-color1);
+    height: 830px;
+    position: relative;
+    overflow: hidden;
+}
+.btn-primary {
+    --bs-btn-color: var(--primary-color1);
+    --bs-btn-bg: var(--primary-color3);
+    --bs-btn-border-color: var(--primary-color3);
+    --bs-btn-border-radius: none;
+    margin-left: 250px;
+    padding: 15px 15px;
+    margin-bottom: 105px;
+}
+.text_banner p {
+    margin-left: 250px;
+    margin-top: 140px;
+    font-size: 50px;
+    font-weight: 700;
+    width: 50%;
+    line-height: 1.3;
+    margin-bottom: 60px;
+}
+
+.text_banner h6 {
+    margin-left: 250px;
+    color: var(--primary-color5);
+    font-size: 18px;
+    width: 30%;
+    margin-bottom: 60px;
+    line-height: 2;
+}
