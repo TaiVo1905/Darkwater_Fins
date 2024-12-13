@@ -18,7 +18,7 @@
 <body>
     <?php include_once './app/components/header.php' ?>
     <?php include_once './app/components/banner.php';
-    echo showBanner('FishFood', ['Home', 'FishFood']);
+    echo showBanner('Fish Food', ['Home', 'Fish Food']);
     ?>
     <div class="container mt-5 mb-5">
         <div class="row">
@@ -42,52 +42,11 @@
                 </div>
                 <!-- chổ này là chổ render các card -->
                     <div class="row">
-                    <div class="col col-md-4 col-sm-6">
-                            <div class="card">
-                                <img src="https://i.imgur.com/uePdyIl.jpg"
-                                    alt="API Betta Food" class="card-img-top">
-                                <div class="icon-overlay">
-                                    <i class="bi bi-cart-plus"></i>
-                                    <i class="bi bi-link"></i>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">API Betta Food</h5>
-                                    <p class="card-text">Formulated to enhance Betta fish colors and support overall health.</p>
-                                    <div class="fish-price">$6.99</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col col-md-4 col-sm-6">
-                            <div class="card">
-                                <img src="https://i.imgur.com/9t7jO78.jpg"
-                                    alt="New Life Spectrum Betta 70" class="card-img-top">
-                                <div class="icon-overlay">
-                                    <i class="bi bi-cart-plus"></i>
-                                    <i class="bi bi-link"></i>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">New Life Spectrum Betta 70</h5>
-                                    <p class="card-text">High-quality pellets that improve Betta fish color, growth, and vitality.</p>
-                                    <div class="fish-price">$12.99</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col col-md-4 col-sm-6">
-                            <div class="card">
-                                <img src="https://i.imgur.com/0TNt6XE.jpg"
-                                    alt="TetraBetta" class="card-img-top">
-                                <div class="icon-overlay">
-                                    <i class="bi bi-cart-plus"></i>
-                                    <i class="bi bi-link"></i>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">TetraBetta</h5>
-                                    <p class="card-text">Well-balanced food that helps Betta fish thrive, supporting health and vibrant colors.</p>
-                                    <div class="fish-price">$4.99</div>
-                                </div>
-                            </div>
-                        </div>
-                        
+                        <?php include_once './app/components/itemCard.php'; 
+                                foreach($data as $item) {
+                                    echo displayItemCard($item->fishFood_img_url, $item->fishFood_name, $item->fishFood_sub, $item->fishFood_price);
+                                }
+                        ?>
                     </div>
 
                     <div class="d-flex justify-content-center mt-4">
