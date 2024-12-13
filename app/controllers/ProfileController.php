@@ -3,21 +3,22 @@
             public function index(){
                 $this -> model('User');
                 $user = new UserModel();
-                $id =2; 
+                $id = $_SESSION['user_id'];
                 $data = $user->getUser($id);
                 $this->view('profile', $data);
             }
             public function updateProfile(){
                 if($_SERVER['REQUEST_METHOD'] === 'POST'){
+                    
                     $id = $_SESSION['user_id'];
                     $this -> model('User');
                     $user = new UserModel();
                     $data = $user->getUser($id);
                     $username = $_POST['username'];
-                    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
                     $phone = $_POST['phone'];
                     $address = $_POST['address'];   
-                    $uploadDir = './app/storage/uploads/';
+                    $uploadDir = './storage/uploads/';
                     $user_img = $data -> user_img_url;  
                     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
                         $fileName = basename($_FILES['image']['name']);

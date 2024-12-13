@@ -61,7 +61,7 @@
     </div>
     <hr class="hr_gray">
     <div class="footer-bottom">
-        <p style="font-size: 12px;">This site is intended for US consumers. Cookies and related technology are used for advertising. To learn
+        <p style="font-size: 12px;">This site is intended for Vietnamese consumers. Cookies and related technology are used for advertising. To learn
             more, visit our privacy policy.</p>
     </div>
 </div>
