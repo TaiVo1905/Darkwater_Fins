@@ -1,7 +1,5 @@
 <?php
     class UserModel extends Model{
-        protected $userModel;
-
         public function getUser($id){
             $query = $this->db->prepare("SELECT * FROM users WHERE user_id = :id");
             $query->execute(['id' => $id]);

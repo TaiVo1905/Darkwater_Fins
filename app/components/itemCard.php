@@ -1,6 +1,6 @@
 <?php
     function displayItemCard($img_url, $product_name, $product_title, $product_price){
-        return ' <div class="col col-md-4 col-sm-6">
+        return ' <div class="col col-md-4 col-sm-6 item">
                     <div class="card">
                         <img src="'.$img_url.'"
                             alt="" class="card-img-top">
