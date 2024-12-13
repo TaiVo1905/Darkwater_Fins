@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Darkwater Fins</title>
     <?php include_once("./app/components/bootStrapAndFontLink.php"); ?>
     <base href="http://localhost/Darkwater_fins/">
     <link rel="stylesheet" href="./public/css/common.css?v=<?php echo time(); ?>">
