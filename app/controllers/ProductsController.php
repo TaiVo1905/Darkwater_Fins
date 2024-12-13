@@ -7,7 +7,7 @@
         }
         public function aquariums($id = null) {
             
-            if($id = null){
+            if($id == null){
                 $aquariums = $this->productsModel->getAquariums();
                 $this->view("aquarium", $aquariums);
             }
