@@ -42,52 +42,11 @@
                 </div>
                 <!-- chổ này là chổ render các card -->
                     <div class="row">
-                    <div class="col col-md-4 col-sm-6">
-                            <div class="card">
-                                <img src="https://i.imgur.com/16kDbZk.jpg"
-                                    alt="Seamless glass aquarium" class="card-img-top">
-                                <div class="icon-overlay">
-                                    <i class="bi bi-cart-plus"></i>
-                                    <i class="bi bi-link"></i>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Seamless glass aquarium</h5>
-                                    <p class="card-text">Using flexible, sturdy glass with high impact resistance,</p>
-                                    <div class="fish-price">$24,99</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col col-md-4 col-sm-6">
-                            <div class="card">
-                                <img src="https://i.imgur.com/raGVVmt.jpg"
-                                    alt="3-in-1 aquarium" class="card-img-top">
-                                <div class="icon-overlay">
-                                    <i class="bi bi-cart-plus"></i>
-                                    <i class="bi bi-link"></i>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">3-in-1 aquarium</h5>
-                                    <p class="card-text">With all essential features such as filtration, lighting, clock,...</p>
-                                    <div class="fish-price">$25.99</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col col-md-4 col-sm-6">
-                            <div class="card">
-                                <img src="https://i.imgur.com/tJQFusj.jpg"
-                                    alt="Molded aquarium" class="card-img-top">
-                                <div class="icon-overlay">
-                                    <i class="bi bi-cart-plus"></i>
-                                    <i class="bi bi-link"></i>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Molded aquarium</h5>
-                                    <p class="card-text">Very diverse in shape and size.</p>
-                                    <div class="fish-price">$25.99</div>
-                                </div>
-                            </div>
-                        </div>
-                        
+                        <?php include_once './app/components/itemCard.php'; 
+                            foreach($data as $item) {
+                                echo displayItemCard($item->aquarium_img_url, $item->aquarium_name, $item->aquarium_title, $item->aquarium_price);
+                            }
+                        ?>
                     </div>
 
                     <div class="d-flex justify-content-center mt-4">
