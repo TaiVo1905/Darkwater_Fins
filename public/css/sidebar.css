@@ -32,4 +32,9 @@
 }
 .filter-fiel p{
     margin-top: 10px;
+    width: 100%;
+}
+
+.page-item.active {
+    background-color: var(--primary-color3);
 }

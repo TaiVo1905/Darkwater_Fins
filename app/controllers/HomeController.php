@@ -1,9 +1,9 @@
 <?php
 class HomeController extends Controller {
     public function index() {
-        $this->model('AquariumFish');
-        $aquariumFishModel = new AquariumFishModel();
-        $topFishes = $aquariumFishModel->getTopPurchasedFishes();
+        $this->model('Products');
+        $productsModel = new ProductsModel();
+        $topFishes = $productsModel->getTopPurchasedFishes();
         $this->view('home', $topFishes);
     }
 }
