@@ -1,12 +1,10 @@
-let lastScrollY = window.scrollY;
 window.addEventListener('scroll', function() {
     var header = document.querySelector('.header_container');
-    if (window.scrollY > lastScrollY) {
-        // Cuộn xuống
-        header.classList.add('scrolled');
-    } else {
-        // Cuộn lên
+    if (window.scrollY < 80) {
         header.classList.remove('scrolled');
+        // Cuộn xuống
+    } else {
+        header.classList.add('scrolled');
+        // Cuộn lên
     }
-    lastScrollY = window.scrollY;
 });

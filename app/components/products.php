@@ -1,8 +1,8 @@
 <?php
-function createFish($fishImage, $fishName, $fishSub, $fishPrice) {
+function createFish($id, $fishImage, $fishName, $fishSub, $fishPrice) {
     $html = "
             <div class='col-lg-3 col-md-4 col-sm-6  d-flex justify-content-center'>
-                <div class='card'>
+                <div class='card' data-id='$id'>
                     <img src='$fishImage' alt='$fishName' class='card-img-top'>
                     <div class='icon-overlay'>
                         <i class='bi bi-cart-plus'></i>

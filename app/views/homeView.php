@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Darkwater Fins</title>
     <?php include_once './app/components/bootStrapAndFontLink.php'?>
+    <base href="<?php echo BASE_URL ?>">
     <link rel="stylesheet" href="./public/css/common.css">
     <link rel="stylesheet" href="./public/css/header.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./public/css/hotFish.css?v=<?php echo time(); ?>">
@@ -92,7 +93,7 @@
             <?php
                 if (isset($data)) {
                     foreach ($data as $fish) {
-                        echo createFish($fish->fish_img_url, $fish->fish_name, $fish->fish_sub, $fish->fish_price);
+                        echo createFish($fish->fish_id, $fish->fish_img_url, $fish->fish_name, $fish->fish_sub, $fish->fish_price);
                 }
                     }
             ?>
