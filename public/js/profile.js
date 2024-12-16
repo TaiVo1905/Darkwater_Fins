@@ -3,6 +3,7 @@ const fileInput = document.querySelector('.file-input');
 const img = document.querySelector('#img-user');
 
 
+ 
 imageContainer.addEventListener('click', () => {
   fileInput.click();
 });
@@ -95,3 +96,80 @@ function showToast() {
     }, false)
   })
 })()
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const menuLinks = document.querySelectorAll(".menu-link"); 
+  const profileForm = document.querySelector(".body-profile"); 
+  const changePasswordForm = document.querySelector(".change-password");
+  const sidebarItems = document.querySelectorAll(".list-group-item");
+
+ 
+  function hideAllForms() {
+      profileForm.style.display = "none";
+      changePasswordForm.style.display = "none";
+     
+  }
+  function removeBackground() {
+    sidebarItems.forEach(item => {
+        item.style.backgroundColor = ""; 
+        
+    });
+}
+
+  function showForm(page) {
+      hideAllForms();
+      removeBackground()
+      if (page === "account") {
+        profileForm.style.display = "block";
+        document.querySelector('[data-page="account"]').parentElement.style.backgroundColor = "#1877F2";
+      } else if (page === "change-password") {
+        changePasswordForm.style.display = "block";
+        document.querySelector('[data-page="change-password"]').parentElement.style.backgroundColor = "#1877F2"; 
+      }
+  }
+
+  menuLinks.forEach(link => {
+      link.addEventListener("click", (e) => {
+          e.preventDefault();
+          const page = link.getAttribute("data-page"); 
+          menuLinks.forEach(item => {
+            item.style.color = "";            // Reset màu chữ
+        });
+          link.style.color = "white";
+          showForm(page);
+      });
+  });
+
+  showForm("account");
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  
+const passwordSession = sessionStorage.getItem("old-password")
+const changePasswordForm = document.getElementById('change-password-form');
+const oldPassword = document.getElementById('old-password');
+const newPassword = document.getElementById('new-password');
+const confirmPassword = document.getElementById('confirm-password');
+
+changePasswordForm.addEventListener('submit', (e) => {
+ 
+  let checkPass = false;
+  if (oldPassword.value !== passwordSession) {
+    checkPass = true;
+  }
+
+  if (newPassword.value !== confirmPassword.value) {
+    checkPass = true;
+  }
+
+ 
+  if (checkPass) {
+    e.preventDefault();
+  } else {
+    console.log('Form is valid. Submitting...');
+  }
+});
+
+});
+

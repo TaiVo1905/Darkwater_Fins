@@ -30,7 +30,7 @@
                     <div class="invalid-feedback">Password must be more than 8 characters</div>
                 </div>
                 <div class="d-grid">
-                    <button type="submit" class="btn custom-btn-outline fw-bold">Sign in</button>
+                    <button type="submit" class="btn custom-btn-outline fw-bold login-btn">Sign in</button>
                 </div>
                 <h6 class="pt-4 text-center"><a href="ForgotPassword" class="custom-color">Forgot password?</a></h6>
                 <h6 class="pt-3 text-center">Not a member? <a href="Register" class="custom-color">Sign up</a></h6>

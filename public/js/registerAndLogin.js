@@ -60,3 +60,9 @@ function showToast(message) {
       toast.hide();
     }, 5000);
 }
+document.querySelector(".login-btn")?.addEventListener("click", () => {
+    const passwordInput = document.querySelector("#user_password");
+    if (passwordInput) {
+        sessionStorage.setItem("old-password", passwordInput.value);
+    }
+});

@@ -12,14 +12,13 @@
             return $query->fetch(PDO::FETCH_OBJ);
         }
 
-        public function updateUser($userID, $username, $imgUrl, $password, $phone, $address){
+        public function updateUser($userID, $username, $imgUrl, $phone, $address){
             $query = $this -> db -> prepare("UPDATE users SET user_name = ?,
                                                             user_img_url = ?,
-                                                            passwords = ?,
                                                             phone_number = ?,
                                                             address = ?  WHERE
                                                             user_id =?");
-            return $query->execute([$username, $imgUrl, $password, $phone, $address, $userID]);
+            return $query->execute([$username, $imgUrl, $phone, $address, $userID]);
              
         }
 
@@ -39,7 +38,7 @@
                 $stmt = $this->db->prepare("INSERT INTO users(user_name, email, passwords, roles) VALUE (?, ?, ?, ?)");
                 $password_hash = password_hash($user_password, PASSWORD_BCRYPT);
                 if(password_needs_rehash($password_hash, PASSWORD_BCRYPT)) {
-                    $password_hash = password_hash($password_hash);
+                    $password_hash = password_hash($password_hash, PASSWORD_BCRYPT);
                 }
                 return $stmt->execute([$user_name, $user_email, $password_hash, 1]);
 
