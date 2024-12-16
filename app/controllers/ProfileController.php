@@ -34,5 +34,16 @@
                     $this->view('profile', $data);
                 }
             }
+            public function executeChangePassword(){
+                if($_SERVER['REQUEST_METHOD'] === 'POST'){
+                    $this -> model('User');
+                    $user = new UserModel();
+                    $id = $_SESSION['user_id'];
+                    $data = $user->getUser($id);
+                    $new_password = password_hash($_POST['new-password'], PASSWORD_BCRYPT);
+                    $user -> updatePassword($id, $new_password);
+                    $this->view('profile', $data);
+                }
+            }
         }
 ?>

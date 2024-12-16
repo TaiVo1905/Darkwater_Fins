@@ -23,51 +23,83 @@ fileInput.addEventListener('change', (event) => {
 });
 // điều hướng nếu có thay đổi
 document.addEventListener("DOMContentLoaded", function () {
-  const user_name = document.getElementById('fullname-user').value
-  const user_email = document.getElementById('email-user').value
-  const user_password = document.getElementById('password-user').value
-  const user_phone = document.getElementById('phone-user').value
-  const user_address= document.getElementById('address-user').value
-  const user_img = document.getElementById("img-user").src
-  
+  // Lấy giá trị ban đầu của form
+  const user_name = document.getElementById('fullname-user').value;
+  const user_email = document.getElementById('email-user').value;
+  const user_phone = document.getElementById('phone-user').value;
+  const user_address = document.getElementById('address-user').value;
+  const user_img = document.getElementById("img-user").src;
+
   const inputValues = {
-    username : user_name ,
-    email: user_email ,
-    password: user_password ,
-    phone: user_phone ,
-    address: user_address ,
-    userImg: user_img 
-  }
+    username: user_name,
+    email: user_email,
+    phone: user_phone,
+    address: user_address,
+    userImg: user_img
+  };
+
   let isAuthenticated = false;
 
   const inputs = document.querySelectorAll('input');
+  
+  // Kiểm tra sự thay đổi của các input
   inputs.forEach(input => {
     input.addEventListener('change', () => {
       if (input.type === "file") {
         const fileInput = document.querySelector(".file-input");
         if (fileInput.files && fileInput.files[0]) {
-            isAuthenticated = true;
-
+          isAuthenticated = true; // Có thay đổi file
         }
-    } else {
+      } else {
         const fieldName = input.name;
-        if (input.value !== inputValues[fieldName]) {
-            isAuthenticated = true;
+        if (fieldName in inputValues && input.value !== inputValues[fieldName]) {
+          isAuthenticated = true; // Có thay đổi giá trị
         }
-    }
+      }
     });
   });
-  const profile_form = document.getElementById('profile-form');
-  
-  profile_form.addEventListener('submit',(e) =>{
 
-    if(!isAuthenticated){
+  const profile_form = document.getElementById('profile-form');
+
+  // Kiểm tra lại toàn bộ form khi nhấn "Save"
+  profile_form.addEventListener('submit', (e) => {
+    // Kiểm tra tất cả input khi submit
+    inputs.forEach(input => {
+      if (input.type === "file") {
+        const fileInput = document.querySelector(".file-input");
+        if (fileInput.files && fileInput.files[0]) {
+          isAuthenticated = true;
+        }
+      } else {
+        const fieldName = input.name;
+        if (fieldName in inputValues && input.value !== inputValues[fieldName]) {
+          isAuthenticated = true;
+        }
+      }
+    });
+
+    // Nếu không có thay đổi, hiển thị toast và ngăn submit
+    if (!isAuthenticated) {
       e.preventDefault();
-      showToast()
+      displayToast("No changes have been made yet");
     }
   });
-  
 });
+
+// Hiển thị toast thông báo
+function displayToast(message) {
+  const toastLiveExample = document?.getElementById('liveToast');
+  const toastBody = toastLiveExample.querySelector('.toast-body');
+  toastBody.textContent = message;
+
+  const toast = new bootstrap.Toast(toastLiveExample);
+  toast.show();
+
+  setTimeout(() => {
+      toast.hide();
+  }, 5000);
+}
+
 
 // Hiện thị tôn báo alert
 function showToast() {
@@ -134,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
           e.preventDefault();
           const page = link.getAttribute("data-page"); 
           menuLinks.forEach(item => {
-            item.style.color = "";            // Reset màu chữ
+            item.style.color = "";           
         });
           link.style.color = "white";
           showForm(page);
@@ -166,10 +198,17 @@ changePasswordForm.addEventListener('submit', (e) => {
  
   if (checkPass) {
     e.preventDefault();
+    displayToast("Something went wrong")
   } else {
     console.log('Form is valid. Submitting...');
   }
 });
 
+});
+document.querySelector("#save_btn_change_pass")?.addEventListener("click", () => {
+  const passwordInput = document.querySelector("#new-password");
+  if (passwordInput) {
+      sessionStorage.setItem("old-password", passwordInput.value);
+  }
 });
 

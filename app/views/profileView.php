@@ -82,7 +82,7 @@
                     <button type="submit" id="save-btn" name="save_btn" class="btn btn-primary float-end m-1 w-25 mt-4 ">Save</button>
                 </form>
                 <!-- Thay đổi password -->
-                <form class="change-password mx-auto  needs-validation" style="width:80%; " method="POST" id="change-password-form" action="Profile/updateProfile" novalidate>
+                <form class="change-password mx-auto  needs-validation" style="width:80%; " method="POST" id="change-password-form" action="Profile/executeChangePassword" novalidate>
                     <h3 class="profile-title mb-4">Change password</h3>
                     <div class="profile-change-password p-5 pt-5 ">
                         <div class="mb-3">
@@ -92,16 +92,16 @@
                         </div>
                         <div class="mb-3">
                             <label for="new-password" class="form-label">New password</label>
-                            <input type="password" class="form-control" name="new-password" id="new-password" required>
+                            <input type="password" class="form-control" minlength="8" name="new-password" id="new-password" required>
                             <span class="form-message"></span>
                         </div>
                         <div class="mb-3">
                             <label for="confirm-password" class="form-label">Confirm password</label>
-                            <input type="password" class="form-control" name="confirm-password" id="confirm-password" required>
+                            <input type="password" class="form-control" minlength="8" name="confirm-password" id="confirm-password" required>
                             <span class="form-message"></span>
                         </div>
                     </div>
-                    <button type="submit" id="save-btn_change_pass" name="save_btn_change_pass" class="btn btn-primary float-end m-1 w-25 mt-4 ">Save</button>
+                    <button type="submit" id="save_btn_change_pass" name="save_btn_change_pass" class="btn btn-primary float-end m-1 w-25 mt-4 ">Save</button>
                 </form>
             </div>
         </div>

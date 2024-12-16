@@ -46,5 +46,10 @@
                 echo $e->getMessage();
             }
         }
+
+        public function updatePassword($user_id, $user_password){
+            $stmt = $this->db->prepare("UPDATE users SET passwords =? WHERE user_id =?");
+            return $stmt->execute([$user_password, $user_id]);
+        }
     }
 ?>
