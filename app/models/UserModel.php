@@ -47,5 +47,13 @@
                 echo $e->getMessage();
             }
         }
+
+        public function shoppingCart($user_id) {
+            $stmt = $this->db->prepare("SELECT * FROm cart as c
+                                        join products as p
+                                        on c.product_id = p.product_id where user_id = ?");
+            $stmt->execute([$user_id]);
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
     }
 ?>

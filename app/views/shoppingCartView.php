@@ -36,27 +36,12 @@
     </div>
     <table class="table align-middle">
         <tbody>
-            <tr>
-                <td style="width: 2%">
-                    <input type="checkbox" class="form-check-input">
-                </td>
-                <td style="width: 15%">
-                    <img class="rounded" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2W50GGieLi2T_e9XHOxA22QI3uTWqmmyg1g&s" alt="Fish" style="width: 100px; height: 100px;">
-                </td>
-                <td>
-                    <span class="fw-bold">Siamese Fighting Fish, Red</span><br>
-                    <small class="text-muted">Fish</small>
-                </td>
-                <td class="text-center">
-                    <button class="btn btn-sm btn-light dashQuantity"><i class="bi bi-dash"></i></button>
-                    <span class="mx-2 quantity">1</span>
-                    <button class="btn btn-sm btn-light plusQuantity"><i class="bi bi-plus"></i></button>
-                </td>
-                <td class="text-center">$<span>44.00</span></td>
-                <td style="width: 2%">
-                    <i class="bi bi-x-lg text-danger"></i>
-                </td>
-            </tr>
+          <?php
+            require_once("./app/components/cartItem.php");
+            foreach($data as $item) {
+              echo createCartItem($item->product_id, $item->product_name, $item->product_img_url, $item->product_type, $item->quantity, $item->product_price);
+            }
+          ?>
         </tbody>
   </table>
     <div class="d-flex justify-content-between align-items-center">
