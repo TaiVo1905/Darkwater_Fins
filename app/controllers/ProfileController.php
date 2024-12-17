@@ -4,7 +4,13 @@
                 $this -> model('User');
                 $user = new UserModel();
                 $id = $_SESSION['user_id'];
-                $data = $user->getUser($id);
+                $userinfo = $user->getUser($id);
+                $order =$user->getOrder($id);
+                $data = array(
+                    'userInfo' => $userinfo,
+                    'order' => $order
+                );
+                
                 $this->view('profile', $data);
             }
             public function updateProfile(){
@@ -30,7 +36,12 @@
                         }
                     }  
                     $user -> updateUser($id, $username,$user_img, $phone, $address);
-                    $data = $user->getUser($id);
+                    $userinfo = $user->getUser($id);
+                    $order =$user->getOrder($id);    
+                    $data = array(
+                        'userInfo' => $userinfo,
+                        'order' => $order
+                    );
                     $this->view('profile', $data);
                 }
             }
@@ -39,9 +50,14 @@
                     $this -> model('User');
                     $user = new UserModel();
                     $id = $_SESSION['user_id'];
-                    $data = $user->getUser($id);
                     $new_password = password_hash($_POST['new-password'], PASSWORD_BCRYPT);
                     $user -> updatePassword($id, $new_password);
+                    $userinfo = $user->getUser($id);
+                    $order =$user->getOrder($id);
+                    $data = array(
+                        'userInfo' => $userinfo,
+                        'order' => $order
+                    );
                     $this->view('profile', $data);
                 }
             }

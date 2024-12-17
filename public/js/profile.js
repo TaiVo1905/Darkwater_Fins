@@ -129,7 +129,7 @@ function showToast() {
   })
 })()
 
-
+// hiện thị nội dung các tab khi nhấn vào sidebar
 document.addEventListener("DOMContentLoaded", () => {
   const menuLinks = document.querySelectorAll(".menu-link"); 
   const profileForm = document.querySelector(".body-profile"); 
@@ -137,7 +137,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const order = document.querySelector(".order-page");
   const sidebarItems = document.querySelectorAll(".list-group-item");
 
- 
   function hideAllForms() {
       profileForm.style.display = "none";
       changePasswordForm.style.display = "none";
@@ -181,6 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
   showForm("account");
 });
 
+// xuử lý password
 document.addEventListener("DOMContentLoaded", () => {
   
 const passwordSession = sessionStorage.getItem("old-password")
@@ -210,6 +210,7 @@ changePasswordForm.addEventListener('submit', (e) => {
 });
 
 });
+// luư password mới vào session
 document.querySelector("#save_btn_change_pass")?.addEventListener("click", () => {
   const passwordInput = document.querySelector("#new-password");
   if (passwordInput) {
@@ -233,6 +234,7 @@ nav_tab_links.forEach(tab => {
   });
 })
 
+// ẩn hiện nút cancel
 document.addEventListener('DOMContentLoaded', function () {
   const orderItems = document.querySelectorAll('.order-item'); 
   
@@ -248,3 +250,27 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
+// phần xử lý render navbar
+document.addEventListener("DOMContentLoaded", function () {
+  const tabs = document.querySelectorAll(".nav_tab_link");
+  const orderItems = document.querySelectorAll(".order-item");
+
+  function filterOrders(status) {
+      orderItems.forEach(item => {
+          const statusText = item.querySelector(".text-primary").textContent.trim();
+          if (statusText === status) {
+              item.style.display = "block";
+          } else {
+              item.style.display = "none";
+          }
+      });
+  }
+  filterOrders("Pending");
+
+  tabs.forEach(tab => {
+      tab.addEventListener("click", function () {
+          const status = this.getAttribute("data-status");
+          filterOrders(status);
+      });
+  });
+});

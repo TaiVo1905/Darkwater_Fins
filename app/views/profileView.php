@@ -47,7 +47,7 @@
                     <div class="profile-card">
                         <div class="profile-header">
                             <div class="image-container">
-                                <img id="img-user" name="user_img" src="<?php echo $data->user_img_url; ?>" alt="User Img" class="image-user">
+                                <img id="img-user" name="user_img" src="<?php echo $data['userInfo']->user_img_url; ?>" alt="User Img" class="image-user">
                                 <div class="icon-overlay">
                                     <i class="bi bi-camera-fill camera-image-user"></i>
                                 </div>
@@ -60,22 +60,22 @@
                     <div class="profile-update-file p-5 pt-3 ">
                         <div class="mb-3">
                             <label for="fullname-user" class="form-label">Full name</label>
-                            <input type="text" class="form-control " name="username" id="fullname-user" value="<?php echo $data->user_name; ?>" required>
+                            <input type="text" class="form-control " name="username" id="fullname-user" value="<?php echo $data['userInfo']->user_name; ?>" required>
                             <span class="form-message"></span>
                         </div>
                         <div class="mb-3">
                             <label for="email-user" class="form-label">Email</label>
-                            <input type="email" class="form-control" name="email" id="email-user" readonly value="<?php echo $data->email; ?> " required>
+                            <input type="email" class="form-control" name="email" id="email-user" readonly value="<?php echo $data['userInfo']->email; ?> " required>
                             <span class="form-message"></span>
                         </div>
                         <div class="mb-3">
                             <label for="phone-user" class="form-label">Phone</label>
-                            <input type="text" class="form-control" name="phone" id="phone-user" value="<?php echo $data->phone_number; ?>">
+                            <input type="text" class="form-control" name="phone" id="phone-user" value="<?php echo $data['userInfo']->phone_number; ?>">
                             <span class="form-message"></span>
                         </div>
                         <div class="mb-3">
                             <label for="address-user" class="form-label">Address</label>
-                            <input type="text" class="form-control" name="address" id="address-user" value="<?php echo $data->address; ?>">
+                            <input type="text" class="form-control" name="address" id="address-user" value="<?php echo $data['userInfo']->address; ?>">
                             <span class="form-message"></span>
                         </div>
                     </div>
@@ -108,66 +108,25 @@
                 <div class="order-page mx-auto" style="width:80%; ">
                     <ul class="nav nav-pills nav-fill mb-4">
                         <li class="nav-item nav_tab "  aria-current="page">
-                            <a class="nav_tab_link nav-link rounded-0 border active" aria-current="page">Pending</a>
+                            <a class="nav_tab_link nav-link rounded-0 border active" aria-current="page" data-status="Pending">Pending</a>
                         </li>
                         <li class="nav-item nav_tab">
-                            <a class="nav_tab_link nav-link rounded-0 border ">Shipping</a>
+                            <a class="nav_tab_link nav-link rounded-0 border" data-status="Shipping">Shipping</a>
                         </li>
                         <li class="nav-item nav_tab">
-                            <a class="nav_tab_link nav-link rounded-0 border">Shipped</a>
+                            <a class="nav_tab_link nav-link rounded-0 border" data-status="Shipped">Shipped</a>
                         </li>
                         <li class="nav-item nav_tab">
-                            <a class="nav_tab_link nav-link rounded-0 border">Canceled</a>
+                            <a class="nav_tab_link nav-link rounded-0 border" data-status="Canceled">Canceled</a>
                         </li>
                     </ul>
                     <div class="row mx-auto" >
-                        <div class="border mb-3 order-item container">
-                            <!-- Item Header -->
-                            <div class="d-flex justify-content-end p-2 ">
-                                <span class="text-primary">Pending</span>
-                            </div>
-                            <!-- Item Content -->
-                            <div class="d-flex p-3 border-top my-3">
-                                <img src="" alt="Fish" style="width: 80px; height: 80px;" class="me-3 rounded">
-                                <div class="flex-grow-1 ">
-                                <h5 class="mb-1">Siamese Fighting Fish, Red</h5>
-                                <p class="mb-1 text-muted">Category: Color Variants</p>
-                                <small>×3</small>
-                            </div>
-                            <div class="text-end">
-                                <span class="fw-bold">$45.67</span>
-                        </div>
-                            </div>
-                            <!-- Item Footer -->
-                            <div class="border-top p-3 d-flex flex-column align-items-end ">
-                              <span class="fw-bold pb-3">Total: $137.01</span>
-                              <button class="cancel-btn btn btn-primary btn-sm rounded-0">Cancel</button>
-                            </div>
-                        </div>
-
-                        <div class="border mb-3 order-item">
-                            <!-- Item Header -->
-                            <div class="d-flex justify-content-end p-2 ">
-                              <span class="text-primary">hello</span>
-                            </div>
-                            <!-- Item Content -->
-                            <div class="d-flex p-3 border-top my-3">
-                              <img src="https://via.placeholder.com/80" alt="Fish" class="me-3 rounded">
-                              <div class="flex-grow-1 ">
-                                <h5 class="mb-1">Siamese Fighting Fish, Red</h5>
-                                <p class="mb-1 text-muted">Category: Color Variants</p>
-                                <small>×3</small>
-                              </div>
-                              <div class="text-end">
-                                <span class="fw-bold">$45.67</span>
-                              </div>
-                            </div>
-                            <!-- Item Footer -->
-                            <div class="border-top p-3 d-flex flex-column align-items-end ">
-                              <span class="fw-bold pb-3">Total: $137.01</span>
-                              <button class="cancel-btn btn btn-primary btn-sm">Cancel</button>
-                            </div>
-                        </div>
+                        <?php
+                            require './app/components/orderItems.php';
+                            foreach ($data['order'] as $order) {
+                                echo renderOrderItems($order->order_status, $order->product_img_url, $order->product_name, $order->product_category, $order->quantity, $order->product_price, $order->price);;
+                            }
+                        ?>
                     </div>
                 </div>
             </div>
@@ -180,6 +139,7 @@
     echo displayToast('No changes have been made yet'); ?>
     <script src="./public/js/profile.js?v=<?php echo time(); ?>"> </script>
     <script src="./public/js/validator.js?v=<?php echo time(); ?>"></script>
+    <script src="./public/js/header.js?v=<?php echo time(); ?>"></script>
     <script>
         Validator({
             form: '#profile-form',

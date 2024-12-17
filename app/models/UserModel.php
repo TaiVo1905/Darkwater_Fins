@@ -51,5 +51,29 @@
             $stmt = $this->db->prepare("UPDATE users SET passwords =? WHERE user_id =?");
             return $stmt->execute([$user_password, $user_id]);
         }
+
+        public function getOrder($user_id){
+            $stmt = $this -> db -> prepare("SELECT 
+                                                O.ORDER_STATUS, 
+                                                P.PRODUCT_IMG_URL, 
+                                                P.PRODUCT_NAME, 
+                                                P.PRODUCT_CATEGORY, 
+                                                OD.QUANTITY, 
+                                                P.PROCUCT_PRICE, 
+                                                OD.PRICE 
+                                            FROM 
+                                                ORDERS AS O
+                                            JOIN 
+                                                ORDER_DETAILS AS OD ON OD.ORDER_ID = O.ORDER_ID
+                                            JOIN 
+                                                PRODUCTS AS P ON P.PRODUCT_ID = OD.PRODUCT_ID
+                                            WHERE 
+                                                O.USER_ID = ?;
+                                            ");
+            $stmt->execute([$user_id]); //true false
+            $orders = $stmt->fetch(PDO::FETCH_OBJ);    
+            return $orders;                           
+        }
+        
     }
 ?>

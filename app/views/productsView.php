@@ -49,28 +49,10 @@
                 </div>
                 <!-- chổ này là chổ render các card -->
                     <div class="row">
-                        <?php include_once './app/components/itemCard.php'; 
-                                if ($url[1] == "fishFoods") {
-                                    $id = "fishFood_id";
-                                    $img_url = "fishFood_img_url";
-                                    $name = "fishFood_name";
-                                    $sub = "fishFood_sub";
-                                    $price = "fishFood_price";
-                                } elseif ($url[1] == "fishes") {
-                                    $id = "fish_id";
-                                    $img_url = "fish_img_url";
-                                    $name = "fish_name";
-                                    $sub = "fish_sub";
-                                    $price = "fish_price";
-                                } elseif ($url[1] == "aquariums") {
-                                    $id = "aquarium_id";
-                                    $img_url = "aquarium_img_url";
-                                    $name = "aquarium_name";
-                                    $sub = "aquarium_sub";
-                                    $price = "aquarium_price";
-                                }
+                        <?php
+                            require_once("./app/components/itemCard.php");
                                 foreach($data[0] as $item) {
-                                    echo displayItemCard($item->$id, $item->$img_url, $item->$name, $item->$sub, $item->$price);
+                                    echo displayItemCard($item->product_id, $item->product_img_url, $item->product_name, $item->product_sub, $item->product_price);
                                 }
                         ?>
                     </div>

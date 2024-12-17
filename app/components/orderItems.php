@@ -17,7 +17,7 @@
                     </div>
                     <div class="border-top p-3 d-flex flex-column align-items-end ">
                         <span class="fw-bold pb-3">Total: $'.$total.'</span>
-                        <button class="btn btn-primary btn-sm rounded-0">Cancel</button>
+                        <button class="cancel-btn btn btn-primary btn-sm rounded-0">Cancel</button>
                     </div>
                 </div>';
     }
