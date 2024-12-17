@@ -134,12 +134,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuLinks = document.querySelectorAll(".menu-link"); 
   const profileForm = document.querySelector(".body-profile"); 
   const changePasswordForm = document.querySelector(".change-password");
+  const order = document.querySelector(".order-page");
   const sidebarItems = document.querySelectorAll(".list-group-item");
 
  
   function hideAllForms() {
       profileForm.style.display = "none";
       changePasswordForm.style.display = "none";
+      order.style.display = "none";
      
   }
   function removeBackground() {
@@ -158,6 +160,9 @@ document.addEventListener("DOMContentLoaded", () => {
       } else if (page === "change-password") {
         changePasswordForm.style.display = "block";
         document.querySelector('[data-page="change-password"]').parentElement.style.backgroundColor = "#1877F2"; 
+      }else if(page === "order"){
+        order.style.display = "block";
+        document.querySelector('[data-page="order"]').parentElement.style.backgroundColor = "#1877F2";
       }
   }
 
@@ -210,5 +215,36 @@ document.querySelector("#save_btn_change_pass")?.addEventListener("click", () =>
   if (passwordInput) {
       sessionStorage.setItem("old-password", passwordInput.value);
   }
+});
+
+const nav_tab_links = document.querySelectorAll('.nav_tab_link')
+
+function hiddenTabs() {
+  nav_tab_links.forEach(tab => {
+    tab.classList.remove('active');
+  });
+}
+
+
+nav_tab_links.forEach(tab => {
+  tab.addEventListener('click', () => {
+    hiddenTabs();
+    tab.classList.add('active');
+  });
+})
+
+document.addEventListener('DOMContentLoaded', function () {
+  const orderItems = document.querySelectorAll('.order-item'); 
+  
+  orderItems.forEach(item => {
+      const statusSpan = item.querySelector('.text-primary');
+      const cancelButton = item.querySelector('.cancel-btn'); 
+      const isStatus = statusSpan.textContent.trim().toLowerCase()
+      if (isStatus !== 'pending') {
+          if (cancelButton) {
+              cancelButton.style.display = 'none';
+          }
+      }
+  });
 });
 

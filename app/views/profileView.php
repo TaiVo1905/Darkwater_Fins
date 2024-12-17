@@ -103,6 +103,73 @@
                     </div>
                     <button type="submit" id="save_btn_change_pass" name="save_btn_change_pass" class="btn btn-primary float-end m-1 w-25 mt-4 ">Save</button>
                 </form>
+
+                <!-- Phần order -->
+                <div class="order-page mx-auto" style="width:80%; ">
+                    <ul class="nav nav-pills nav-fill mb-4">
+                        <li class="nav-item nav_tab "  aria-current="page">
+                            <a class="nav_tab_link nav-link rounded-0 border active" aria-current="page">Pending</a>
+                        </li>
+                        <li class="nav-item nav_tab">
+                            <a class="nav_tab_link nav-link rounded-0 border ">Shipping</a>
+                        </li>
+                        <li class="nav-item nav_tab">
+                            <a class="nav_tab_link nav-link rounded-0 border">Shipped</a>
+                        </li>
+                        <li class="nav-item nav_tab">
+                            <a class="nav_tab_link nav-link rounded-0 border">Canceled</a>
+                        </li>
+                    </ul>
+                    <div class="row mx-auto" >
+                        <div class="border mb-3 order-item container">
+                            <!-- Item Header -->
+                            <div class="d-flex justify-content-end p-2 ">
+                                <span class="text-primary">Pending</span>
+                            </div>
+                            <!-- Item Content -->
+                            <div class="d-flex p-3 border-top my-3">
+                                <img src="" alt="Fish" style="width: 80px; height: 80px;" class="me-3 rounded">
+                                <div class="flex-grow-1 ">
+                                <h5 class="mb-1">Siamese Fighting Fish, Red</h5>
+                                <p class="mb-1 text-muted">Category: Color Variants</p>
+                                <small>×3</small>
+                            </div>
+                            <div class="text-end">
+                                <span class="fw-bold">$45.67</span>
+                        </div>
+                            </div>
+                            <!-- Item Footer -->
+                            <div class="border-top p-3 d-flex flex-column align-items-end ">
+                              <span class="fw-bold pb-3">Total: $137.01</span>
+                              <button class="cancel-btn btn btn-primary btn-sm rounded-0">Cancel</button>
+                            </div>
+                        </div>
+
+                        <div class="border mb-3 order-item">
+                            <!-- Item Header -->
+                            <div class="d-flex justify-content-end p-2 ">
+                              <span class="text-primary">hello</span>
+                            </div>
+                            <!-- Item Content -->
+                            <div class="d-flex p-3 border-top my-3">
+                              <img src="https://via.placeholder.com/80" alt="Fish" class="me-3 rounded">
+                              <div class="flex-grow-1 ">
+                                <h5 class="mb-1">Siamese Fighting Fish, Red</h5>
+                                <p class="mb-1 text-muted">Category: Color Variants</p>
+                                <small>×3</small>
+                              </div>
+                              <div class="text-end">
+                                <span class="fw-bold">$45.67</span>
+                              </div>
+                            </div>
+                            <!-- Item Footer -->
+                            <div class="border-top p-3 d-flex flex-column align-items-end ">
+                              <span class="fw-bold pb-3">Total: $137.01</span>
+                              <button class="cancel-btn btn btn-primary btn-sm">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

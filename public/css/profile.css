@@ -126,3 +126,11 @@ input.invalid {
     border-radius: 10px;
     overflow: hidden;
 }
+
+/* phần order */
+.order-item{
+    background-color: #f8f9fa;
+}
+.nav_tab:hover{
+    cursor: pointer;
+}
