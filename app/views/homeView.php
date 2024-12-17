@@ -93,7 +93,7 @@
             <?php
                 if (isset($data)) {
                     foreach ($data as $fish) {
-                        echo createFish($fish->fish_id, $fish->fish_img_url, $fish->fish_name, $fish->fish_sub, $fish->fish_price);
+                        echo createFish($fish->product_id, $fish->product_img_url, $fish->product_name, $fish->product_sub, $fish->product_price);
                 }
                     }
             ?>

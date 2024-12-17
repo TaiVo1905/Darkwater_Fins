@@ -9,18 +9,18 @@
         // Fishes
         public function fishes($id = null) {
             if($id == null){
-                $aquariumFishes = $this->productsModel->getAquariumFishes();
-                $highestPrice = $this->productsModel->getHighestFishPrice()->fish_price;
-                $categories = $this->productsModel->getFishCategories();
+                $aquariumFishes = $this->productsModel->getProducts("Fish");
+                $highestPrice = $this->productsModel->getHighestPrice("Fish")->product_price;
+                $categories = $this->productsModel->getCategories("Fish");
                 $this->view("products", [$aquariumFishes, $highestPrice, $categories]);
             }
         }
 
         public function aquariums($id = null) {
             if($id == null){
-                $aquariums = $this->productsModel->getAquariums();
-                $highestPrice = $this->productsModel->getHighestAquariumPrice()->aquarium_price;
-                $categories = $this->productsModel->getAquariumCategories();
+                $aquariums = $this->productsModel->getProducts("Aquarium");
+                $highestPrice = $this->productsModel->getHighestPrice("Aquarium")->product_price;
+                $categories = $this->productsModel->getCategories("Aquarium");
                 $this->view("products", [$aquariums, $highestPrice, $categories]);
             }
         }
@@ -28,11 +28,21 @@
 
         public function fishFoods($id = null) {
             if($id == null){
-                $fishFoods = $this->productsModel->getFishFoods();
-                $highestPrice = $this->productsModel->getHighestFoodPrice()->fishFood_price;
-                $categories = $this->productsModel->getFoodCategories();
+                $fishFoods = $this->productsModel->getProducts("Fish Food");
+                $highestPrice = $this->productsModel->getHighestPrice("Fish Food")->product_price;
+                $categories = $this->productsModel->getCategories("Fish Food");
                 $this->view("products", [$fishFoods, $highestPrice, $categories]);
             }
         }
+        public function search() {
+            if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                $searchQuery = $_GET['search_query'];
+                $aquariumFishes = $this->productsModel->searchProducts($searchQuery, "Fish");
+                $aquariums = $this->productsModel->searchProducts($searchQuery, "Aquarium");
+                $fishFoods = $this->productsModel->searchProducts($searchQuery, "Fish Food");
+                $allResults = array_merge($aquariumFishes, $aquariums, $fishFoods);
+                $this->view("search", [$allResults]);
+            }
+        }        
     }
 ?>
