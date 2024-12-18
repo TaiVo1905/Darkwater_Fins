@@ -6,7 +6,7 @@
 
         public function __construct () {
             $this->getUrl();
-            $this->dispath();
+            $this->dispatch();
         }
 
         public function getUrl() {
@@ -28,7 +28,7 @@
             $this->controller = new $this->controller;
         }
 
-        public function dispath() {
+        public function dispatch() {
             call_user_func_array([$this->controller, $this->method], $this->params);
         }
     }

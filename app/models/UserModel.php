@@ -48,12 +48,30 @@
             }
         }
 
+
+        //cart
         public function shoppingCart($user_id) {
             $stmt = $this->db->prepare("SELECT * FROm cart as c
                                         join products as p
                                         on c.product_id = p.product_id where user_id = ?");
             $stmt->execute([$user_id]);
             return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
+
+        public function changeQuantityCart($user_id, $product_id, $quantity) {
+            $stmt = $this->db->prepare("UPDATE cart SET quantity = ? where user_id = ? AND product_id = ?");
+            return $stmt->execute([$quantity, $user_id, $product_id]);
+        }
+
+        public function removeCart($user_id, $product_id) {
+            $stmt = $this->db->prepare("DELETE FROM cart WHERE user_id = ? AND product_id = ?");
+            return $stmt->execute([$user_id, $product_id]);
+        }
+
+        public function countItems($user_id) {
+            $stmt = $this->db->prepare("SELECT sum(quantity) AS totalQuantity FROM cart WHERE user_id = ?");
+            $stmt->execute([$user_id]);
+            return $stmt->fetch(PDO::FETCH_OBJ);
         }
     }
 ?>

@@ -9,7 +9,7 @@
                     <img class='rounded' src='$product_img_url' style='with: 100px; height:100px;'>
                 </td>
                 <td>
-                    <span class='fw-bold' data-id='$product_id'>$product_name</span><br>
+                    <span class='fw-bold' data-product-id='$product_id'>$product_name</span><br>
                     <small class='text-muted'>$product_type</small>
                 </td>
                 <td class='text-center'>

@@ -32,13 +32,13 @@
 <div class="container my-5">
     <h3 class="mb-4 fw-bold">Shopping Cart</h3>
     <div class="d-flex justify-content-end mb-2">
-        <span class="text-muted">3 items</span>
+        <span class="text-muted"><span class="countCart"><?php echo ($data[1]->totalQuantity ? $data[1]->totalQuantity : 0) ?></span> Items</span>
     </div>
-    <table class="table align-middle">
+    <table class="table align-middle shoppingCart">
         <tbody>
           <?php
             require_once("./app/components/cartItem.php");
-            foreach($data as $item) {
+            foreach($data[0] as $item) {
               echo createCartItem($item->product_id, $item->product_name, $item->product_img_url, $item->product_type, $item->quantity, $item->product_price);
             }
           ?>
@@ -49,6 +49,10 @@
         <button class="btn custom-btn-outline px-4">CHECKOUT</button>
     </div>
 </div>
+<?php
+    include_once  './app/components/toast.php';
+    echo displayToast("");
+ ?>
 <?php include_once("./app/components/footer.php"); ?>
 <script src="./public/js/shoppingCart.js?v=<?php echo time() ?>"></script>
 </body>
