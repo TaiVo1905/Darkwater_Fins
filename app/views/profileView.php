@@ -124,7 +124,7 @@
                         <?php
                             require './app/components/orderItems.php';
                             foreach ($data['order'] as $order) {
-                                echo renderOrderItems($order->order_status, $order->product_img_url, $order->product_name, $order->product_category, $order->quantity, $order->product_price, $order->price);;
+                                echo renderOrderItems($order -> order_id, $order->order_status, $order->product_img_url, $order->product_name, $order->product_category, $order->quantity, $order->product_price, $order->price);;
                             }
                         ?>
                     </div>

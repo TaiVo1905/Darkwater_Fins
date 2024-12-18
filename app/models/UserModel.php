@@ -54,6 +54,7 @@
 
         public function getOrder($user_id){
             $stmt = $this -> db -> prepare("SELECT 
+                                                O.ORDER_ID,
                                                 O.ORDER_STATUS, 
                                                 P.PRODUCT_IMG_URL, 
                                                 P.PRODUCT_NAME, 
@@ -74,6 +75,9 @@
             $orders = $stmt->fetch(PDO::FETCH_OBJ);    
             return $orders;                           
         }
-        
+        public function removeOrder($order_id){
+            $stmt = $this -> db -> prepare("DELETE FROM ORDERS WHERE ORDER_ID =?");
+            return $stmt->execute([$order_id]); 
+        }
     }
 ?>

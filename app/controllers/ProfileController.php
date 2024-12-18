@@ -61,5 +61,15 @@
                     $this->view('profile', $data);
                 }
             }
+            public function deleteOrder($order_id ){
+                if($_SERVER['REQUEST_METHOD'] === 'POST'){
+                    $this -> model('User');
+                    $user = new UserModel();          
+                    if($order_id){
+                        $user -> removeOrder($order_id);
+                    }
+                    
+                }
+            }
         }
 ?>

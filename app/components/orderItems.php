@@ -1,5 +1,5 @@
 <?php
-    function renderOrderItems($order_status, $produc_img_url, $product_name, $product_category, $quantity, $product_price, $total){
+    function renderOrderItems($order_id, $order_status, $produc_img_url, $product_name, $product_category, $quantity, $product_price, $total){
         return '<div class="border mb-3 order-item">
                     <div class="d-flex justify-content-end p-2 ">
                         <span class="text-primary">'.$order_status.'</span>
@@ -17,7 +17,7 @@
                     </div>
                     <div class="border-top p-3 d-flex flex-column align-items-end ">
                         <span class="fw-bold pb-3">Total: $'.$total.'</span>
-                        <button class="cancel-btn btn btn-primary btn-sm rounded-0">Cancel</button>
+                        <button class="cancel-btn btn btn-primary btn-sm rounded-0" data-order-id="'.$order_id.'">Cancel</button>
                     </div>
                 </div>';
     }

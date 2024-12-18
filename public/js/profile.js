@@ -274,3 +274,23 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
 });
+
+// xử lý cancel
+document.addEventListener("DOMContentLoaded", function () {
+  const cancelButtons = document.querySelectorAll(".cancel-btn");
+  cancelButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+        const orderId = button.getAttribute("data-order-id");
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", `Profile/deleteOrder/${encodeURIComponent(orderId)}`, true);
+        xhr.onreadystatechange = function () {
+            if(xhr.readyState == 4 && xhr.status == 200) {
+                button.closest(".order-item").remove();
+            } else {
+                console.log("Error");
+            }
+        }
+        xhr.send();
+    })
+  })
+});
