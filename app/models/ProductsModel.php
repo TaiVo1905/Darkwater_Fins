@@ -35,5 +35,10 @@
             ]);
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
+        public function getProductById($id) {
+            $stmt = $this->db->prepare("SELECT * FROM products WHERE product_id = :id");
+            $stmt->execute(['id' => $id]);
+            return $stmt->fetch(PDO::FETCH_OBJ);
+        }        
     }
 ?>

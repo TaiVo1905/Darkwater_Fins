@@ -43,6 +43,15 @@
                 $allResults = array_merge($aquariumFishes, $aquariums, $fishFoods);
                 $this->view("search", [$allResults]);
             }
-        }        
+        }  
+        public function detail($id) {
+            $product = $this->productsModel->getProductById($id);
+            if (!$product) {
+                header("Location: /404");
+                exit;
+            }
+            $this->view("detail", [$product]);
+        }
+              
     }
 ?>
