@@ -68,6 +68,7 @@
     <?php include_once  './app/components/footer.php'; ?>
     <?php include_once  './app/components/toast.php';
     echo displayToast('No changes have been made yet'); ?>
+    <script src="./public/js/define.js?v=<?php echo time(); ?>"></script>
     <script src="./public/js/profile.js?v=<?php echo time(); ?>"></script>
     <script src="./public/js/validator.js?v=<?php echo time(); ?>"></script>
     <script>

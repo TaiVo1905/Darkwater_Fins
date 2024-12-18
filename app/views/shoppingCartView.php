@@ -54,6 +54,8 @@
     echo displayToast("");
  ?>
 <?php include_once("./app/components/footer.php"); ?>
+<script src="./public/js/define.js?v=<?php echo time(); ?>"></script>
 <script src="./public/js/shoppingCart.js?v=<?php echo time() ?>"></script>
+<script src="./public/js/header.js?v=<?php echo time() ?>"></script>
 </body>
 </html>

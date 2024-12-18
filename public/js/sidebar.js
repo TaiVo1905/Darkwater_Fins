@@ -1,5 +1,3 @@
-const $ = document.querySelector.bind(document);
-const $$ = document.querySelectorAll.bind(document);
 
 const priceRange = document.getElementById("priceRange");
 const selectedPrice = document.getElementById("selectedPrice");

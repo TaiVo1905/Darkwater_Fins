@@ -38,5 +38,16 @@
                 echo $countItems->totalQuantity;
             }
         }
+
+        public function addToCart() {
+            if($_SERVER["REQUEST_METHOD"] == "POST") {
+                $jsonData = file_get_contents("php://input");
+                $request = json_decode($jsonData, true);
+                $this->model("User");
+                $userModel = new UserModel();
+                $response = $userModel->addToCart($_SESSION["user_id"], $request["product_id"]);
+                echo $response;
+            }
+        }
     }
 ?>
