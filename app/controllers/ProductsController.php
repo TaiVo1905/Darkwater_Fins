@@ -52,6 +52,37 @@
             }
             $this->view("detail", [$product]);
         }
-              
+          public function filterByPrice($price=null, $type=null) {
+            $price = $_GET['price'] ?? null;
+            $type = $_GET['type'] ?? null;
+            if ($price) {
+                $filteredProducts = $this->productsModel->filterProductsByPrice($price, $type);
+                echo json_encode($filteredProducts);
+            } else {
+                echo json_encode([]);
+            }
+        }
+
+        public function sortProducts($sortOption=null, $type=null) {
+            $sortOption = $_GET['sort'] ?? null;
+            $type = $_GET['type'] ?? null;
+            if ($sortOption) {
+                $sortedProducts = $this->productsModel->sortProducts($sortOption, $type);
+                echo json_encode($sortedProducts);
+            } else {
+                echo json_encode([]);
+            }
+        }
+        public function filterByCategory($categories = null) {
+            $categories = $_GET['categories'] ?? '[]';
+            $categories = json_decode($categories, true);  
+            if ($categories && is_array($categories) && count($categories) > 0) {
+                $filteredProducts = $this->productsModel->filterProductsByCategory($categories);
+                echo json_encode($filteredProducts);
+            } else {
+                echo json_encode([]);
+            }
+        }
+        
     }
 ?>

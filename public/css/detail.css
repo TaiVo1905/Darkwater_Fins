@@ -1,17 +1,17 @@
 .price {
     font-size: 32px;
     font-weight: bold;
-    color: #1877F2;
+    color:var( --primary-color3);
     margin-bottom: 20px;
 }
 .card-text {
-    color: #8c8c8c;
+    color: var( --primary-color4);
     line-height: 1.8;
     margin-bottom: 30px;
 }
 .btn-primary {
-    background-color: #1877F2;
-    border-color: #1877F2;
+    background-color:var( --primary-color3);
+    border-color:var( --primary-color3);
     padding: 8px 30px;
 }
 .btn-primary:hover {
@@ -26,7 +26,7 @@ input[type="number"] {
     padding: 5px;
 }
 .card-title span {
-    color: #1877F2;
+    color:var( --primary-color3);
 }
 .card-title {
     font-size: 18px;
@@ -49,18 +49,19 @@ input[type="number"] {
     border-radius: 5px 5px 0 0;
     padding: 10px 20px;
     font-weight: bold;
-    color: #1877F2;
+    color:var( --primary-color3);
     background-color: #f8f9fa;
 }
 
 .nav-link.active {
-    background-color: #1877F2;
-    color: white !important;
-    border-color: #1877F2;
+    background-color:var( --primary-color3);
+    color: var( --primary-color1) !important;
+    border-color:var( --primary-color3);
 }
 .tab-content {
-    color: #8c8c8c;
+    color: var( --primary-color4);
     padding: 20px;
     background: #f9f9f9;
     border: 1px solid #ddd;
+    margin-bottom: 60px;
 }

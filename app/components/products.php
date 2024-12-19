@@ -6,7 +6,9 @@ function createFish($id, $fishImage, $fishName, $fishSub, $fishPrice) {
                     <img src='$fishImage' alt='$fishName' class='card-img-top'>
                     <div class='icon-overlay'>
                         <i class='bi bi-cart-plus'></i>
-                        <i class='bi bi-link'></i>
+                        <a href='products/detail/$id'>
+                                <i class='bi bi-link'></i>
+                        </a>
                     </div>
                     <div class='card-body'>
                         <h5 class='card-title'>$fishName</h5>

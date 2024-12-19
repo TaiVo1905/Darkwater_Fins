@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="./public/css/itemCard.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./public/css/sidebar.css?v=<?php echo time(); ?>">
 </head>
-
 <body>
     <?php include_once './app/components/header.php' ?>
     <?php include_once './app/components/banner.php';
@@ -41,14 +40,13 @@
             <div class="col-9">
                 <!-- Phần đầu với icons và dropdown -->
                 <div class="d-flex justify-content-end mb-3 top-right-content">
-                    <select class="form-select w-25" style="border-radius: 0;">
-                        <option value="1">Sort by highest</option>
-                        <option value="2">Sort by lowest</option>
-                        <option value="3">Sort by </option>
+                    <select class="form-select w-25" style="border-radius: 0;" id="sortSelect">
+                        <option value="1">Sort by </option>
+                        <option value="2">Sort by highest</option>
+                        <option value="3">Sort by lowest</option>
                     </select>
                 </div>
-                <!-- chổ này là chổ render các card -->
-                    <div class="row">
+                    <div class="row" id="product-container">
                         <?php
                             require_once("./app/components/itemCard.php");
                                 foreach($data[0] as $item) {
@@ -76,6 +74,7 @@
     <script src="./public/js/sidebar.js?v=<?php echo time(); ?>"></script>
     <script src="./public/js/pagination.js?v=<?php echo time(); ?>"></script>
     <script src="./public/js/header.js?v=<?php echo time(); ?>"></script>
+    <script src="./public/js/products.js?v=<?php echo time(); ?>"></script>
 </body>
 
 </html>
