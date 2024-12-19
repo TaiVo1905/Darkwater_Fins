@@ -135,7 +135,11 @@
         </form>
     </div>
     <div class="overlay"></div>
-
+    <!-- Phan load -->
+    <section class="load_animation">
+        <div class="loader">
+        </div>
+    </section>
     <?php include_once  './app/components/footer.php'; ?>
     <?php include_once  './app/components/toast.php';
     echo displayToast('No changes have been made yet'); ?>

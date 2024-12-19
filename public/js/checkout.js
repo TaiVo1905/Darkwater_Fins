@@ -25,3 +25,23 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+// Phan load trang 
+const loader = document.querySelector('.loader');
+
+for (let i = 1; i <= 20; i++) {
+    const span = document.createElement('span'); 
+    span.style.setProperty('--stt', i); 
+    loader.appendChild(span); 
+}
+
+document.querySelector('.checkout-btn').addEventListener('click', () => {
+
+    document.querySelector('.load_animation').style.display = 'flex';
+    
+    setTimeout(() => {
+        document.querySelector('.load_animation').style.display = 'none';
+        window.location.href = 'success'       
+    }, 3500);
+
+});
+
