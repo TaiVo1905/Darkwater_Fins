@@ -92,25 +92,25 @@
 
         public function getOrder($user_id){
             $stmt = $this -> db -> prepare("SELECT 
-                                                O.ORDER_ID,
-                                                O.ORDER_STATUS, 
-                                                P.PRODUCT_IMG_URL, 
-                                                P.PRODUCT_NAME, 
-                                                P.PRODUCT_CATEGORY, 
-                                                OD.QUANTITY, 
-                                                P.PROCUCT_PRICE, 
-                                                OD.PRICE 
+                                                o.order_id,
+                                                o.order_status, 
+                                                p.product_img_url, 
+                                                p.product_name, 
+                                                p.product_category, 
+                                                od.quantity, 
+                                                p.product_price, 
+                                                o.total_price
                                             FROM 
-                                                ORDERS AS O
+                                                orders AS o
                                             JOIN 
-                                                ORDER_DETAILS AS OD ON OD.ORDER_ID = O.ORDER_ID
+                                                order_details AS od ON od.order_id = o.order_id
                                             JOIN 
-                                                PRODUCTS AS P ON P.PRODUCT_ID = OD.PRODUCT_ID
+                                                products AS p ON p.product_id = od.product_id
                                             WHERE 
-                                                O.USER_ID = ?;
+                                                o.user_id = ?;
                                             ");
             $stmt->execute([$user_id]); //true false
-            $orders = $stmt->fetch(PDO::FETCH_OBJ);    
+            $orders = $stmt->fetchAll(PDO::FETCH_OBJ);    
             return $orders;                           
         }
         public function removeOrder($order_id){

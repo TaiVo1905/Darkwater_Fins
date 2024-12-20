@@ -34,5 +34,15 @@
                 $this->view("products", [$fishFoods, $highestPrice, $categories]);
             }
         }
+        public function search() {
+            if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                $searchQuery = $_GET['search_query'];
+                $aquariumFishes = $this->productsModel->searchProducts($searchQuery, "Fish");
+                $aquariums = $this->productsModel->searchProducts($searchQuery, "Aquarium");
+                $fishFoods = $this->productsModel->searchProducts($searchQuery, "Fish Food");
+                $allResults = array_merge($aquariumFishes, $aquariums, $fishFoods);
+                $this->view("search", [$allResults]);
+            }
+        }        
     }
 ?>

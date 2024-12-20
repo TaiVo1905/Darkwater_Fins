@@ -4,7 +4,7 @@ function Validator(options) {
     if (formElement) {
         options.rules.forEach(function(rule) {
             var inputElement = formElement.querySelector(rule.selector);
-            var errorElement = inputElement.parentElement.querySelector('.form-message');
+            var errorElement = inputElement?.parentElement.querySelector('.form-message');
 
             if (inputElement) {
                 // Kiểm tra khi người dùng rời khỏi input

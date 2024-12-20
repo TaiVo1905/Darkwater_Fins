@@ -258,7 +258,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function filterOrders(status) {
       orderItems.forEach(item => {
           const statusText = item.querySelector(".text-primary").textContent.trim();
-          if (statusText === status) {
+          if (statusText.toLowerCase() === status.toLowerCase()) {
               item.style.display = "block";
           } else {
               item.style.display = "none";

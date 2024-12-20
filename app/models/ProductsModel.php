@@ -23,6 +23,17 @@
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
-
+        public function searchProducts($searchQuery, $productType) {
+            $stmt = $this->db->prepare(
+                "SELECT * FROM products 
+                WHERE product_type = :productType 
+                AND product_name LIKE :searchQuery"
+            );
+            $stmt->execute([
+                'productType' => $productType,
+                'searchQuery' => '%' . $searchQuery . '%'
+            ]);
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
     }
 ?>
