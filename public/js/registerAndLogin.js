@@ -1,7 +1,4 @@
-'use strict'
-
-const $ = document.querySelector.bind(document);
-const $$ = document.querySelectorAll.bind(document);
+'use strict';
 
 (() => {
     const forms = document.querySelectorAll('.needs-validation')

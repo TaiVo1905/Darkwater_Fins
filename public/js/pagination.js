@@ -1,5 +1,4 @@
-// const $ = document.querySelector.bind(document);
-// const $$ = document.querySelectorAll.bind(document);
+
 const itemsPerPage = 6; // Số item hiển thị trên mỗi trang
 const items = document.querySelectorAll(".item");
 const pageLinks = document.querySelectorAll(".page-link[data-page]");

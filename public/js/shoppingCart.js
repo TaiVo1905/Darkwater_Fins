@@ -1,5 +1,4 @@
-const $ = document.querySelector.bind(document);
-const $$ = document.querySelectorAll.bind(document);
+
 
 const itemCarts = $$(".shoppingCart tr");
 const countCart = $(".countCart");
@@ -40,6 +39,25 @@ itemCarts.forEach(item => {
     })
 });
 
+const addToCarts = $$(".add-to-cart");
+
+addToCarts.forEach(addToCart => {
+    addToCart.addEventListener("click", (e) => {
+        const product_id = parseInt(e.target.closest(".card").dataset.productId);
+        const product_name = e.target.closest(".card").querySelector(".card-title").innerText;
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "./shoppingCart/addToCart/", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function() {
+            if(this.readyState == 4 && this.status == 200) {
+                if(this.response == 1) {
+                    showToast("Add "+product_name+" successfully!");
+                };
+            }
+        }
+        xhr.send(JSON.stringify({"product_id": product_id}));
+    })
+})
 
 //Show message
 function showToast(message) {
@@ -72,6 +90,7 @@ async function changeQuantityCart(product_id, quantity) {
     xhr.send(JSON.stringify({"product_id": product_id, "quantity": quantity}))
 }
 
+//remove cart
 async function removeCart(product_id) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "./ShoppingCart/removeCart/", true);
@@ -84,6 +103,7 @@ async function removeCart(product_id) {
     xhr.send(JSON.stringify({"product_id": product_id}));
 }
 
+//Đếm sản phẩm
 async function countItems() {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "./shoppingCart/countItems/", true);

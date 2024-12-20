@@ -85,6 +85,22 @@
             return $stmt->fetch(PDO::FETCH_OBJ);
         }
 
+        private function getCart($user_id, $product_id) {
+            $stmt = $this->db->prepare("SELECT count(*) AS hasItem FROM cart WHERE user_id = ? AND product_id = ?");
+            $stmt->execute([$user_id, $product_id]);
+            return $stmt->fetch(PDO::FETCH_OBJ);
+        }
+
+        public function addToCart($user_id, $product_id) {
+            if($this->getCart($user_id, $product_id)->hasItem != 0) {
+                $stmt = $this->db->prepare("UPDATE cart SET quantity = quantity + ? WHERE user_id = ? AND product_id = ?");
+                return $stmt->execute([1, $user_id, $product_id]);
+            } else {
+                $stmt = $this->db->prepare("INSERT INTO cart(user_id, product_id, quantity) VALUE (?, ?, ?)");
+                return $stmt->execute([$user_id, $product_id, 1]);
+            }
+        }
+
         public function updatePassword($user_id, $user_password){
             $stmt = $this->db->prepare("UPDATE users SET passwords =? WHERE user_id =?");
             return $stmt->execute([$user_password, $user_id]);

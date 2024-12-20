@@ -73,9 +73,15 @@
         </div>
     </div>
     <?php include_once  './app/components/footer.php'; ?>
+    <?php
+        include_once  './app/components/toast.php';
+        echo displayToast("");
+    ?>
+    <script src="./public/js/define.js?v=<?php echo time(); ?>"></script>
     <script src="./public/js/sidebar.js?v=<?php echo time(); ?>"></script>
     <script src="./public/js/pagination.js?v=<?php echo time(); ?>"></script>
     <script src="./public/js/header.js?v=<?php echo time(); ?>"></script>
+    <script src="./public/js/shoppingCart.js?v=<?php echo time() ?>"></script>
 </body>
 
 </html>
