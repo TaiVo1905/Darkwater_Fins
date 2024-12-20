@@ -46,7 +46,7 @@
                 $this->model("User");
                 $userModel = new UserModel();
                 $response = $userModel->addToCart($_SESSION["user_id"], $request["product_id"]);
-                echo $response;
+                echo json_encode($response);
             }
         }
 

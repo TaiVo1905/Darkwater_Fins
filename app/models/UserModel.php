@@ -65,7 +65,6 @@
                     "status" => "success"
                 ];
             } catch(PDOException $e) {
-                $this->db->rollback();
                 return [
                     "status" => "fall",
                     "code" => $e->getCode(),
@@ -92,12 +91,23 @@
         }
 
         public function addToCart($user_id, $product_id) {
-            if($this->getCart($user_id, $product_id)->hasItem != 0) {
-                $stmt = $this->db->prepare("UPDATE cart SET quantity = quantity + ? WHERE user_id = ? AND product_id = ?");
-                return $stmt->execute([1, $user_id, $product_id]);
-            } else {
-                $stmt = $this->db->prepare("INSERT INTO cart(user_id, product_id, quantity) VALUE (?, ?, ?)");
-                return $stmt->execute([$user_id, $product_id, 1]);
+            try{
+                if($this->getCart($user_id, $product_id)->hasItem != 0) {
+                    $stmt = $this->db->prepare("UPDATE cart SET quantity = quantity + ? WHERE user_id = ? AND product_id = ?");
+                    $stmt->execute([1, $user_id, $product_id]);
+                } else {
+                    $stmt = $this->db->prepare("INSERT INTO cart(user_id, product_id, quantity) VALUE (?, ?, ?)");
+                    $stmt->execute([$user_id, $product_id, 1]);
+                }
+                return [
+                    "status" => "success"
+                ];
+            } catch(PDOException $e) {
+                return [
+                    "status" => "fall",
+                    "code" => $e->getCode(),
+                    "message" => $e->getMessage()
+                ];
             }
         }
 

@@ -50,9 +50,13 @@ addToCarts.forEach(addToCart => {
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function() {
             if(this.readyState == 4 && this.status == 200) {
-                if(this.response == 1) {
+                const response = JSON.parse(this.response);
+                console.log(response)
+                if(response.stauts == "success") {
                     showToast("Add "+product_name+" successfully!");
-                };
+                }else if(response["status"] == "fall" && response["code"] == "45000") {
+                    showToast("Quantity exceeds the allowed limit.")
+                }
             }
         }
         xhr.send(JSON.stringify({"product_id": product_id}));
@@ -134,7 +138,7 @@ function checkedItemList() {
 }
 
 
-$(".checkout").addEventListener("click", () => {
+$(".checkout")?.addEventListener("click", () => {
     const product_id_list = checkedItemList();
     if(product_id_list.length == 0){
         showToast("Please choose product before checkout!");

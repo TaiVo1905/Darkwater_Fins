@@ -1,50 +1,48 @@
-const $ = document.querySelector.bind(document);
-const $$ = document.querySelectorAll.bind(document);
 
-const address_form = document.querySelector('.form-container')
-const overlay = document.querySelector(".overlay");
+const address_form = $('.form-container')
+const overlay = $(".overlay");
 
 const info_username = $(".user_name");
 const info_phoneNumber = $(".user_phoneNumber");
 const info_address = $(".address");
 
-document.querySelector('.edit_address').addEventListener('click', () => {
+$('.edit_address')?.addEventListener('click', () => {
     address_form.style.display = 'block';
 })
-document.querySelector('.cancel_btn').addEventListener('click', () => {
+$('.cancel_btn')?.addEventListener('click', () => {
     address_form.style.display = 'none';
 })
 
 document.addEventListener("DOMContentLoaded", function () {
-    const formContainer = document.querySelector(".form-container");
-    const editButton = document.querySelector(".edit_address");
-    const cancelButton = document.querySelector(".cancel_btn");
+    const formContainer = $(".form-container");
+    const editButton = $(".edit_address");
+    const cancelButton = $(".cancel_btn");
 
-    editButton.addEventListener("click", () => {
+    editButton?.addEventListener("click", () => {
         overlay.classList.add("active");
     });
-    cancelButton.addEventListener("click", () => {
+    cancelButton?.addEventListener("click", () => {
         overlay.classList.remove("active");
     });
 
-    overlay.addEventListener("click", () => {
+    overlay?.addEventListener("click", () => {
         formContainer.style.display = "none";
         overlay.classList.remove("active");
     });
 });
 
 // Phan load trang 
-const loader = document.querySelector('.loader');
+const loader = $('.loader');
 
 for (let i = 1; i <= 20; i++) {
     const span = document.createElement('span'); 
     span.style.setProperty('--stt', i); 
-    loader.appendChild(span); 
+    loader?.appendChild(span); 
 }
 
-document.querySelector('.checkout-btn').addEventListener('click', () => {
+$('.checkout-btn')?.addEventListener('click', () => {
 
-    document.querySelector('.load_animation').style.display = 'flex';
+    $('.load_animation').style.display = 'flex';
     if(checkInfo()) {
         completedOrder();
     }
@@ -52,7 +50,7 @@ document.querySelector('.checkout-btn').addEventListener('click', () => {
 });
 
 //checkout backend
-$(".editProfileForm").addEventListener("submit", (e) => {
+$(".editProfileForm")?.addEventListener("submit", (e) => {
     console.log(1)
     const username = e.target.querySelector("input[name=username]").value;
     const phonenumber = e.target.querySelector("input[name=phonenumber]").value;
@@ -99,16 +97,34 @@ function completedOrder() {
             console.log(this.response)
             const response = JSON.parse(this.response);
             if(response["status"] == "success") {
-                document.querySelector('.load_animation').style.display = 'none';
+                $('.load_animation').style.display = 'none';
                 window.location.href = "./success";
             } else if(response["status"] == "fall") {
-                document.querySelector('.load_animation').style.display = 'none';
+                $('.load_animation').style.display = 'none';
                 showToast(response["message"]);
             }
         }
     }
     xhr.send();
 }
+
+$(".checkout")?.addEventListener("click", () => {
+    const product_id = parseInt($(".card").dataset.productId);
+    const xhr = new XMLHttpRequest();
+        xhr.open("POST", "./shoppingCart/addToCart/", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function() {
+            if(this.readyState == 4 && this.status == 200) {
+                const response = JSON.parse(this.response);
+                if(response.stauts == "success") {
+                    storeProductIdBeforCheckout([product_id]);
+                } else if(response["status"] == "fall" && response["code"] == "45000") {
+                    showToast("Quantity exceeds the allowed limit.")
+                }
+            }
+        }
+        xhr.send(JSON.stringify({"product_id": product_id}));
+})
 
 function checkInfo() {
     if (info_phoneNumber == "Not have your phone number yet" || info_address == "Not have your address yet") {
@@ -117,4 +133,18 @@ function checkInfo() {
     }
     return true;
 
+}
+
+function storeProductIdBeforCheckout(product_id_list) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "./shoppingCart/storeProductIdBeforCheckout", true);
+    xhr.onreadystatechange = function () {
+        if(this.readyState == 4 && this.status == 200) {
+            if(this.response == 1) {
+                console.log(this.response);
+                window.location.href = "./checkout";
+            }
+        }
+    }
+    xhr.send(JSON.stringify(product_id_list));
 }

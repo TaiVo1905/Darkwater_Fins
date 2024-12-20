@@ -35,5 +35,41 @@
             ]);
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
+        public function getProductById($id) {
+            $stmt = $this->db->prepare("SELECT * FROM products WHERE product_id = :id");
+            $stmt->execute(['id' => $id]);
+            return $stmt->fetch(PDO::FETCH_OBJ);
+        }     
+        public function filterProductsByPrice($price, $type) {
+            $sql = "SELECT * FROM products WHERE product_price <= $price";
+            if ($type) {
+                $sql .= " AND product_type = '$type'";
+            }
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute(); 
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
+           
+        public function sortProducts($sortOption, $type) {
+            $sql = "SELECT * FROM products";
+            if ($type) {
+                $sql .= " WHERE product_type = '$type'";
+            }
+            if ($sortOption == 2) {
+                $sql .= " ORDER BY product_price DESC";
+            } elseif ($sortOption == 3) {
+                $sql .= " ORDER BY product_price ASC";
+            }
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }              
+        public function filterProductsByCategory($categories) {
+            $placeholders = implode(",", array_fill(0, count($categories), "?"));
+            $stmt = $this->db->prepare("SELECT * FROM products WHERE product_category IN ($placeholders)");
+            $stmt->execute($categories);
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
+          
     }
 ?>

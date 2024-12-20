@@ -3,7 +3,7 @@
     <div class="filter-fiel">
         <input type="range" min="0" max="<?php echo $data[1] ?>" value="<?php echo $data[1] ?>" step="0.01" id="priceRange" class="price-slider w-100">
         <p>Selected Price: <span id="selectedPrice"><?php echo $data[1] ?>$</span></p>
-        <button type="button" class="btn btn-primary" style="border-radius: 0">FILTER</button>
+        <button type="button" class="btn btn-primary" style="border-radius: 0" id="filterBtn">FILTER</button>
     </div>
     <h2 class="sidebar-title mb-4 mt-3">Categories</h2>
     <div class="checkbox-category form-check">
