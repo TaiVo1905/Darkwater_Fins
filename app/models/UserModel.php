@@ -58,8 +58,20 @@
         }
 
         public function changeQuantityCart($user_id, $product_id, $quantity) {
-            $stmt = $this->db->prepare("UPDATE cart SET quantity = ? where user_id = ? AND product_id = ?");
-            return $stmt->execute([$quantity, $user_id, $product_id]);
+            try{
+                $stmt = $this->db->prepare("UPDATE cart SET quantity = ? where user_id = ? AND product_id = ?");
+                $stmt->execute([$quantity, $user_id, $product_id]);
+                return [
+                    "status" => "success"
+                ];
+            } catch(PDOException $e) {
+                $this->db->rollback();
+                return [
+                    "status" => "fall",
+                    "code" => $e->getCode(),
+                    "message" => $e->getMessage()
+                ];
+            }
         }
 
         public function removeCart($user_id, $product_id) {
@@ -114,7 +126,40 @@
                                         ON c.product_id = p.product_id WHERE c.user_id = ? AND c.product_id IN ($place)");
             $stmt->execute(array_merge([$user_id], $product_id_list));
             return $stmt->fetchAll(PDO::FETCH_OBJ);
-            
+        }
+
+        public function completedOrder($user_id ,$product_id_list) {
+            try {
+                $this->db->beginTransaction();
+                $itemCheckouts = $this->getProductBeforCheckout($user_id ,$product_id_list);
+                $stmt = $this->db->prepare("INSERT INTO orders(user_id, order_status, order_date) VALUE (?, 'pending', NOW())");
+                $stmt->execute([$user_id]);
+
+                $stmt = $this->db->prepare("SELECT order_id FROM orders ORDER BY order_id DESC LIMIT 1");
+                $stmt->execute();
+                $order_id = $stmt->fetch(PDO::FETCH_OBJ)->order_id;
+
+                $stmt = $this->db->prepare("INSERT INTO order_details(order_id, product_id, price, quantity) VALUE (?, ?, ?, ?)");
+                foreach($itemCheckouts as $item) {
+                    $stmt->execute([$order_id, $item->product_id, $item->product_price, $item->quantity]);
+                }
+
+                $stmt = $this->db->prepare("DELETE FROM cart WHERE user_id = ? AND product_id = ?");
+                foreach($product_id_list as $id) {
+                    $stmt->execute([$user_id, $id]);
+                }
+                $this->db->commit();
+                return [
+                    "status" => "success"
+                ];
+            } catch(PDOException $e) {
+                $this->db->rollback();
+                return [
+                    "status" => "fall",
+                    "code" => $e->getCode(),
+                    "message" => $e->getMessage()
+                ];
+            }
         }
     }
 ?>

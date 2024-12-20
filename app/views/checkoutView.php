@@ -108,7 +108,7 @@
                 </div>
                 <div class="d-flex justify-content-between fw-bold">
                     <span>Total payment</span>
-                    <span class="total_price">$<?php echo  round(($total + ($total * 2/100)), 2) ?></span>
+                    <span class="total_price">$<?php $_SESSION["total_price"] = round(($total + ($total * 2/100)), 2); echo $_SESSION["total_price"]; ?></span>
                 </div>
             </div>
             <div class="col-12 text-end mt-3 mb-3">
@@ -120,9 +120,9 @@
     <!-- Form address -->
     <div class="form-container">
         <?php
-            $user_name = $data[1]->user_name ?? $_SESSION["user_name_c"];
-            $phone_number = $data[1]->phone_number ?? $_SESSION["phone_number_c"];
-            $address = $data[1]->address ?? $_SESSION["address_c"];
+            $user_name = $data[1]->user_name ?? $_SESSION["info_checkout"]["username"];
+            $phone_number = $data[1]->phone_number ?? $_SESSION["info_checkout"]["phone_number"] ?? "";
+            $address = $data[1]->address ?? $_SESSION["info_checkout"]["address"] ?? "";
             echo "
                 <form class='editProfileForm' action='' method='POST'>
                     <div class='mb-4 input-fiel mb-5'>
@@ -146,7 +146,11 @@
         ?>
     </div>
     <div class="overlay"></div>
-
+    <!-- Phan load -->
+    <section class="load_animation">
+        <div class="loader">
+        </div>
+    </section>
     <?php include_once  './app/components/footer.php'; ?>
     <?php include_once  './app/components/toast.php';
     echo displayToast('No changes have been made yet'); ?>

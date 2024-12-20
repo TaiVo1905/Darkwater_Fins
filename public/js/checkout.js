@@ -3,6 +3,11 @@ const $$ = document.querySelectorAll.bind(document);
 
 const address_form = document.querySelector('.form-container')
 const overlay = document.querySelector(".overlay");
+
+const info_username = $(".user_name");
+const info_phoneNumber = $(".user_phoneNumber");
+const info_address = $(".address");
+
 document.querySelector('.edit_address').addEventListener('click', () => {
     address_form.style.display = 'block';
 })
@@ -28,6 +33,24 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+// Phan load trang 
+const loader = document.querySelector('.loader');
+
+for (let i = 1; i <= 20; i++) {
+    const span = document.createElement('span'); 
+    span.style.setProperty('--stt', i); 
+    loader.appendChild(span); 
+}
+
+document.querySelector('.checkout-btn').addEventListener('click', () => {
+
+    document.querySelector('.load_animation').style.display = 'flex';
+    if(checkInfo()) {
+        completedOrder();
+    }
+
+});
+
 //checkout backend
 $(".editProfileForm").addEventListener("submit", (e) => {
     console.log(1)
@@ -45,9 +68,9 @@ $(".editProfileForm").addEventListener("submit", (e) => {
                 console.log(1)
                 address_form.style.display = 'none';
                 overlay.classList.remove("active");
-                $(".user_name").innerText = username;
-                $(".user_phoneNumber").innerText = " - " + phonenumber;
-                $(".address").innerText = "- " + user_address;
+                info_username.innerText = username;
+                info_phoneNumber.innerText = " - " + phonenumber;
+                info_address.innerText = "- " + user_address;
                 showToast("Edit information successfully!")
             }
         }
@@ -66,4 +89,32 @@ function showToast(message) {
     setTimeout(() => {
       toast.hide();
     }, 5000);
+}
+
+function completedOrder() {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "./checkout/completedOrder", true);
+    xhr.onreadystatechange = function() {
+        if(this.readyState == 4 && this.status == 200) {
+            console.log(this.response)
+            const response = JSON.parse(this.response);
+            if(response["status"] == "success") {
+                document.querySelector('.load_animation').style.display = 'none';
+                window.location.href = "./success";
+            } else if(response["status"] == "fall") {
+                document.querySelector('.load_animation').style.display = 'none';
+                showToast(response["message"]);
+            }
+        }
+    }
+    xhr.send();
+}
+
+function checkInfo() {
+    if (info_phoneNumber == "Not have your phone number yet" || info_address == "Not have your address yet") {
+        showToast("You need update your information to check out!");
+        return false;
+    }
+    return true;
+
 }

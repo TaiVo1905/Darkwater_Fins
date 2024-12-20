@@ -61,8 +61,10 @@ async function changeQuantityCart(product_id, quantity) {
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function() {
         if(this.readyState == 4 && this.status == 200) {
-            if(this.response) {
-                console.log("a");
+            const response = JSON.parse(this.response);
+            console.log(response)
+            if(response["status"] == "fall" && response["code"] == "45000") {
+                showToast("Quantity exceeds the allowed limit.")
             }
         }
 

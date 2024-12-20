@@ -15,7 +15,7 @@
                 $this->model("User");
                 $userModel = new UserModel();
                 $response = $userModel->changeQuantityCart($_SESSION["user_id"], $request["product_id"], $request["quantity"]);
-                echo $response;
+                echo json_encode($response);
             }
         }
 
