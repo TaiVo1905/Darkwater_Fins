@@ -71,5 +71,20 @@
                     
                 }
             }
+
+            //checkout
+            public function saveInfoCheckout() {
+                if($_SERVER["REQUEST_METHOD"] == "POST") {
+                    try{
+                        $jsonData = file_get_contents("php://input");
+                        $request = json_decode($jsonData, true);
+                        $_SESSION["info_checkout"] = $request;
+                        echo true;
+
+                    } catch(PDOException $e) {
+                        echo $e->getMessage();
+                    }
+                }
+            }
         }
 ?>

@@ -47,6 +47,32 @@
             }
         }
 
+
+        //cart
+        public function shoppingCart($user_id) {
+            $stmt = $this->db->prepare("SELECT * FROM cart AS c
+                                        JOIN products AS p
+                                        ON c.product_id = p.product_id WHERE user_id = ?");
+            $stmt->execute([$user_id]);
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
+
+        public function changeQuantityCart($user_id, $product_id, $quantity) {
+            $stmt = $this->db->prepare("UPDATE cart SET quantity = ? where user_id = ? AND product_id = ?");
+            return $stmt->execute([$quantity, $user_id, $product_id]);
+        }
+
+        public function removeCart($user_id, $product_id) {
+            $stmt = $this->db->prepare("DELETE FROM cart WHERE user_id = ? AND product_id = ?");
+            return $stmt->execute([$user_id, $product_id]);
+        }
+
+        public function countItems($user_id) {
+            $stmt = $this->db->prepare("SELECT sum(quantity) AS totalQuantity FROM cart WHERE user_id = ?");
+            $stmt->execute([$user_id]);
+            return $stmt->fetch(PDO::FETCH_OBJ);
+        }
+
         public function updatePassword($user_id, $user_password){
             $stmt = $this->db->prepare("UPDATE users SET passwords =? WHERE user_id =?");
             return $stmt->execute([$user_password, $user_id]);
@@ -78,6 +104,17 @@
         public function removeOrder($order_id){
             $stmt = $this -> db -> prepare("DELETE FROM ORDERS WHERE ORDER_ID =?");
             return $stmt->execute([$order_id]); 
+        }
+
+        //checkout
+        public function getProductBeforCheckout($user_id ,$product_id_list) {
+            $place = implode(", ", array_fill(0, count($product_id_list), "?"));
+            $stmt = $this->db->prepare("SELECT * FROM cart AS c
+                                        JOIN products AS p
+                                        ON c.product_id = p.product_id WHERE c.user_id = ? AND c.product_id IN ($place)");
+            $stmt->execute(array_merge([$user_id], $product_id_list));
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+            
         }
     }
 ?>

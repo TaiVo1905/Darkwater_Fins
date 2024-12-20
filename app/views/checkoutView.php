@@ -29,16 +29,23 @@
         </div>
         
         <div class="address_order row mb-4 p-3 rounded">
-            <div class="col-8">
-                <span class="fw-semibold delevery_address"><i class="bi bi-geo-alt me-2 delevery_address"></i>Delivery address</span>
-                <div class="d-flex">
-                    <p class="mb-0 d-inline-block me-3">Tran Cong Doan 0942345105</p>
-                    <p class="d-inline-block">Nhà Thờ Giáo Xứ Phu Kinh, Phu Hoa, Quang Trach, Quảng Binh</p>
-                </div>
-            </div>
-            <div class="col-4 text-end d-flex align-items-center justify-content-end">
-                <p  class="edit_address text-primary text-decoration-none">Edit</p>
-            </div>
+            <?php
+                $username = $data[1]->user_name ?? $_SESSION["info_checkout"]["username"];
+                $phone_number = $data[1]->phone_number ?? $_SESSION["info_checkout"]["phone_number"] ?? 'Not have phone number yet';
+                $address = $data[1]->address ?? $_SESSION["info_checkout"]["address"] ?? 'Not have address yet';
+                echo "
+                    <div class='col-8'>
+                        <span class='fw-semibold delevery_address'><i class='bi bi-geo-alt me-2 delevery_address'></i>Delivery address</span>
+                        <div class='d-flex'>
+                            <p class='mb-0 d-inline-block me-1 mb-0'><span class='user_name'>" . $username . "</span> <span class='user_phoneNumber'> - " . $phone_number . "</span></p>
+                            <p class='d-inline-block mb-0 address'> - " . $address . "</p>
+                        </div>
+                    </div>
+                    <div class='col-4 text-end d-flex align-items-center justify-content-end'>
+                        <p  class='edit_address text-primary text-decoration-none mb-0'>Edit</p>
+                    </div>
+                "
+            ?>
         </div>
 
         <!-- Products Table -->
@@ -54,34 +61,31 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr >
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <img style="max-width: 80px; max-height: 80px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSz2o14Olyw0w-bMlkcMQfWKUkYlfuQTs0wog&s" class="me-2" alt="Product">
-                                    <div>
-                                        <p class="mb-0">Siamese Fighting Fish, White</p>
-                                        <small class="text-muted">Category: Unique</small>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="quantity">2</td>
-                            <td>$30.00</td>
-                            <td>$60.00</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <img style="max-width: 80px; max-height: 80px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ-vwAuwtl9iP3qGEuE5swc8lGBDkZoq8Z2Q&s" class="me-2" alt="Product">
-                                    <div>
-                                        <p class="mb-0">Siamese Fighting Fish, White</p>
-                                        <small class="text-muted">Category: Unique</small>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="quantity" >2</td>
-                            <td>$30.00</td>
-                            <td>$60.00</td>
-                        </tr>
+                        <?php
+                        $html = "";
+                        $total = 0;
+                            foreach($data[0] as $product) {
+                                $html .= "
+                                    <tr >
+                                        <td>
+                                            <div class='d-flex align-items-center'>
+                                                <img style='width: 80px; height: 80px; object-fit: cover;' src='$product->product_img_url' class='me-2' alt='Product'>
+                                                <div>
+                                                    <p class='mb-0'>$product->product_name</p>
+                                                    <small class='text-muted'>Category: $product->product_category</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class='quantity'>$product->quantity</td>
+                                        <td>$$product->product_price</td>
+                                        <td>$" . $product->quantity*$product->product_price . "</td>
+                                    </tr>
+                                    ";
+                                $total += $product->quantity*$product->product_price;
+                            }
+                        echo $html;
+                        ?>
+                        
                         
                     </tbody>
                 </table>
@@ -96,15 +100,15 @@
             <div class="col-md-5 col-12 p-3 rounded">
                 <div class="d-flex justify-content-between mb-2">
                     <span>Total cost of goods</span>
-                    <span>$120.00</span>
+                    <span>$ <?php echo $total ?></span>
                 </div>
                 <div class="d-flex justify-content-between mb-2">
                     <span>Total shipping cost</span>
-                    <span>$30.00</span>
+                    <span>$ <?php echo round(($total * 2/100), 2) ?></span>
                 </div>
                 <div class="d-flex justify-content-between fw-bold">
                     <span>Total payment</span>
-                    <span class="total_price">$150.00</span>
+                    <span class="total_price">$<?php echo  round(($total + ($total * 2/100)), 2) ?></span>
                 </div>
             </div>
             <div class="col-12 text-end mt-3 mb-3">
@@ -115,24 +119,31 @@
     
     <!-- Form address -->
     <div class="form-container">
-        <form action="">
-            <div class="mb-4 input-fiel mb-5">
-                <label for="username" class="form-label">Name</label>
-                <input type="text" id="username" name="username" class="form-control" placeholder="Type name here.." required>
-            </div>
-            <div class="mb-4 input-fiel mb-5">
-                <label for="phonenumber" class="form-label">Phone number</label>
-                <input type="text" id="phonenumber" name="phonenumber" class="form-control" placeholder="Type phone number here.." required>
-            </div>
-            <div class="mb-4 input-fiel mb-5">
-                <label for="user-address" class="form-label">Address</label>
-                <input type="text" id="user-address" name="user-address" class="form-control" placeholder="Type address here.." required>
-            </div>
-            <div class="btn-fiel">
-                <button type="button" class="cancel_btn">Cancel</button>
-                <button type="submit" class="save_btn">Save</button>
-            </div>
-        </form>
+        <?php
+            $user_name = $data[1]->user_name ?? $_SESSION["user_name_c"];
+            $phone_number = $data[1]->phone_number ?? $_SESSION["phone_number_c"];
+            $address = $data[1]->address ?? $_SESSION["address_c"];
+            echo "
+                <form class='editProfileForm' action='' method='POST'>
+                    <div class='mb-4 input-fiel mb-5'>
+                        <label for='username' class='form-label'>Name</label>
+                        <input type='text' id='username' name='username' class='form-control' placeholder='Type name here..' value='" . $user_name . "' required>
+                    </div>
+                    <div class='mb-4 input-fiel mb-5'>
+                        <label for='phonenumber' class='form-label'>Phone number</label>
+                        <input type='text' id='phonenumber' name='phonenumber' class='form-control' placeholder='Type phone number here..' value='" . $phone_number . "' required>
+                    </div>
+                    <div class='mb-4 input-fiel mb-5'>
+                        <label for='user-address' class='form-label'>Address</label>
+                        <input type='text' id='user-address' name='user-address' class='form-control' placeholder='Type address here..' value='" . $address . "' required>
+                    </div>
+                    <div class='btn-fiel'>
+                        <button type='button' class='cancel_btn'>Cancel</button>
+                        <button type='submit' class='save_btn'>Save</button>
+                    </div>
+                </form>
+            ";
+        ?>
     </div>
     <div class="overlay"></div>
 
