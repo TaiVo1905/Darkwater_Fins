@@ -46,7 +46,7 @@
             <span class="gay-color">Payment method</span>
             <span>Cash on delivery</span>
         </div>
-        <button class="float-end btn-continue mb-3"> <a href="home">Continue shopping</a></button>
+        <button class="float-end btn-continue mb-3"> <a href="./products/fishes">Continue shopping</a></button>
     </div>
 </body>
 </html>

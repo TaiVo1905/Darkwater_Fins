@@ -22,17 +22,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function displayProducts(products) {
-        let productContainer = document.getElementById("product-container");
+        let productContainer = $("#product-container");
         productContainer.innerHTML = ''; 
         products.forEach(function (product) {
             let productElement = document.createElement("div");
             productElement.classList.add("col", "col-md-4", "col-sm-6", "item");
             productElement.innerHTML = `
-                <div class="card" data-id="${product.product_id}">
+                <div class="card" data-product-id="${product.product_id}">
                     <img src="${product.product_img_url}" alt="" class="card-img-top">
                     <div class="icon-overlay">
-                        <i class="bi bi-cart-plus"></i>
-                        <a href="products/detail/${product.product_id}">
+                        <i class="bi bi-cart-plus add-to-cart"></i>
+                        <a href="products/${product.product_type == 'Fish' ? 'fishes' : product.product_type == 'Fish Food' ? 'fishfoods' : 'aquariums'}/${product.product_id}">
                             <i class="bi bi-link"></i>
                         </a>
                     </div>
@@ -45,6 +45,18 @@ document.addEventListener('DOMContentLoaded', function () {
             `;
             productContainer.appendChild(productElement);
         });
+        const addToCarts = $$(".add-to-cart");
+        addToCartFunction(addToCarts);
+        const pagination = $(".pagination");
+        pagination.innerHTML = "";
+        for(let i = 1; i <= Math.floor((products.length % 6 + 1)); i++) {
+            pagination.innerHTML += `<li class='page-item'><a class='page-link' data-page='${i}'>${i}</a></li>`;
+        }
+        const pageLinks = $$(".page-link[data-page]");
+        const itemsPerPage = 6;
+        const items = $$(".item");
+        preparepagination(pageLinks, items, itemsPerPage);
+        $(".page-link[data-page='1']").click();
     }
 
     // Get the product type from the current page URL
@@ -58,24 +70,24 @@ document.addEventListener('DOMContentLoaded', function () {
         type = "Fish";
     }
     console.log(type);
-    document.getElementById('filterBtn').addEventListener('click', function () {
-        let selectedPrice = document.getElementById('priceRange').value;
+    $('#filterBtn').addEventListener('click', function () {
+        let selectedPrice = $('#priceRange').value;
         fetchProducts("Products/filterByPrice", { price: selectedPrice, type: type }, displayProducts);
     });
 
-    document.getElementById('sortSelect').addEventListener('change', function () {
+    $('#sortSelect').addEventListener('change', function () {
         let sortBy = this.value;
         fetchProducts("Products/sortProducts", { sort: sortBy, type: type }, displayProducts);
     });
 
-    document.querySelectorAll('.form-check-input').forEach(function (checkbox) {
+    $$('.form-check-input').forEach(function (checkbox) {
         checkbox.addEventListener('change', function () {
             let selectedCategories = [];
-            document.querySelectorAll('.form-check-input:checked').forEach(function (checkedCheckbox) {
+            $$('.form-check-input:checked').forEach(function (checkedCheckbox) {
                 selectedCategories.push(checkedCheckbox.value);
             });
-            if(selectedCategories.length() == 0) {
-                document.querySelectorAll('.form-check-input').forEach(function (checkedCheckbox) {
+            if(selectedCategories.length == 0) {
+                $$('.form-check-input').forEach(function (checkedCheckbox) {
                     selectedCategories.push(checkedCheckbox.value);
                 });
             }

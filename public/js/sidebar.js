@@ -1,6 +1,6 @@
 
-const priceRange = document.getElementById("priceRange");
-const selectedPrice = document.getElementById("selectedPrice");
+const priceRange = $("#priceRange");
+const selectedPrice = $("#selectedPrice");
 priceRange.addEventListener("input", function () {
     selectedPrice.textContent = "$" + priceRange.value;
 });

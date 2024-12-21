@@ -1,5 +1,5 @@
 function Validator(options) {
-    var formElement = document.querySelector(options.form);
+    var formElement = $(options.form);
 
     if (formElement) {
         options.rules.forEach(function(rule) {

@@ -47,6 +47,7 @@ $('.checkout-btn')?.addEventListener('click', () => {
         completedOrder();
     }
 
+
 });
 
 //checkout backend
@@ -109,25 +110,34 @@ function completedOrder() {
 }
 
 $(".checkout")?.addEventListener("click", () => {
-    const product_id = parseInt($(".card").dataset.productId);
-    const xhr = new XMLHttpRequest();
-        xhr.open("POST", "./shoppingCart/addToCart/", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function() {
-            if(this.readyState == 4 && this.status == 200) {
-                const response = JSON.parse(this.response);
-                if(response.stauts == "success") {
-                    storeProductIdBeforCheckout([product_id]);
-                } else if(response["status"] == "fall" && response["code"] == "45000") {
-                    showToast("Quantity exceeds the allowed limit.")
+    checkLogin("You need to log in to add products to the cart.")
+        .then((response) => {
+            if(response) {
+                const product_id = parseInt($(".card").dataset.productId);
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "./shoppingCart/addToCart/", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function() {
+                    if(this.readyState == 4 && this.status == 200) {
+                        const response = JSON.parse(this.response);
+                        if(response.status == "success") {
+                            storeProductIdBeforCheckout([product_id]);
+                        } else if(response["status"] == "fall" && response["code"] == "45000") {
+                            showToast("Quantity exceeds the allowed limit.")
+                        }
+                    }
                 }
+                xhr.send(JSON.stringify({"product_id": product_id}));
             }
-        }
-        xhr.send(JSON.stringify({"product_id": product_id}));
+        })
+        .catch((error) => {
+            console.error(error);
+        })
+    
 })
-
 function checkInfo() {
-    if (info_phoneNumber == "Not have your phone number yet" || info_address == "Not have your address yet") {
+    if (info_phoneNumber.innerText == "- Not have phone number yet" || info_address.innerText == "- Not have your address yet") {
+        $('.load_animation').style.display = 'none';
         showToast("You need update your information to check out!");
         return false;
     }

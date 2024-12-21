@@ -17,7 +17,7 @@
                     <input type="text" class="search-input" name="search_query" placeholder="Search...">
                 </form>
             </div>
-            <i class="bi bi-bag-plus"></i>
+            <i class="bi bi-bag-plus shoppingCart"></i>
             <i class="bi bi-person"></i>
             <div class="dropdown-menu" id="dropdown-menu">
                 <?php

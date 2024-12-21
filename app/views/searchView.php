@@ -19,16 +19,6 @@
     <?php include_once './app/components/banner.php';
     $pageName = "";
     $searchQuery = isset($_GET['search_query']) ? trim($_GET['search_query']) : '';
-    $url = rtrim($_GET["url"], "/");
-    $url = filter_var($url, FILTER_SANITIZE_URL);
-    $url = explode("/", $url);
-    if ($url[1] == "fishFoods") {
-        $pageName = "Fish Food";
-    } elseif ($url[1] == "fishes") {
-        $pageName = "Aquarium Fish";
-    } elseif ($url[1] == "aquariums") {
-        $pageName = "Aquarium";
-    }
     if ($searchQuery) {
         $pageName = "Search: " . ucfirst($searchQuery);
     }
@@ -39,21 +29,50 @@
             <div class="col-9">
                     <div class="row">
                         <?php
-                            if (empty($data[0])) {
+                            if (empty($data)) {
                                 echo '<div class="col-12"><p>No products found.</p></div>';
                             } else {
                                 require_once("./app/components/itemCard.php");
-                                foreach ($data[0] as $item) {
-                                    echo displayItemCard($item->product_id, $item->product_img_url, $item->product_name, $item->product_sub, $item->product_price);
+                                $url = "";
+                                foreach ($data as $item) {
+                                    if($item->product_type == "Fish") {
+                                        $url = "./products/fishes";
+                                    } elseif($item->product_type == "Fish Food") {
+                                        $url = "./products/fishfoods";
+                                    } elseif($item->product_type == "Aquarium") {
+                                        $url = "./products/aquariums";
+                                    }
+                                    echo displayItemCard($item->product_id, $item->product_img_url, $item->product_name, $item->product_sub, $item->product_price, $url);
                                 }
                             }
                         ?>
                     </div>
+                    <div class="d-flex justify-content-center mt-4">
+                        <nav>
+                            <ul class="pagination">
+                                <?php
+                                    $pageNum = count($data)/6 + 1;
+                                    for($i = 1; $i <= $pageNum; $i++) {
+                                        echo '<li class="page-item"><a class="page-link" data-page="' . $i . '">' . $i . '</a></li>';
+                                    }
+                                ?>
+                            </ul>
+                        </nav>
+                    </div>
             </div>
+            
         </div>
     </div>
     <?php include_once  './app/components/footer.php'; ?>
+    <?php
+        include_once  './app/components/toast.php';
+        echo displayToast("");
+    ?>
+    <script src="./public/js/define.js?v=<?php echo time(); ?>"></script>
     <script src="./public/js/header.js?v=<?php echo time(); ?>"></script>
+    <script src="./public/js/shoppingCart.js?v=<?php echo time() ?>"></script>
+    <script src="./public/js/pagination.js?v=<?php echo time(); ?>"></script>
+
 </body>
 
 </html>

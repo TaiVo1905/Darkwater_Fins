@@ -34,6 +34,87 @@ create table cart (
     foreign key (product_id) references products(product_id)
 );
 
+DELIMITER $$
+	create trigger check_stock_insert_cart
+    before insert on cart
+    for each row
+    begin
+		if (new.quantity > (select product_stock from products where product_id = new.product_id))
+			then signal sqlstate '45000'
+			set message_text = "Quantity exceeds the allowed limit.";
+		end if;
+	end$$
+DELIMITER ;
+
+DELIMITER $$
+    create trigger check_stock_update_cart
+    before update on cart
+    for each row
+    begin
+		if (new.quantity > (select product_stock from products where product_id = new.product_id))
+			then signal sqlstate '45000'
+			set message_text = "Quantity exceeds the allowed limit.";
+		end if;
+	end$$
+DELIMITER ;
+
+DELIMITER $$
+	create trigger update_stock
+    after insert on order_details
+    for each row
+    begin
+		update products set product_stock = product_stock - new.quantity where product_id = new.product_id;
+	end$$
+DELIMITER ;
+
+DELIMITER $$
+	create trigger update_total_price
+    after insert on order_details
+    for each row
+    begin
+		update orders set total_price = total_price + new.quantity * new.price where order_id = new.order_id;
+	end$$
+DELIMITER ;
+
+DELIMITER $$
+	create trigger check_stock
+    before insert on order_details
+    for each row
+    begin
+		if (new.quantity > (select product_stock from products where product_id = new.product_id))
+			then signal sqlstate '45000'
+			set message_text = "Quantity exceeds the allowed limit.";
+		end if;
+	end$$
+DELIMITER ;
+
+
+create table orders (
+	order_id int primary key auto_increment,
+    user_id int not null,
+    total_price float default (0),
+    order_status varchar(8) check (order_status in ("pending", "shipping", "shipped", "canceled")),
+    order_date datetime,
+    foreign key (user_id) references users(user_id)
+);
+
+create table order_details (
+	order_detail_id int primary key auto_increment,
+    order_id int not null,
+    product_id int not null,
+    price float not null,
+    quantity int check (quantity > 0),
+	foreign key (order_id) references orders(order_id)
+);
+
+create table shipping (
+	shipping_id int primary key auto_increment,
+    order_id int not null unique,
+    phone_number varchar(11) not null,
+    address varchar(250) not null,
+    receiver varchar(40) not null
+);
+
 INSERT INTO products (product_name, product_img_url, product_price, product_sub, product_description, product_stock, product_category, product_type, purchases) 
 VALUES ('Siamese Fighting Fish, White', 'https://i.imgur.com/fQou4dN.jpg', 10.99, 'Known for its striking white color and aggressive nature, often a favorite for its elegance.', 'The Siamese Fighting Fish, or Betta splendens, is a species well known for its vivid colors and elaborate fins. Among the various colorations, the White Siamese Fighting Fish stands out for its immaculate, snow-like appearance. These fish are native to the rice paddies, floodplains, and canals of Thailand and neighboring Southeast Asian countries. The species has been selectively bred for its aggressive behavior towards other males, making it famous among aquarium enthusiasts.
 White Siamese Fighting Fish are characterized by their pristine white coloration, which gives them a pure and elegant look. This variety is relatively rare, and its beauty lies in its simplicity. Unlike more colorful Betta varieties, the White Siamese Fighting Fish exudes a serene and sophisticated aura. Despite their calm appearance, these fish possess a fierce territorial instinct, which is a hallmark of the Betta species. Males are known for their aggressive displays, which include flaring their gill covers and spreading their fins to appear larger. In their natural habitat, Siamese Fighting Fish are adapted to survive in low-oxygen environments due to their specialized labyrinth organ. This organ allows them to breathe atmospheric air, enabling them to thrive in stagnant waters where other fish might struggle. This adaptation has contributed to their success as a species and their popularity in the aquarium trade

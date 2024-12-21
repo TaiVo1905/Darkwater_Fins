@@ -1,6 +1,6 @@
-const imageContainer = document.querySelector('.image-container');
-const fileInput = document.querySelector('.file-input');
-const img = document.querySelector('#img-user');
+const imageContainer = $('.image-container');
+const fileInput = $('.file-input');
+const img = $('#img-user');
 
 
  
@@ -40,13 +40,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let isAuthenticated = false;
 
-  const inputs = document.querySelectorAll('input');
+  const inputs = $$('input');
   
   // Kiểm tra sự thay đổi của các input
   inputs.forEach(input => {
     input.addEventListener('change', () => {
       if (input.type === "file") {
-        const fileInput = document.querySelector(".file-input");
+        const fileInput = $(".file-input");
         if (fileInput.files && fileInput.files[0]) {
           isAuthenticated = true; // Có thay đổi file
         }
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Kiểm tra tất cả input khi submit
     inputs.forEach(input => {
       if (input.type === "file") {
-        const fileInput = document.querySelector(".file-input");
+        const fileInput = $(".file-input");
         if (fileInput.files && fileInput.files[0]) {
           isAuthenticated = true;
         }
@@ -115,7 +115,7 @@ function showToast() {
 (() => {
   'use strict'
 
-  const forms = document.querySelectorAll('.needs-validation')
+  const forms = $$('.needs-validation')
 
   Array.from(forms).forEach(form => {
     form.addEventListener('submit', event => {
@@ -131,11 +131,11 @@ function showToast() {
 
 // hiện thị nội dung các tab khi nhấn vào sidebar
 document.addEventListener("DOMContentLoaded", () => {
-  const menuLinks = document.querySelectorAll(".menu-link"); 
-  const profileForm = document.querySelector(".body-profile"); 
-  const changePasswordForm = document.querySelector(".change-password");
-  const order = document.querySelector(".order-page");
-  const sidebarItems = document.querySelectorAll(".list-group-item");
+  const menuLinks = $$(".menu-link"); 
+  const profileForm = $(".body-profile"); 
+  const changePasswordForm = $(".change-password");
+  const order = $(".order-page");
+  const sidebarItems = $$(".list-group-item");
 
   function hideAllForms() {
       profileForm.style.display = "none";
@@ -155,13 +155,13 @@ document.addEventListener("DOMContentLoaded", () => {
       removeBackground()
       if (page === "account") {
         profileForm.style.display = "block";
-        document.querySelector('[data-page="account"]').parentElement.style.backgroundColor = "#1877F2";
+        $('[data-page="account"]').parentElement.style.backgroundColor = "#1877F2";
       } else if (page === "change-password") {
         changePasswordForm.style.display = "block";
-        document.querySelector('[data-page="change-password"]').parentElement.style.backgroundColor = "#1877F2"; 
+        $('[data-page="change-password"]').parentElement.style.backgroundColor = "#1877F2"; 
       }else if(page === "order"){
         order.style.display = "block";
-        document.querySelector('[data-page="order"]').parentElement.style.backgroundColor = "#1877F2";
+        $('[data-page="order"]').parentElement.style.backgroundColor = "#1877F2";
       }
   }
 
@@ -211,14 +211,14 @@ changePasswordForm.addEventListener('submit', (e) => {
 
 });
 // luư password mới vào session
-document.querySelector("#save_btn_change_pass")?.addEventListener("click", () => {
-  const passwordInput = document.querySelector("#new-password");
+$("#save_btn_change_pass")?.addEventListener("click", () => {
+  const passwordInput = $("#new-password");
   if (passwordInput) {
       sessionStorage.setItem("old-password", passwordInput.value);
   }
 });
 
-const nav_tab_links = document.querySelectorAll('.nav_tab_link')
+const nav_tab_links = $$('.nav_tab_link')
 
 function hiddenTabs() {
   nav_tab_links.forEach(tab => {
@@ -236,7 +236,7 @@ nav_tab_links.forEach(tab => {
 
 // ẩn hiện nút cancel
 document.addEventListener('DOMContentLoaded', function () {
-  const orderItems = document.querySelectorAll('.order-item'); 
+  const orderItems = $$('.order-item'); 
   
   orderItems.forEach(item => {
       const statusSpan = item.querySelector('.text-primary');
@@ -252,8 +252,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // phần xử lý render navbar
 document.addEventListener("DOMContentLoaded", function () {
-  const tabs = document.querySelectorAll(".nav_tab_link");
-  const orderItems = document.querySelectorAll(".order-item");
+  const tabs = $$(".nav_tab_link");
+  const orderItems = $$(".order-item");
 
   function filterOrders(status) {
       orderItems.forEach(item => {
@@ -277,7 +277,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // xử lý cancel
 document.addEventListener("DOMContentLoaded", function () {
-  const cancelButtons = document.querySelectorAll(".cancel-btn");
+  const cancelButtons = $$(".cancel-btn");
   cancelButtons.forEach(function (button) {
     button.addEventListener("click", function () {
         const orderId = button.getAttribute("data-order-id");

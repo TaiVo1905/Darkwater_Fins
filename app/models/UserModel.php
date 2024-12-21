@@ -140,8 +140,8 @@
             return $orders;                           
         }
         public function removeOrder($order_id){
-            $stmt = $this -> db -> prepare("DELETE FROM ORDERS WHERE ORDER_ID =?");
-            return $stmt->execute([$order_id]); 
+            $stmt = $this -> db -> prepare("UPDATE ORDERS SET ORDER_STATUS = 'canceled' WHERE ORDER_ID = ?");
+            return $stmt->execute([$order_id]);
         }
 
         //checkout

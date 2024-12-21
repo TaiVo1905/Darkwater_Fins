@@ -3,7 +3,7 @@
 const itemCarts = $$(".shoppingCart tr");
 const countCart = $(".countCart");
 
-itemCarts.forEach(item => {
+itemCarts?.forEach(item => {
     const itemQuantity = item.querySelector(".quantity");
     const product_id = parseInt(item.querySelector("td:nth-child(3) span").dataset.productId);
     const removeIcon = item.querySelector("td:nth-child(6) i");
@@ -40,40 +40,39 @@ itemCarts.forEach(item => {
 });
 
 const addToCarts = $$(".add-to-cart");
+addToCartFunction(addToCarts);
 
-addToCarts.forEach(addToCart => {
-    addToCart.addEventListener("click", (e) => {
-        const product_id = parseInt(e.target.closest(".card").dataset.productId);
-        const product_name = e.target.closest(".card").querySelector(".card-title").innerText;
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", "./shoppingCart/addToCart/", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function() {
-            if(this.readyState == 4 && this.status == 200) {
-                const response = JSON.parse(this.response);
-                console.log(response)
-                if(response.stauts == "success") {
-                    showToast("Add "+product_name+" successfully!");
-                }else if(response["status"] == "fall" && response["code"] == "45000") {
-                    showToast("Quantity exceeds the allowed limit.")
-                }
-            }
-        }
-        xhr.send(JSON.stringify({"product_id": product_id}));
+//select add-to-cart-icon
+function addToCartFunction(addToCarts) {
+    addToCarts.forEach(addToCart => {
+        addToCart.addEventListener("click", (e) => {
+            checkLogin("You need to log in to add products to the cart.")
+                .then((response)=> {
+                    if(response) {
+                        const product_id = parseInt(e.target.closest(".card").dataset.productId);
+                        const product_name = e.target.closest(".card").querySelector(".card-title").innerText;
+                        const xhr = new XMLHttpRequest();
+                        xhr.open("POST", "./shoppingCart/addToCart/", true);
+                        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                        xhr.onreadystatechange = function() {
+                            if(this.readyState == 4 && this.status == 200) {
+                                const response = JSON.parse(this.response);
+                                console.log(response)
+                                if(response.status == "success") {
+                                    showToast("Add "+product_name+" successfully!");
+                                }else if(response["status"] == "fall" && response["code"] == "45000") {
+                                    showToast("Quantity exceeds the allowed limit.")
+                                }
+                            }
+                        }
+                        xhr.send(JSON.stringify({"product_id": product_id}));
+                    }
+                })
+                .catch((error) => {
+                    console.error(error);
+                })
+        })
     })
-})
-
-//Show message
-function showToast(message) {
-    const toastLive = $('#liveToast');
-    $(".toast-body").innerText = message;
-    console.log(message)
-    
-    const toast = new bootstrap.Toast(toastLive);
-    toast.show();
-    setTimeout(() => {
-      toast.hide();
-    }, 5000);
 }
 
 //Change item quantity in user cart
