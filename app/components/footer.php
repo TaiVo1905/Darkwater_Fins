@@ -29,11 +29,11 @@
         <div class="footer-section">
             <h6 style="padding-top: 10px;">LINK</h6>
             <ul>
-                <li style="margin-bottom: 46px;"><a href="#">Home</a></li>
+                <li style="margin-bottom: 46px;"><a href="./home">Home</a></li>
                 <li style="margin-bottom: 40px;"><a href="#">About us</a></li>
-                <li style="margin-bottom: 40px;"><a href="#">Aquarium</a></li>
-                <li style="margin-bottom: 40px;"><a href="#">Fish food</a></li>
-                <li style="margin-bottom: 40px;"><a href="#">Fish</a></li>
+                <li style="margin-bottom: 40px;"><a href="./products/aquariums">Aquarium</a></li>
+                <li style="margin-bottom: 40px;"><a href="./products/fishfoods">Fish food</a></li>
+                <li style="margin-bottom: 40px;"><a href="./products/fishes">Fish</a></li>
             </ul>
         </div>
         <div class="footer-section">

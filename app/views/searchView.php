@@ -12,55 +12,46 @@
     <link rel="stylesheet" href="./public/css/header.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./public/css/footer.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./public/css/itemCard.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="./public/css/sidebar.css?v=<?php echo time(); ?>">
 </head>
+
 <body>
     <?php include_once './app/components/header.php' ?>
     <?php include_once './app/components/banner.php';
     $pageName = "";
-    $url = rtrim($_GET["url"], "/");
-    $url = filter_var($url, FILTER_SANITIZE_URL);
-    $url = explode("/", $url);
-    if ($url[1] == "fishFoods") {
-        $pageName = "Fish Food";
-    } elseif ($url[1] == "fishes") {
-        $pageName = "Aquarium Fish";
-    } elseif ($url[1] == "aquariums") {
-        $pageName = "Aquarium";
+    $searchQuery = isset($_GET['search_query']) ? trim($_GET['search_query']) : '';
+    if ($searchQuery) {
+        $pageName = "Search: " . ucfirst($searchQuery);
     }
-    $url = "./products/$url[1]";
-    echo showBanner($pageName, ['Home', $pageName]);
+    echo showBanner($pageName, ['Home', !empty($searchQuery) ? ucfirst($searchQuery) : $pageName]);
     ?>
     <div class="container mt-5 mb-5">
         <div class="row">
-            <!-- Sidebar -->
-            <div class="col-3">
-                <?php require_once './app/components/sidebar.php'; ?>
-            </div>
-            <!-- Main content -->
             <div class="col-9">
-                <!-- Phần đầu với icons và dropdown -->
-                <div class="d-flex justify-content-end mb-3 top-right-content">
-                    <select class="form-select w-25" style="border-radius: 0;" id="sortSelect">
-                        <option value="1">Sort by </option>
-                        <option value="2">Sort by highest</option>
-                        <option value="3">Sort by lowest</option>
-                    </select>
-                </div>
-                    <div class="row" id="product-container">
+                    <div class="row">
                         <?php
-                            require_once("./app/components/itemCard.php");
-                                foreach($data[0] as $item) {
+                            if (empty($data)) {
+                                echo '<div class="col-12"><p>No products found.</p></div>';
+                            } else {
+                                require_once("./app/components/itemCard.php");
+                                $url = "";
+                                foreach ($data as $item) {
+                                    if($item->product_type == "Fish") {
+                                        $url = "./products/fishes";
+                                    } elseif($item->product_type == "Fish Food") {
+                                        $url = "./products/fishfoods";
+                                    } elseif($item->product_type == "Aquarium") {
+                                        $url = "./products/aquariums";
+                                    }
                                     echo displayItemCard($item->product_id, $item->product_img_url, $item->product_name, $item->product_sub, $item->product_price, $url);
                                 }
+                            }
                         ?>
                     </div>
-
                     <div class="d-flex justify-content-center mt-4">
                         <nav>
                             <ul class="pagination">
                                 <?php
-                                    $pageNum = count($data[0])/6 + 1;
+                                    $pageNum = count($data)/6 + 1;
                                     for($i = 1; $i <= $pageNum; $i++) {
                                         echo '<li class="page-item"><a class="page-link" data-page="' . $i . '">' . $i . '</a></li>';
                                     }
@@ -69,6 +60,7 @@
                         </nav>
                     </div>
             </div>
+            
         </div>
     </div>
     <?php include_once  './app/components/footer.php'; ?>
@@ -77,11 +69,10 @@
         echo displayToast("");
     ?>
     <script src="./public/js/define.js?v=<?php echo time(); ?>"></script>
-    <script src="./public/js/sidebar.js?v=<?php echo time(); ?>"></script>
     <script src="./public/js/header.js?v=<?php echo time(); ?>"></script>
     <script src="./public/js/shoppingCart.js?v=<?php echo time() ?>"></script>
-    <script src="./public/js/products.js?v=<?php echo time(); ?>"></script>
     <script src="./public/js/pagination.js?v=<?php echo time(); ?>"></script>
+
 </body>
 
 </html>

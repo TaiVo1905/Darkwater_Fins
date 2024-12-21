@@ -93,7 +93,7 @@
             <?php
                 if (isset($data)) {
                     foreach ($data as $fish) {
-                        echo createFish($fish->fish_id, $fish->fish_img_url, $fish->fish_name, $fish->fish_sub, $fish->fish_price);
+                        echo createFish($fish->product_id, $fish->product_img_url, $fish->product_name, $fish->product_sub, $fish->product_price, "./products/fishes");
                 }
                     }
             ?>
@@ -109,6 +109,12 @@
             <button type="button" class="btn btn-primary">VIEW OUR PORTFOLIO</button>
         </div>
         <?php include_once './app/components/footer.php'?>
+    <?php
+        include_once  './app/components/toast.php';
+        echo displayToast("");
+    ?>
+    <script src="./public/js/define.js?v=<?php echo time(); ?>"></script>
     <script src="./public/js/header.js?v=<?php echo time(); ?>"></script>
+    <script src="./public/js/shoppingCart.js?v=<?php echo time(); ?>"></script>
 </body>
 </html>

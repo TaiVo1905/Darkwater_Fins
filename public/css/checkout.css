@@ -1,0 +1,161 @@
+body {
+    background-color: #f5f5f5;
+    position: relative;
+}
+.address_order{
+    background-color: var(--primary-color1);
+}
+.sumary_fiel{
+    background-color: var(--primary-color1);
+}
+.total_price{
+    color: var(--primary-color3);
+}
+.pay_method{
+    color: var(--primary-color3);
+}
+.checkout-btn{
+    border-radius: 0;
+}
+.delevery_address{
+    color: var(--primary-color3);
+}
+.quantity{
+    padding-left: 35px !important;
+}
+.edit_address{
+    cursor: pointer;
+}
+.form-container {
+    width: 100%;
+    max-width: 430px;
+    height: 70vh;
+    position: fixed; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    display: none;
+    z-index: 9999; /* Đảm bảo form luôn hiển thị trên các phần tử khác */
+}
+
+.input-fiel input {
+    line-height: 30px;
+
+}
+.order-item{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.btn-fiel {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+.cancel_btn{
+    background-color: #FF2F2F;
+}
+.save_btn{
+    background-color: var(--primary-color3);
+}
+.btn-fiel button{
+    width: 80px;
+    height: 35px;
+    border: none;
+    color: var(--primary-color1);
+}
+.overlay {
+    display: none;
+}
+
+.overlay.active {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+
+
+/* phan load trangtrang */
+.load_animation {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    display: none;
+    justify-content: center; 
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 9999;
+    animation: fadeIn 0.5s; 
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.loader {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    animation: rotate-loader 2s linear infinite; /* Quay tròn */
+}
+
+@keyframes rotate-loader {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+.loader span {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotate(calc(18deg * var(--stt)));
+}
+
+.loader span::before {
+    content: "";
+    width: 15px;
+    height: 15px;
+    background-color: yellow;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    animation: tbay-c 2s infinite linear;
+    animation-delay: calc(0.1s * var(--stt));
+    box-shadow: 0px 0px 18px 0px #080808;
+}
+
+
+@keyframes tbay-c {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0);
+    }
+}

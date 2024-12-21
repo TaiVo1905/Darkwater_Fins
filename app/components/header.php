@@ -13,14 +13,16 @@
         <div class="icon_header">
             <div class="search-container icon-header-search">
                 <i class="bi bi-search"></i>
-                <input type="text" class="search-input" placeholder="Search...">
+                <form method="GET" action="Products/search">
+                    <input type="text" class="search-input" name="search_query" placeholder="Search...">
+                </form>
             </div>
-            <i class="bi bi-bag-plus"></i>
+            <i class="bi bi-bag-plus shoppingCart"></i>
             <i class="bi bi-person"></i>
             <div class="dropdown-menu" id="dropdown-menu">
                 <?php
-                    if(isset($_SESSION["user_id"])) {
-                        echo '
+                if (isset($_SESSION["user_id"])) {
+                    echo '
                                 <div style="background-color: black;border-radius: 20px;margin-bottom: 5px;">
                                     <a href="Profile">Profile</a>
                                 </div>
@@ -31,8 +33,8 @@
                                     <a href="LogOut">Log out</a>
                                 </div>
                         ';
-                    } else {
-                        echo '
+                } else {
+                    echo '
                                 <div style="background-color: black;border-radius: 20px;margin-bottom: 5px;">
                                     <a href="LogIn">Sign in</a>
                                 </div>
@@ -40,8 +42,8 @@
                                     <a href="Register">Sign up</a>
                                 </div>
                         ';
-                    }
-                    ?>
+                }
+                ?>
             </div>
         </div>
     </div>

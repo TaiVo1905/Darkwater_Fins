@@ -72,5 +72,6 @@
 
     } ?>
 </body>
+<script src="./public/js/define.js?v=<?php echo time(); ?>"></script>
 <script src="./public/js/registerAndLogin.js?v=<?php echo time(); ?>"></script>
 </html>

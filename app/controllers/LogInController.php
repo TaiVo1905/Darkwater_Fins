@@ -25,5 +25,15 @@
                 echo $e->getMessage();
             }
         }
+
+        public function checkLogin() {
+            if($_SERVER["REQUEST_METHOD"] == "POST") {
+                if(isset($_SESSION["user_id"])) {
+                    echo true;
+                } else {
+                    echo false;
+                }
+            }
+        }
     }
 ?>

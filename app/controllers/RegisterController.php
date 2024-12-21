@@ -2,8 +2,6 @@
     class RegisterController extends Controller{
         public function index () {
             $data = $this->register();
-            if(empty($data)) {
-            }
             $this->view("Register", $data);
             
         }
