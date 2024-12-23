@@ -1,0 +1,77 @@
+body {
+    background-color: #f8f9fa;
+  }
+
+  .table th,
+  .table td {
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    white-space: nowrap;
+    vertical-align: middle;
+    text-align: center;
+  }
+
+
+  .role-select {
+    display: none; 
+    margin-top: 5px;
+  }
+  .icon-setting.user {
+    color: blue;
+  }
+
+  .icon-setting.admin {
+    color: green;
+  }
+  .table-primary {
+    background-color: #737475; 
+    color: #000;
+  }
+
+  .btn-sm {
+    width: 35px;
+    height: 35px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+  }
+
+  .btn-primary i,
+  .btn-danger i {
+    font-size: 16px;
+  }
+  .table{
+    border-spacing: 0 10px; 
+    border-collapse: separate; 
+    table-layout: fixed; 
+    width: 100%;
+  }
+  .table tbody tr:hover {
+    background-color: #e9ecef;
+  }
+  .table th{
+    border-right: 1px solid gray;
+    background-color: white;
+    line-height: 40px;
+    
+  }
+  .table th:last-child {
+    border-right: none;
+    }
+    .table th:first-child {
+        width: 60px;
+    }
+  .table-body{
+    background-color: #E9F6F7;
+  }
+  .table-body tr{
+    border-radius: 30%;
+    line-height: 30px;
+  }
+  .icon-setting{
+    color: blue;
+  }
+  .icon-delete{
+    color: red;
+  }
