@@ -20,7 +20,7 @@
             <div class="col-7">
                 <div class="display-3 fw-bold text-white mx-auto p-5">Welcome, We are glad to see you again!</div>
             </div>
-            <form action="LogIn" method="POST" class= "col-4 mx-auto shadow px-3 py-5 rounded-3 needs-validation" novalidate>
+            <form action="users/login" method="POST" class= "col-4 mx-auto shadow px-3 py-5 rounded-3 needs-validation" novalidate>
                 <div class="mb-3">
                     <input type="email" class="form-control form-control custom-opacity-form" id="user_email" name="user_email" placeholder="Email" required  value="<?php echo isset($data["user_email"]) ? $data["user_email"] : ""?>">
                     <div class="invalid-feedback">Invalid email</div>
@@ -33,7 +33,7 @@
                     <button type="submit" class="btn custom-btn-outline fw-bold login-btn">Sign in</button>
                 </div>
                 <h6 class="pt-4 text-center"><a href="ForgotPassword" class="custom-color">Forgot password?</a></h6>
-                <h6 class="pt-3 text-center">Not a member? <a href="Register" class="custom-color">Sign up</a></h6>
+                <h6 class="pt-3 text-center">Not a member? <a href="./users/register" class="custom-color">Sign up</a></h6>
             </form>
         </div>
     </div>

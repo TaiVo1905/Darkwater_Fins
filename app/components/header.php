@@ -24,22 +24,22 @@
                 if (isset($_SESSION["user_id"])) {
                     echo '
                                 <div style="background-color: black;border-radius: 20px;margin-bottom: 5px;">
-                                    <a href="Profile">Profile</a>
+                                    <a href="Users">Profile</a>
                                 </div>
                                 <div style="background-color: black;border-radius: 20px;margin-bottom: 5px;">
                                     <a href="#">Change password</a>
                                 </div>
                                 <div style="background-color: black;border-radius: 20px;">
-                                    <a href="LogOut">Log out</a>
+                                    <a href="Users/logOut">Log out</a>
                                 </div>
                         ';
                 } else {
                     echo '
                                 <div style="background-color: black;border-radius: 20px;margin-bottom: 5px;">
-                                    <a href="LogIn">Sign in</a>
+                                    <a href="Users/logIn">Sign in</a>
                                 </div>
                                 <div style="background-color: black;border-radius: 20px;">
-                                    <a href="Register">Sign up</a>
+                                    <a href="Users/register">Sign up</a>
                                 </div>
                         ';
                 }

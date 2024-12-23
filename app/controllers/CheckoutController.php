@@ -5,7 +5,7 @@ class CheckoutController extends Controller {
         $userModel = new UserModel();
         $product_list = $userModel->getProductBeforCheckout($_SESSION["user_id"], $_SESSION["product_id_list"]);
         $user = $userModel->getUser($_SESSION["user_id"]);
-        $this->view('checkout', [$product_list, $user]);
+        $this->view('checkout/checkout', [$product_list, $user]);
     }
 
     public function completedOrder() {
@@ -14,6 +14,10 @@ class CheckoutController extends Controller {
             $userModel = new UserModel();
             echo json_encode($userModel->completedOrder($_SESSION["user_id"], $_SESSION["product_id_list"]));
         }
+    }
+
+    public function success() {
+        $this->view('checkout/success');
     }
 }
 ?>

@@ -6,36 +6,32 @@
             $this->productsModel = new ProductsModel;
         }
 
-        // Fishes
         public function fishes($id = null) {
             if($id == null){
                 $aquariumFishes = $this->productsModel->getProducts("Fish");
                 $highestPrice = $this->productsModel->getHighestPrice("Fish")->product_price;
                 $categories = $this->productsModel->getCategories("Fish");
-                $this->view("products", [$aquariumFishes, $highestPrice, $categories]);
+                $this->view("products/products", [$aquariumFishes, $highestPrice, $categories]);
             } else {
                 $this->detail($id);
             }
         }
-
         public function aquariums($id = null) {
             if($id == null){
                 $aquariums = $this->productsModel->getProducts("Aquarium");
                 $highestPrice = $this->productsModel->getHighestPrice("Aquarium")->product_price;
                 $categories = $this->productsModel->getCategories("Aquarium");
-                $this->view("products", [$aquariums, $highestPrice, $categories]);
+                $this->view("products/products", [$aquariums, $highestPrice, $categories]);
             } else {
                 $this->detail($id);
             }
         }
-
-
         public function fishFoods($id = null) {
             if($id == null){
                 $fishFoods = $this->productsModel->getProducts("Fish Food");
                 $highestPrice = $this->productsModel->getHighestPrice("Fish Food")->product_price;
                 $categories = $this->productsModel->getCategories("Fish Food");
-                $this->view("products", [$fishFoods, $highestPrice, $categories]);
+                $this->view("products/products", [$fishFoods, $highestPrice, $categories]);
             } else {
                 $this->detail($id);
             }
@@ -44,7 +40,7 @@
             if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 $searchQuery = $_GET['search_query'];
                 $data = $this->productsModel->searchProducts($searchQuery, $searchQuery, $searchQuery, $searchQuery);
-                $this->view("search", $data);
+                $this->view("products/search", $data);
             }
         }  
         private function detail($id) {
@@ -53,9 +49,9 @@
                 header("Location: /404");
                 exit;
             }
-            $this->view("detail", [$product]);
+            $this->view("products/detail", [$product]);
         }
-          public function filterByPrice($price=null, $type=null) {
+        public function filterByPrice($price=null, $type=null) {
             $price = $_GET['price'] ?? null;
             $type = $_GET['type'] ?? null;
             if ($price) {
@@ -65,7 +61,6 @@
                 echo json_encode([]);
             }
         }
-
         public function sortProducts($sortOption=null, $type=null) {
             $sortOption = $_GET['sort'] ?? null;
             $type = $_GET['type'] ?? null;
@@ -85,7 +80,6 @@
             } else {
                 echo json_encode([]);
             }
-        }
-        
+        }   
     }
 ?>

@@ -16,7 +16,7 @@ function showToast(message) {
 function checkLogin(message) {
     return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
-        xhr.open("POST", "./Login/checkLogin/", true);
+        xhr.open("POST", "./users/checkLogin/", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
         xhr.onreadystatechange = function() {

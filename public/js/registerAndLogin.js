@@ -46,17 +46,6 @@ $("#register-form")?.addEventListener("submit", (e) => {
     }
 })
 
-function showToast(message) {
-    const toastLive = $('#liveToast');
-    $(".toast-body").innerText = message;
-    console.log(message)
-    
-    const toast = new bootstrap.Toast(toastLive);
-    toast.show();
-    setTimeout(() => {
-      toast.hide();
-    }, 5000);
-}
 document.querySelector(".login-btn")?.addEventListener("click", () => {
     const passwordInput = document.querySelector("#user_password");
     if (passwordInput) {
