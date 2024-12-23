@@ -59,7 +59,7 @@ $(".editProfileForm")?.addEventListener("submit", (e) => {
     console.log(user_address, username, phonenumber)
     e.preventDefault();
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "./Profile/saveInfoCheckout", true);
+    xhr.open("POST", "./Users/saveInfoCheckout", true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function () {
         if(this.readyState == 4 && this.status == 200) {
@@ -77,19 +77,6 @@ $(".editProfileForm")?.addEventListener("submit", (e) => {
     xhr.send(JSON.stringify({"username": username, "phone_number": phonenumber, "address": user_address}));
 })
 
-//Show message
-function showToast(message) {
-    const toastLive = $('#liveToast');
-    $(".toast-body").innerText = message;
-    console.log(message)
-    
-    const toast = new bootstrap.Toast(toastLive);
-    toast.show();
-    setTimeout(() => {
-      toast.hide();
-    }, 5000);
-}
-
 function completedOrder() {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "./checkout/completedOrder", true);
@@ -99,7 +86,7 @@ function completedOrder() {
             const response = JSON.parse(this.response);
             if(response["status"] == "success") {
                 $('.load_animation').style.display = 'none';
-                window.location.href = "./success";
+                window.location.href = "./checkout/success";
             } else if(response["status"] == "fall") {
                 $('.load_animation').style.display = 'none';
                 showToast(response["message"]);
