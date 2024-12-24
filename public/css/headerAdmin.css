@@ -1,8 +1,13 @@
+.hide-element {
+    visibility: hidden;
+}
+
 .card-header {
-    width: 270px; 
+    width: 220px; 
     margin: 10px;
     font-weight: bold; 
-    margin-right: 50px;
+    margin-right: 80px;
+    line-height: 2;
 }
 .icon-box {
     margin-left: 30px;
@@ -12,10 +17,13 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 92px;
 }
 .icon_i{
     font-size: 20px;
-    margin-right: 50px;
+    margin-right: 80px;
 }
 .search-input {
     position: relative;
@@ -31,10 +39,10 @@
     color: var( --primary-color2); 
 }
 .dash_board{
-    margin-right: 530px;
+    margin-right: 450px;
 }
 .mt-3{
-    margin-left: 405px;
+    margin-left: 468px;
 }
 .icon_pr{
     font-size: 25px;

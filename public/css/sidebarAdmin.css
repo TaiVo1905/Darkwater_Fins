@@ -1,13 +1,14 @@
 .sidebar {
-    font-weight: bold; 
-    height: 100vh;
+    font-weight: bold;
+    height: 96vh;
     background-color: var(--primary-color1);
     padding: 20px;
     z-index: 1;
-    margin-top: -235px;
-    margin-left: 72px;
+    position: absolute;
     border-radius: 10px;
     line-height: 2;
+    top: 28px;
+    left: 85px;
 }
 
 .sidebar a {
