@@ -7,7 +7,11 @@
   text-align: center;
 }
 
-
+.table-container{
+  border-radius: 35px;
+  padding: 20px;
+  background-color: #fff;
+}
 .role-select {
   display: none; /* Ẩn ô select mặc định */
   margin-top: 5px;
@@ -89,4 +93,16 @@
 }
 .form-title{
   text-align: center;
+}
+
+.product-row td:first-child{
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+
+}
+
+.product-row td:last-child{
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+
 }

@@ -2,6 +2,12 @@ body {
     background-color: #f8f9fa;
   }
 
+  .table-container{
+    border-radius: 35px;
+    padding: 20px;
+    background-color: #fff;
+  }
+
   .table th,
   .table td {
     overflow: hidden;
@@ -74,4 +80,16 @@ body {
   }
   .icon-delete{
     color: red;
+  }
+
+  .user-row td:first-child{
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+
+  }
+
+  .user-row td:last-child{
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+
   }

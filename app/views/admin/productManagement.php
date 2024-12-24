@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./public/css/productManagement.css?v=<?php echo time(); ?>">
 </head>
 <body>
 <div class="table-container container mt-4 ">
@@ -11,18 +12,18 @@
             <thead class="table-primary table-head">
                 <tr>
                     <th>ID</th>
-                    <th>Product's name</th>
                     <th>Image</th>
+                    <th>Product's name</th>
                     <th>Price</th>
                     <th>Stock</th>
                     <th>Options</th>
             </tr>
             </thead>
             <tbody class="table-body">
-                <tr class="">
+                <tr class="product-row">
                     <td>1</td>
-                    <td>Con cá coi</td>
                     <td><img style="width: 60px; height: 6opx;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFCh-A8p05QPQtI5-Qt4at-Jy7UmTGKr9nfQ&s" alt=""></td>
+                    <td>Con cá coi</td>
                     <td>********</td>
                     <td>99, To Hien Thanh...</td>
                     <td>
@@ -32,7 +33,7 @@
                         
                     </td>
                 </tr>
-                <tr class="">
+                <tr class="product-row">
                     <td>2</td>
                     <td>Mai Tram Huynh</td>
                     <td>Tram@gmail.com</td>
@@ -88,6 +89,6 @@
             <button type="button" class="btn btn-secondary ms-2" id="cancelButton">Cancel</button>
         </div>
     </form>
-
+    <script src="./public/js/productManagement.js?v=<?php echo time(); ?>"></script>
 </body>
 </html>

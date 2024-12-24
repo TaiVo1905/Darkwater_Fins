@@ -20,7 +20,7 @@
             </tr>
             </thead>
             <tbody class="table-body">
-                <tr class="">
+                <tr class="user-row">
                     <td>1</td>
                     <td>Tran Cong Doan</td>
                     <td>congdoan0806@gmail.com</td>
@@ -39,7 +39,7 @@
                         
                     </td>
                 </tr>
-                <tr class="">
+                <tr class="user-row">
                     <td>2</td>
                     <td>Mai Tram Huynh</td>
                     <td>Tram@gmail.com</td>
