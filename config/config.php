@@ -5,5 +5,5 @@
     // define('DB_PASS', 'darkwaterfins');
     define('DB_PASS', '');
     define('DB_NAME', 'darkwater_fins');
-    define('BASE_URL', 'http://localhost:8080/Darkwater_Fins/');
+    define('BASE_URL', 'http://localhost/Darkwater_Fins/');
 ?>
