@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <base href="<?php echo BASE_URL ?>">
     <?php include_once './app/components/bootStrapAndFontLink.php'; ?>
-    <link rel="stylesheet" href="../public/css/addProduct.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="./public/css/addProduct.css?v=<?php echo time(); ?>">
 </head>
 <body>
 <div class="add-product-container">
         <h1 class="text-center">Add Product</h1>
-        <form class="form-add-product d-flex">
+        <form class="form-add-product d-flex" method="POST" enctype="multipart/form-data">
             <div class="left-form p-3 w-100">
                 <div class="product-name-fiel d-flex flex-column mb-4">
                     <label for="productName"><b>Product name</b></label>
@@ -51,14 +52,34 @@
                     <label for="productStock"><b>Product stock</b></label>
                     <input class="input-area" type="number" id="productStock" min="0" name="productStock" required>
                 </div>
+                <div class="product-category-fiel d-flex flex-column mb-4">
+                    <label for="productCategory"><b>Product Category</b></label>
+                    <input class="input-area" type="text" id="productCategory" name="productCategory" required>
+                </div> 
                 <div class="button-fiel float-end">
                     <button class = "cancel-btn btn btn-danger">Cancel</button>
-                    <button class = "save-btn btn btn-primary">Save</button>
+                    <button type="submit" id="save-btn" class = "save-btn btn btn-primary">Save</button>
                 </div>
             </div>
         </form>
     </div>
-    <script src="../public/js/addProduct.js?v=<?php echo time(); ?>"></script>
-
+    <div class="modal fade" id="confirmRedirectModal" tabindex="-1" aria-labelledby="confirmRedirectModalLabel" aria-hidden="true" >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="confirmRedirectModalLabel">Product added successfully</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Do you want to stay on this page?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" id="no-button" >No</button>
+            <button type="button" class="btn btn-primary" id="yes-button" data-bs-dismiss="modal">Yes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./public/js/addProduct.js?v=<?php echo time(); ?>"></script>
 </body>
 </html>

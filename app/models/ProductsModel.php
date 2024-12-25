@@ -69,6 +69,12 @@
             $stmt->execute($categories);
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
-          
+        
+        public function addProduct($product_name, $product_img_url, $product_price, $product_sub, $product_description, $product_stock, $product_category ,$product_type) {
+            $stmt = $this->db->prepare("INSERT INTO 
+            products (product_name, product_img_url, product_price, product_sub, product_description, product_stock, product_category, product_type) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            return $stmt->execute([$product_name, $product_img_url, $product_price, $product_sub, $product_description, $product_stock, $product_category, $product_type]);
+        }
     }
 ?>
