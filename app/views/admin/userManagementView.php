@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./public/css/userManagement.css?v=<?php echo time(); ?>">
+    <?php include_once './app/components/bootStrapAndFontLink.php'; ?>
+    <link rel="stylesheet" href="../public/css/userManagement.css?v=<?php echo time(); ?>">
 </head>
 <body>
 <div class="table-container container mt-4 ">
@@ -61,6 +62,6 @@
             </tbody>
         </table>
     </div>
-    <script src="./public/js/userManagement.js?v=<?php echo time(); ?>"></script>
+    <script src="../public/js/userManagement.js?v=<?php echo time(); ?>"></script>
 </body>
 </html>

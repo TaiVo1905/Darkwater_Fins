@@ -1,3 +1,10 @@
+
+.table-container {
+  border-radius: 35px;
+  padding: 20px;
+  background-color: #fff;
+}
+
 .table th,
 .table td {
   overflow: hidden; /* Ẩn phần nội dung tràn ra ngoài */

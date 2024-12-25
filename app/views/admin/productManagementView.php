@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <?php include_once './app/components/bootStrapAndFontLink.php'; ?>
+    <link rel="stylesheet" href="../public/css/productManagement.css?v=<?php echo time(); ?>">
 </head>
 <body>
 <div class="table-container container mt-4 ">
@@ -88,6 +90,7 @@
             <button type="button" class="btn btn-secondary ms-2" id="cancelButton">Cancel</button>
         </div>
     </form>
+    <script src="../public/js/productManagement.js?v=<?php echo time(); ?>"></script>
 
 </body>
 </html>
