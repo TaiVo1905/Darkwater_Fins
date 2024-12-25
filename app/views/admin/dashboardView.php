@@ -4,40 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <base href="<?php echo BASE_URL ?>">
     <?php include_once './app/components/bootStrapAndFontLink.php' ?>
     <link rel="stylesheet" href="./public/css/common.css">
+    <link rel="stylesheet" href="./public/css/headerAdmin.css">
+    <link rel="stylesheet" href="./public/css/sidebarAdmin.css">
 </head>
 <body style="">
-  
-<canvas id="dashBoardChart" style="width:100%;"></canvas>
-
-<script>
-const xValues = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-const yValues = [7,8,8,9,9,9,10,11,14,14,15, 16];
-
-new Chart("dashBoardChart", {
-  type: "line",
-  data: {
-    labels: xValues,
-    datasets: [{
-      fill: false,
-      lineTension: 0.35,
-      backgroundColor: "rgba(24, 119, 242,1.0)",
-      borderColor: "rgba(24, 119, 242,0.1)",
-      data: yValues
-    }]
-  },
-  options: {
-    title: {
-      display: true,
-      text: "Product Sales Overview",
-    },
-    legend: {display: false},
-    scales: {
-      yAxes: [{ticks: {min: 6, max:16}}],
+<?php 
+    $totalOrder = count($data);
+    $totalMoney = 0;
+    $productSold = 0;
+    foreach($data as $order) {
+      $totalMoney += $order->product_price * $order->quantity;
     }
-  }
-});
-</script>
+    foreach($data as $order) {
+      $productSold += $order->quantity;
+    }
+    require_once("./app/components/headerAdmin.php");
+    echo generateDashboard(null , $totalOrder, $totalMoney, $productSold);
+    require_once("./app/components/sidebarAdmin.php");
+ ?>
+<canvas id="dashBoardChart" style="padding: 0 20px 0 380px; width:100%; height: 60vh"></canvas>
+<script src="./public/js/dashboard.js"></script>
 </body>
 </html>
