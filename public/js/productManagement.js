@@ -1,5 +1,5 @@
-const iconSetting = document.querySelectorAll('.icon-setting'); 
-const formEdit = document.querySelector('.form-product-edit');  
+const iconSetting = $$('.icon-setting');  
+const formEdit = $('.form-product-edit');  
 
 iconSetting.forEach(icon => {
     icon.addEventListener('click', () => {
@@ -7,7 +7,9 @@ iconSetting.forEach(icon => {
     });
 });
 
-const cancelButton = document.getElementById('cancelButton');
+const cancelButton = $('#cancelButton');  
 cancelButton.addEventListener('click', () => {
-    document.querySelector('.form-product-edit').style.display = 'none'; 
+    $('.form-product-edit').style.display = 'none';  
 });
+
+
