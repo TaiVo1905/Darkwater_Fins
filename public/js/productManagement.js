@@ -138,3 +138,23 @@ function displayToast(message) {
         toast.hide();
     }, 5000);
   }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const deleteButtons = $$(".icon-delete");
+    deleteButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+          const productId = button.getAttribute("data-id");
+          
+          const xhr = new XMLHttpRequest();
+          xhr.open("POST", `./Admin/deleteProduct/${encodeURIComponent(productId)}`, true);
+          xhr.onreadystatechange = function () {
+              if(xhr.readyState == 4 && xhr.status == 200) {
+                button.closest(".product-row").remove();
+              } else {
+                console.log("Error");
+              }
+          }
+          xhr.send();
+      })
+    })
+  });

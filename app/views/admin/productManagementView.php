@@ -44,7 +44,7 @@
                                     <td>
                                         <i class='icon-setting bi bi-gear admin' data-id = ".$product->product_id."></i>
                                         
-                                        <i class='icon-delete bi bi-trash m-1'></i>
+                                        <i class='icon-delete bi bi-trash m-1' data-id = ".$product->product_id."></i>
                                         
                                     </td>
                         </tr>

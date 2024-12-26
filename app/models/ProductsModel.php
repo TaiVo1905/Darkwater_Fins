@@ -85,5 +85,9 @@
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
+        public function removeProduct($product_id){
+            $stmt =$this->db->prepare("DELETE FROM products WHERE product_id = ? ");
+            return $stmt->execute([$product_id]);
+        }
     }
 ?>

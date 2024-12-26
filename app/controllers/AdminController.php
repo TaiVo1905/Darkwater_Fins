@@ -79,5 +79,14 @@
                 echo $result;
             }
         }
+        public function deleteProduct($product_id ){
+            if($_SERVER['REQUEST_METHOD'] === 'POST'){
+                $this -> model('Products');
+                $product = new ProductsModel();          
+                if($product_id){
+                    $product -> removeProduct($product_id);
+                }
+            }
+        }
     }
 ?>
