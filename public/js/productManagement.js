@@ -113,8 +113,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     console.log(xhr.responseText);
                     if(Number(xhr.responseText) == 1){
-                        
                         modal.show();
+                        isChanged = false;
                     }
                 }
             };
