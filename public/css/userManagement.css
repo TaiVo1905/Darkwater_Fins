@@ -5,7 +5,8 @@
   margin: 0;
   width: 936px;
   top: 200px;
-  margin-left: 485px;
+  /* margin-left: 485px; */
+  right: 25px;
   position: absolute;
 }
 
@@ -46,11 +47,15 @@
   background-color: #BCD9FF;
 }
 
+.table_btn tbody td {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
 .table_btn th {
   border-right: 1px solid gray;
   background-color: white;
   line-height: 40px;
-
 }
 
 .table_btn th:last-child {
@@ -58,16 +63,17 @@
 }
 
 .table_btn th:first-child {
-  width: 60px;
+  width: 10%;
+}
+
+.table_btn th:nth-child(3) {
+  width: 30%;
 }
 .table_btn th:nth-child(4) {
-  width: 120px;
-}
-.table_btn th:nth-child(5) {
-  width: 150px;
+  width: 35%;
 }
 .table_btn th:last-child {
-  width: 120px;
+  width: 10%;
 }
 .table-body-btn td:first-child{
   border-top-left-radius:10px;
