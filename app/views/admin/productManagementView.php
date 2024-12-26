@@ -13,7 +13,11 @@
 </head>
 <body>
 <div style="background-color: #F4F4F4; height:100vh;">
- 
+        <?php include_once './app/components/headerAdmin.php' ;
+            $dashboardHTML = generateDashboard('hide-element', '34 orders', '$20000', '33');
+            echo $dashboardHTML;
+        ?>
+        <?php include_once './app/components/sidebarAdmin.php' ?>
 
     <div class="table-container big_container">
             <table class="table_btn align-middle text-center small_container">
@@ -28,33 +32,26 @@
                 </tr>
                 </thead>
                 <tbody class="table-body">
-                    <tr class="product-row">
-                        <td>1</td>
-                        <td><img style="width: 60px; margin-bottom: 3px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFCh-A8p05QPQtI5-Qt4at-Jy7UmTGKr9nfQ&s" alt=""></td>
-                        <td>Con cá coi</td>
-                        <td>********</td>
-                        <td>99, To Hien Thanh...</td>
-                        <td>
-                            <i class="icon-setting bi bi-gear admin" data-id = "1"></i>
-                            
-                            <i class="icon-delete bi bi-trash m-1"></i>
-                            
-                        </td>
-                    </tr>
-                    <tr class="product-row">
-                        <td>2</td>
-                        <td>Mai Tram Huynh</td>
-                        <td>Tram@gmail.com</td>
-                        <td>********</td>
-                        <td>99, To Hien Thanh...ccccccccccccccccccccccccccc</td>
-                        <td>
-                            <i class="icon-setting bi bi-gear admin" data-id = "2"></i>
-                            
-                            <i class="icon-delete bi bi-trash m-1"></i>
-                            
-                        </td>
-                    </tr>
-            <!-- Các dòng khác -->
+                    <?php 
+                        foreach ($data as $product){
+                            echo "
+                               <tr class='product-row'>
+                                    <td>".$product->product_id."</td>
+                                    <td><img style='width: 60px; margin-bottom: 3px;' src='".$product->product_img_url."' alt=''></td>
+                                    <td>".$product->product_name."</td>
+                                    <td>".$product->product_price."</td>
+                                    <td>".$product->product_stock."</td>
+                                    <td>
+                                        <i class='icon-setting bi bi-gear admin' data-id = ".$product->product_id."></i>
+                                        
+                                        <i class='icon-delete bi bi-trash m-1'></i>
+                                        
+                                    </td>
+                        </tr>
+                            ";
+                        
+                        }
+                    ?>
                 </tbody>
             </table>
     </div>

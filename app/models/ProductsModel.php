@@ -80,5 +80,10 @@
             $stmt = $this->db->prepare("UPDATE products SET product_name =?, product_img_url =?, product_price =?, product_stock =?, product_sub =?, product_description =? WHERE product_id =?");
             return $stmt->execute([$product_name, $product_img_url, $product_price, $product_stock, $product_sub, $product_description, $product_id]);
         }
+        public function getAllProduct() {
+            $stmt = $this->db->prepare("SELECT * FROM products");
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
     }
 ?>

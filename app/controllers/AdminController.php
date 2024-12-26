@@ -7,7 +7,10 @@
             $this->view("admin/userManagement");
         }
         public function productManagement() {
-            $this->view("admin/productManagement");
+            $this->model("Products");
+            $productModel = new ProductsModel();
+            $data = $productModel->getAllProduct();
+            $this->view("admin/productManagement", $data);
         }
         public function addProductView() {
             $this->view("admin/addProduct");
