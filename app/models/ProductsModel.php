@@ -76,5 +76,9 @@
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             return $stmt->execute([$product_name, $product_img_url, $product_price, $product_sub, $product_description, $product_stock, $product_category, $product_type]);
         }
+        public function updateProduct($product_name, $product_img_url, $product_price, $product_stock, $product_sub, $product_description, $product_id){
+            $stmt = $this->db->prepare("UPDATE products SET product_name =?, product_img_url =?, product_price =?, product_stock =?, product_sub =?, product_description =? WHERE product_id =?");
+            return $stmt->execute([$product_name, $product_img_url, $product_price, $product_stock, $product_sub, $product_description, $product_id]);
+        }
     }
 ?>

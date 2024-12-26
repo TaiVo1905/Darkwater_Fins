@@ -29,7 +29,7 @@
                     <td>********</td>
                     <td>99, To Hien Thanh...</td>
                     <td>
-                        <i class="icon-setting bi bi-gear admin"></i>
+                        <i class="icon-setting bi bi-gear admin" data-id = "1"></i>
                         
                         <i class="icon-delete bi bi-trash m-1"></i>
                         
@@ -42,7 +42,7 @@
                     <td>********</td>
                     <td>99, To Hien Thanh...ccccccccccccccccccccccccccc</td>
                     <td>
-                        <i class="icon-setting bi bi-gear admin"></i>
+                        <i class="icon-setting bi bi-gear admin" data-id = "2"></i>
                         
                         <i class="icon-delete bi bi-trash m-1"></i>
                         
@@ -54,36 +54,39 @@
     </div>
 
         
-    <form class="container form-product-edit">
-        <h2 class = "form-title mb-2">Product Registration Form</h2>
+    <form class="container form-product-edit" id="form-product-edit"  enctype="multipart/form-data">
+        <h2 class = "form-title mb-2">Product Edit Form</h2>
         <div class="mb-1">
             <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name" required>
+            <input type="text" class="form-control" id="product_name" name="productName">
         </div>
         
         <div class="mb-1">
             <label for="image" class="form-label">Image</label>
-            <input type="file" class="form-control" id="image" accept="image/*" required>
+            <div class="img-fiel d-flex ">
+                <input style="line-height: 40px;" type="file" class="form-control" id="product_image" accept="image/*" name="productImg">
+                <img id="img-show" style="width:55px; height:55px; border-radius: 10px;" src="" alt="" name="productImage">
+            </div>
         </div>
     
         <div class="mb-1">
             <label for="price" class="form-label">Price</label>
-            <input type="number" class="form-control" id="price" required>
+            <input type="text" class="form-control" id="product_price" name="productPrice" required>
         </div>
     
         <div class="mb-1">
             <label for="quantity" class="form-label">Quantity</label>
-            <input type="number" class="form-control" id="quantity" required>
+            <input type="number" class="form-control" id="product_quantity" name="productStock" required>
         </div>
     
         <div class="mb-1">
             <label for="title" class="form-label">Title</label>
-            <input type="text" class="form-control" id="title" required>
+            <input type="text" class="form-control" id="product_title" name="productSub" required>
         </div>
     
         <div class="mb-1">
             <label for="description" class="form-label">Description</label>
-            <textarea class="form-control" id="description" rows="3" required></textarea>
+            <textarea class="form-control" id="product_description" rows="3" name="productDescription" required></textarea>
         </div >
         <div class="float-end">
 
@@ -91,7 +94,25 @@
             <button type="button" class="btn btn-secondary ms-2" id="cancelButton">Cancel</button>
         </div>
     </form>
+    <div class="modal fade" id="confirmRedirectModal" tabindex="-1" aria-labelledby="confirmRedirectModalLabel" aria-hidden="true" >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="confirmRedirectModalLabel">Product Updated successfully</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+          Press yes to exit!
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="yes-button" data-bs-dismiss="modal">Yes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./public/js/define.js?v=<?php echo time(); ?>"></script>
     <script src="./public/js/productManagement.js?v=<?php echo time(); ?>"></script>
-
+    <?php include_once  './app/components/toast.php';
+    echo displayToast('No changes have been made yet'); ?>
 </body>
 </html>
