@@ -47,6 +47,12 @@
             }
         }
 
+        public function getAllUser() {
+            $stmt = $this->db->prepare("SELECT * FROM users");
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
+
 
         //cart
         public function shoppingCart($user_id) {
@@ -154,7 +160,7 @@
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
 
-        public function completedOrder($user_id ,$product_id_list) {
+        public function completedOrder($user_id ,$product_id_list, $info_checkout) {
             try {
                 $this->db->beginTransaction();
                 $itemCheckouts = $this->getProductBeforCheckout($user_id ,$product_id_list);
@@ -169,6 +175,9 @@
                 foreach($itemCheckouts as $item) {
                     $stmt->execute([$order_id, $item->product_id, $item->product_price, $item->quantity]);
                 }
+
+                $stmt = $this->db->prepare("INSERT INTO shipping(order_id, phone_number, address, receiver) VALUE (?, ?, ?, ?)");
+                $stmt->execute([$order_id, $info_checkout["phone_number"], $info_checkout["address"], $info_checkout["username"]]);
 
                 $stmt = $this->db->prepare("DELETE FROM cart WHERE user_id = ? AND product_id = ?");
                 foreach($product_id_list as $id) {
@@ -186,11 +195,6 @@
                     "message" => $e->getMessage()
                 ];
             }
-        }
-        public function getAllUser() {
-            $stmt = $this->db->prepare("SELECT * FROM users");
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
         public function updateRole($userId, $role) {
             $query = $this->db->prepare("UPDATE users SET roles = ? WHERE user_id = ?");
