@@ -24,13 +24,6 @@
   margin-top: 5px;
 }
 
-.icon-setting.user {
-  color: blue;
-}
-
-.icon-setting.admin {
-  color: green;
-}
 
 .table_btn {
   border-spacing: 0 10px;
@@ -80,11 +73,12 @@
 .table-body-btn tr {
   line-height: 3;
 }
-
-.icon-setting {
-  color: blue;
-}
-
 .icon-delete {
   color: red;
+}
+i.active{
+  color: red !important;
+}
+.icon-setting{
+  color: green;
 }

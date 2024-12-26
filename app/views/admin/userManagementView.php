@@ -31,42 +31,38 @@
                     </tr>
                 </thead>
                 <tbody class="table-body-btn">
-                    <tr>
-                        <td>1</td>
-                        <td>Tran Cong Doan</td>
-                        <td>congdoan0806@gmail.com</td>
-                        <td>********</td>
-                        <td>99, To Hien Thanh...</td>
-                        <td>
-                            <i
-                                class="icon-setting bi bi-gear admin"
-                                onclick="toggleRoleSelect(this)"></i>
-                            <select class="role-select" onchange="updateRole(this)">
-                                <option value="User">User</option>
-                                <option value="Admin">Admin</option>
-                            </select>
-                            <i class="icon-delete bi bi-trash m-1"></i>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Mai Tram Huynh</td>
-                        <td>Tram@gmail.com</td>
-                        <td>********</td>
-                        <td>99, To Hien Thanh...ccccccccccccccccccccccccccc</td>
-                        <td>
-                            <i
-                                class="icon-setting bi bi-gear admin"
-                                onclick="toggleRoleSelect(this)"></i>
-                            <select class="role-select" onchange="updateRole(this)">
-                                <option value="User">User</option>
-                                <option value="Admin">Admin</option>
-                            </select>
-                            <i class="icon-delete bi bi-trash m-1"></i>
-
-                        </td>
-                    </tr>
+                    <?php
+                            foreach ($data as $user) {
+                                if($user->roles == 1){
+                                    $active = "active";
+                                    $roles_1 = "Admin";
+                                    $roles_2 = "User";
+                                }else{
+                                    $active = null;
+                                    $roles_1 = "User";
+                                    $roles_2 = "Admin";
+                                }
+                            echo "
+                                <tr data-userId = '".$user->user_id."'>
+                                    <td>".$user->user_id."</td>
+                                    <td title='".$user->user_name."'>".$user->user_name."</td>
+                                    <td title='".$user->email."'>".$user->email."</td>
+                                    <td title='".$user->address."'>".$user->passwords."</td>
+                                    <td title='".$user->address."'></td>
+                                    <td>
+                                        <i
+                                            class='icon-setting bi bi-gear admin ". $active ."'
+                                            ></i>
+                                        <select class='role-select' onchange='updateUserRole(this)'>
+                                            <option value='$roles_1'>".$roles_1."</option>
+                                            <option value='$roles_2'>".$roles_2."</option>
+                                        </select>
+                                        <i class='icon-delete bi bi-trash m-1'></i>
+                                    </td>
+                                </tr>
+                            ";
+                            }
+                        ?>
                 </tbody>
             </table>
         </div>

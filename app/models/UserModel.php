@@ -187,5 +187,14 @@
                 ];
             }
         }
+        public function getAllUser() {
+            $stmt = $this->db->prepare("SELECT * FROM users");
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
+        public function updateRole($userId, $role) {
+            $query = $this->db->prepare("UPDATE users SET roles = ? WHERE user_id = ?");
+            return $query->execute([$role, $userId]);
+        }
     }
 ?>
