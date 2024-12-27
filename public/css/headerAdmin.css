@@ -47,3 +47,35 @@
 .icon_pr{
     font-size: 25px;
 }
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    background-color:var( --primary-color1);
+    color: var(--primary-color2);
+    min-width: 200px;
+    border: 1px solid #ccc;
+    z-index: 1000;
+    padding: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+ .bi-person-circle:hover + .dropdown-menu,
+.dropdown-menu:hover {
+    display: block;
+}
+
+.dropdown-menu a {
+    text-align: center;
+    color:var( --primary-color1);
+    text-decoration: none;
+    display: block;
+    padding: 5px 0;
+}
+
+.dropdown-menu a:hover {
+    color:var(--primary-color3);
+    text-decoration: none;
+}

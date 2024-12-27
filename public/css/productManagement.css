@@ -125,3 +125,22 @@
   border-bottom-right-radius: 10px;
 
 }
+
+.addNewProducs {
+  width: 200px;
+  height: 50px;
+  background-color: var(--primary-color3);
+  position: fixed;
+  z-index: 100;
+  right: 25px;
+  bottom: 50px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--primary-color1);
+}
+
+.addNewProducs:hover {
+  opacity: 0.8;
+}

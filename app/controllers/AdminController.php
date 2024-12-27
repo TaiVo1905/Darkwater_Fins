@@ -19,7 +19,18 @@
             $data = $userModel->getAllUserNotBan();
             $this->view("admin/userManagement", $data);
         }
-
+        public function productManagement() {
+            $this->model("Products");
+            $productModel = new ProductsModel();
+            $data = $productModel->getAllProduct();
+            $this->view("admin/productManagement", $data);
+        }
+        public function orderManagement() {
+            $this->model("Order");
+            $orderModel = new OrderModel();
+            $data = $orderModel->getAllOrderNotPending();
+            $this->view("admin/orderManagement", $data);
+        }
         public function updateUserRole() {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $userId = $_POST['userId'];
@@ -47,12 +58,6 @@
             $data = $orderModel->getAllOrderPending();
             $this->view("admin/pendingOrder", $data);
         }
-        public function orderManagement() {
-            $this->model("Order");
-            $orderModel = new OrderModel();
-            $data = $orderModel->getAllOrderNotPending();
-            $this->view("admin/orderManagement", $data);
-        }
         public function changeOrderStatus() {
             if($_SERVER["REQUEST_METHOD"] = "POST") {
                 $jsonData = file_get_contents("php://input");
@@ -72,14 +77,7 @@
             }
 
         }
-
-        public function productManagement() {
-            $this->model("Products");
-            $productModel = new ProductsModel();
-            $data = $productModel->getAllProduct();
-            $this->view("admin/productManagement", $data);
-        }
-        public function addProductView() {
+        public function addProducts() {
             $this->view("admin/addProduct");
         }
         public function handelAddProduct(){

@@ -13,6 +13,11 @@ function generateDashboard($hideClass , $orders, $money, $productsSold, $pageNam
                     </div>
                     <i class='bi bi-bell me-3'></i>
                     <i class='bi bi-person-circle'></i>
+                    <div class='dropdown-menu' id='dropdown-menu'>
+                        <div style='background-color: black;border-radius: 20px;'>
+                            <a href='Users/logOut'>Log out</a>
+                        </div>
+                    </div>
                 </div>
             </div>
             <h3 class='mt-3'>$pageName</h3>

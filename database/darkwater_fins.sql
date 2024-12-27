@@ -9,7 +9,8 @@ create table users (
     passwords varchar(100) not null,
     address varchar(250),
     phone_number varchar(11) unique,
-    roles boolean default 0
+    roles boolean default 0,
+    banned boolean default 0
 );
 
 create table products (
@@ -22,7 +23,8 @@ create table products (
     product_stock int default 0,
     product_category varchar(40),
     product_type varchar(40),
-    purchases int default 0
+    purchases int default 0,
+    deleted boolean default 0,
 );
 
 create table cart (

@@ -75,7 +75,12 @@
                     if(!empty($user)) {
                         session_start();
                         $_SESSION["user_id"] = $user->user_id;
-                        header("location:" . BASE_URL . "home");
+                        if($user->roles = 1) {
+                        header("location:" . BASE_URL . "admin");
+
+                        } else {
+                            header("location:" . BASE_URL . "home");
+                        }
                         exit();
                     } else {
                         $data = ["user_email" => $user_email, "user_password" => $user_password];

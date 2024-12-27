@@ -18,7 +18,7 @@
             echo $dashboardHTML;
         ?>
         <?php include_once './app/components/sidebarAdmin.php' ?>
-
+    <a href="./admin/addProducts/"><div class="addNewProducs"><i class="bi bi-patch-plus p-1"></i>Add new products</div></a>
     <div class="table-container big_container">
             <table class="table_btn align-middle text-center small_container">
                 <thead class="table-primary table-head">
@@ -116,6 +116,7 @@
     </div>
     <script src="./public/js/define.js?v=<?php echo time(); ?>"></script>
     <script src="./public/js/productManagement.js?v=<?php echo time(); ?>"></script>
+    <script src="./public/js/sidebarAdmin.js?v=<?php echo time(); ?>"></script>
     <?php include_once  './app/components/toast.php';
     echo displayToast('No changes have been made yet'); ?>
 </body>

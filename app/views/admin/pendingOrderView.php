@@ -16,7 +16,7 @@
 <body>
   <div style="background-color: #F4F4F4; height:100vh;">
       <?php include_once './app/components/headerAdmin.php';
-      $dashboardHTML = generateDashboard('hide-element', '34 orders', '$20000', '33');
+      $dashboardHTML = generateDashboard('hide-element', '34 orders', '$20000', '33', "Pending orders");
       echo $dashboardHTML;
       ?>
       <?php include_once './app/components/sidebarAdmin.php' ?>
@@ -133,6 +133,7 @@
   ?>
       <script src="./public/js/define.js?v=<?php echo time(); ?>"></script>
       <script src="./public/js/orderManagement.js?v=<?php echo time(); ?>"></script>
+      <script src="./public/js/sidebarAdmin.js?v=<?php echo time(); ?>"></script>
 </body>
 
 </html>
