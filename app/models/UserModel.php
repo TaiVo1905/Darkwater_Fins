@@ -6,6 +6,12 @@
             return $query->fetch(PDO::FETCH_OBJ);
         }
 
+        public function getAllUserNotBan() {
+            $stmt = $this->db->prepare("SELECT * FROM users WHERE banned = ?");
+            $stmt->execute([0]);
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
+
         public function getUserByEmail($email){
             $query = $this->db->prepare("SELECT * FROM users WHERE email = ?");
             $query->execute([$email]);
@@ -199,6 +205,14 @@
         public function updateRole($userId, $role) {
             $query = $this->db->prepare("UPDATE users SET roles = ? WHERE user_id = ?");
             return $query->execute([$role, $userId]);
+        }
+        public function banUser($userId) {
+            try{
+                $stmt = $this->db->prepare("UPDATE users SET banned = ? WHERE user_id = ?");
+                return $stmt->execute([1, $userId]);
+            } catch(PDOException $e) {
+                return  $e->getMessage();
+            }
         }
     }
 ?>

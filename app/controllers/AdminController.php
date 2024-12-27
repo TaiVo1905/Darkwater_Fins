@@ -19,7 +19,7 @@
         public function userManagement() {
             $this->model("User");
             $userModel = new UserModel();
-            $data = $userModel->getAllUser();
+            $data = $userModel->getAllUserNotBan();
             $this->view("admin/userManagement", $data);
         }
         public function productManagement() {
@@ -35,6 +35,15 @@
                 if($success){
                     echo $role ;
                 };
+            }
+        }
+        public function banUser() {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $jsonData = file_get_contents("php://input");
+                $request = json_decode($jsonData, true);
+                $this->model('User');
+                $userModel = new UserModel();
+                echo json_encode($userModel->banUser($request["user_id"]));
             }
         }
     }

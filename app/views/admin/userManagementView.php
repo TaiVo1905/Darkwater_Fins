@@ -22,33 +22,31 @@
             <table class="table_btn align-middle text-center small_container">
                 <thead class="table-head">
                     <tr>
-                        <th>No.</th>
+                        <th>User_id</th>
                         <th>User's name</th>
                         <th>Email</th>
-                        <th>Password</th>
                         <th>Address</th>
                         <th>Options</th>
                     </tr>
                 </thead>
                 <tbody class="table-body-btn">
                     <?php
-                            foreach ($data as $user) {
-                                if($user->roles == 1){
-                                    $active = "active";
-                                    $roles_1 = "Admin";
-                                    $roles_2 = "User";
-                                }else{
-                                    $active = null;
-                                    $roles_1 = "User";
-                                    $roles_2 = "Admin";
-                                }
+                    foreach ($data as $user) {
+                        if($user->roles == 1){
+                            $active = "active";
+                            $roles_1 = "Admin";
+                            $roles_2 = "User";
+                        }else{
+                            $active = null;
+                            $roles_1 = "User";
+                            $roles_2 = "Admin";
+                        }
                             echo "
                                 <tr data-userId = '".$user->user_id."'>
-                                    <td>".$user->user_id."</td>
-                                    <td title='".$user->user_name."'>".$user->user_name."</td>
-                                    <td title='".$user->email."'>".$user->email."</td>
-                                    <td title='".$user->address."'>".$user->passwords."</td>
-                                    <td title='".$user->address."'></td>
+                                    <td>$user->user_id</td>
+                                    <td title='$user->user_name'>$user->user_name</td>
+                                    <td title='$user->email'>$user->email</td>
+                                    <td title='$user->address'>$user->address</td>
                                     <td>
                                         <i
                                             class='icon-setting bi bi-gear admin ". $active ."'
@@ -57,16 +55,19 @@
                                             <option value='$roles_1'>".$roles_1."</option>
                                             <option value='$roles_2'>".$roles_2."</option>
                                         </select>
-                                        <i class='icon-delete bi bi-trash m-1'></i>
+                                        <i class='icon-ban bi bi-ban m-1'></i>
+
                                     </td>
                                 </tr>
                             ";
-                            }
-                        ?>
+                        }
+                    ?>
                 </tbody>
             </table>
         </div>
     </div>
+    <?php include_once  './app/components/toast.php';
+    echo displayToast(''); ?>
     <script src="./public/js/define.js?v=<?php echo time(); ?>"></script>
     <script src="./public/js/userManagement.js?v=<?php echo time(); ?>"></script>
 </body>

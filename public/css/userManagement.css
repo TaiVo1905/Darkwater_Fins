@@ -6,6 +6,7 @@
   width: 936px;
   top: 200px;
   margin-left: 485px;
+  /* right: 25px; */
   position: absolute;
 }
 
@@ -24,6 +25,13 @@
   margin-top: 5px;
 }
 
+.icon-setting.user {
+  color: blue;
+}
+
+.icon-setting.admin {
+  color: green;
+}
 
 .table_btn {
   border-spacing: 0 10px;
@@ -39,11 +47,15 @@
   background-color: #BCD9FF;
 }
 
+.table_btn tbody td {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
 .table_btn th {
   border-right: 1px solid gray;
   background-color: white;
   line-height: 40px;
-
 }
 
 .table_btn th:last-child {
@@ -51,16 +63,17 @@
 }
 
 .table_btn th:first-child {
-  width: 60px;
+  width: 10%;
+}
+
+.table_btn th:nth-child(3) {
+  width: 30%;
 }
 .table_btn th:nth-child(4) {
-  width: 120px;
-}
-.table_btn th:nth-child(5) {
-  width: 150px;
+  width: 35%;
 }
 .table_btn th:last-child {
-  width: 120px;
+  width: 10%;
 }
 .table-body-btn td:first-child{
   border-top-left-radius:10px;
@@ -73,12 +86,14 @@
 .table-body-btn tr {
   line-height: 3;
 }
-.icon-delete {
+.icon-ban {
   color: red;
+  cursor: pointer;
 }
 i.active{
   color: red !important;
 }
 .icon-setting{
   color: green;
+  cursor: pointer;
 }
