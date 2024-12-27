@@ -1,10 +1,10 @@
 <?php
-function generateDashboard($hideClass , $orders, $money, $productsSold) {
+function generateDashboard($hideClass , $orders, $money, $productsSold, $pageName) {
     return "
         <div class='container-fluid bg-primary text-white p-3'>
             <div class='d-flex justify-content-end align-items-center' id='Dashboard'>
                 <div class='dash_board'>
-                    <i class='bi bi-house-door'></i> <span>/ </span>Dashboard
+                    <a href='./admin/' style='color: white'><i class='bi bi-house-door'></i></a><span>/ </span>$pageName
                 </div>
                 <div class='d-flex align-items-center icon_i'>
                     <div class='search-input'>
@@ -15,7 +15,7 @@ function generateDashboard($hideClass , $orders, $money, $productsSold) {
                     <i class='bi bi-person-circle'></i>
                 </div>
             </div>
-            <h3 class='mt-3'>Dashboard</h3>
+            <h3 class='mt-3'>$pageName</h3>
             <div class='d-flex justify-content-end flex-wrap gap-5 $hideClass'>
                 <div class='bg-white text-dark p-3 rounded card-header'>
                     <div class='d-flex align-items-center'  style='position:relative;'>
@@ -33,7 +33,7 @@ function generateDashboard($hideClass , $orders, $money, $productsSold) {
                             <i class='bi bi-cash icon_pr'></i>
                         </div>
                     </div>
-                    <div>$money</div>
+                    <div>$$money</div>
                 </div>
                 <div class='bg-white text-dark p-3 rounded card-header'>
                     <div class='d-flex align-items-center'  style='position:relative;'>

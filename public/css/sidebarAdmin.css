@@ -25,6 +25,10 @@
     background-color: #d0e7ff;
 }
 
+.sidebar a.active {
+    background-color: #d0e7ff;
+}
+
 .icon {
     margin-right: 10px;
     color: var(--primary-color3);
@@ -42,6 +46,6 @@
     color: #FF316B;
 }
 
-.icon-chart {
+.icon-pending {
     color: #13D4FF;
 }

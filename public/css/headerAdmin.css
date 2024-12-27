@@ -39,7 +39,7 @@
     color: var( --primary-color2); 
 }
 .dash_board{
-    margin-right: 450px;
+    width: 560px;
 }
 .mt-3{
     margin-left: 468px;
