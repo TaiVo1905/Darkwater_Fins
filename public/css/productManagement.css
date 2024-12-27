@@ -1,0 +1,108 @@
+.table th,
+.table td {
+  overflow: hidden; /* Ẩn phần nội dung tràn ra ngoài */
+  text-overflow: ellipsis; /* Hiển thị dấu chấm lửng (...) */
+  white-space: nowrap;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.table-container{
+  border-radius: 35px;
+  padding: 20px;
+  background-color: #fff;
+}
+.role-select {
+  display: none; /* Ẩn ô select mặc định */
+  margin-top: 5px;
+}
+.icon-setting.user {
+  color: blue;
+}
+
+.icon-setting.admin {
+  color: green;
+}
+.table-primary {
+  background-color: #737475; /* Tông màu xanh nhạt */
+  color: #000;
+}
+
+.btn-sm {
+  width: 35px;
+  height: 35px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.btn-primary i,
+.btn-danger i {
+  font-size: 16px;
+}
+.table{
+  border-spacing: 0 10px; /* Khoảng cách giữa các hàng */
+  border-collapse: separate; 
+  table-layout: fixed; /* Cố định chiều rộng cột */
+  width: 100%;
+}
+.table tbody tr:hover {
+  background-color: #e9ecef;
+}
+.table th{
+  border-right: 1px solid gray;
+  background-color: white;
+  line-height: 40px;
+  
+}
+.table th:last-child {
+  border-right: none;
+  }
+  .table th:first-child {
+      width: 60px;
+  }
+.table-head tr{
+  
+}
+.table-body{
+  background-color: #E9F6F7;
+}
+.table-body tr{
+  border-radius: 30%;
+  line-height: 30px;
+}
+.icon-setting{
+  color: blue;
+}
+.icon-delete{
+  color: red;
+}
+/* form */
+.form-product-edit{
+  position: fixed; 
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  width: 550px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: none;
+}
+.form-title{
+  text-align: center;
+}
+
+.product-row td:first-child{
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+
+}
+
+.product-row td:last-child{
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+
+}

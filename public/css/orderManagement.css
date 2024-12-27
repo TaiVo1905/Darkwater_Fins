@@ -1,0 +1,139 @@
+.big_container {
+  border-radius: 35px;
+  padding: 20px;
+  background-color: #fff;
+  margin: 0;
+  width: 936px;
+  top: 200px;
+  margin-left: 485px;
+  position: absolute;
+}
+
+.small_container th,
+.small_container td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.btn-sm {
+  width: 35px;
+  height: 35px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.table_btn {
+  border-spacing: 0 10px;
+  border-collapse: separate;
+  table-layout: fixed;
+  width: 100%;
+}
+.table_btn tbody tr{
+  background-color: #E9F6F7;
+  transition: background-color 0.3s;
+}
+.table_btn tbody tr:hover {
+  background-color: #BCD9FF;
+}
+
+.table_btn th {
+  border-right: 1px solid gray;
+  background-color: white;
+  line-height: 40px;
+
+}
+
+.table_btn th:last-child {
+  border-right: none;
+}
+
+.table_btn th:first-child {
+  width: 10%;
+}
+.table_btn th:nth-child(4) {
+  width: 25%;
+}
+.table_btn th:nth-child(5) {
+  width: 15%;
+}
+.table_btn th:last-child {
+  width: 10%;
+}
+
+.table-body-order {
+  background-color: #e9f6f7;
+}
+.table-body {
+  background-color: #e9f6f7;
+}
+
+.product-detail{
+  border-radius: 35px;
+  padding: 20px;
+  border: 1px solid gray; 
+}
+.table-body-order tr {
+  border-radius: 30px;
+  line-height: 30px;
+}
+
+.icon-cancel {
+  color: red;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.icon-confirm {
+  color: var(--primary-color3);
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.icon-confirm:hover, .icon-cancel:hover {
+  opacity: 1;
+}
+
+.order-detail {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  height: 100%;
+  max-width: 600px;
+  background-color: #fff;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+  transition: right 0.3s ease-in-out; /* Smooth slide-in effect */
+  overflow-y: auto; /* Handle scrolling for content */
+  z-index: 1050;
+  padding: 30px;
+}
+
+.order-detail.visible {
+  right: 0;
+}
+
+.table-body-order tr{
+  cursor: pointer;
+  line-height: 3;
+}
+
+.order-row td:first-child{
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+
+}
+
+.order-row td:last-child{
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+
+}
+
+.order-detail .confirm-btn{
+  width: 90px;
+  height: 40px;
+}

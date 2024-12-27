@@ -14,7 +14,7 @@
 <body>
     <div style="background-color: #F4F4F4;height:100vh;">
         <?php include_once './app/components/headerAdmin.php' ;
-            $dashboardHTML = generateDashboard('hide-element', '34 orders', '$20000', '33', "User management");
+            $dashboardHTML = generateDashboard('hide-element', '34 orders', '$20000', '33', "Users management");
             echo $dashboardHTML;
         ?>
         <?php include_once './app/components/sidebarAdmin.php' ?>
