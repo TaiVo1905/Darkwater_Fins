@@ -1,0 +1,38 @@
+body{
+    font-family: 'Kaisei Tokumin', serif;
+}
+.add-product-container{
+    width: 750px;
+    position: fixed; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+    /* display: none; */
+    border-radius: 15px;
+}
+#img-product{
+    width: 200px;
+    height: 200px;
+    border-radius: 15px;
+    display: none;
+}
+#productDescription{
+    line-height: 100px;
+    border: 1px solid #ccc;
+    padding-left: 15px;
+    outline: none;
+}
+.save-btn{
+    width: 75px;
+}
+.input-area{
+    border-radius: 5px ;
+    border: 1px solid #ccc;
+    line-height: 30px;
+    padding-left: 15px;
+    outline: none;
+}

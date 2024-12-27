@@ -1,0 +1,99 @@
+.big_container {
+  border-radius: 35px;
+  padding: 20px;
+  background-color: #fff;
+  margin: 0;
+  width: 936px;
+  top: 200px;
+  margin-left: 485px;
+  /* right: 25px; */
+  position: absolute;
+}
+
+.small_container th,
+.small_container td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+  text-align: center;
+}
+
+
+.role-select {
+  display: none;
+  margin-top: 5px;
+}
+
+.icon-setting.user {
+  color: blue;
+}
+
+.icon-setting.admin {
+  color: green;
+}
+
+.table_btn {
+  border-spacing: 0 10px;
+  border-collapse: separate;
+  table-layout: fixed;
+  width: 100%;
+}
+.table_btn tbody tr{
+  background-color: #E9F6F7;
+  transition: background-color 0.3s;
+}
+.table_btn tbody tr:hover {
+  background-color: #BCD9FF;
+}
+
+.table_btn tbody td {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+.table_btn th {
+  border-right: 1px solid gray;
+  background-color: white;
+  line-height: 40px;
+}
+
+.table_btn th:last-child {
+  border-right: none;
+}
+
+.table_btn th:first-child {
+  width: 10%;
+}
+
+.table_btn th:nth-child(3) {
+  width: 30%;
+}
+.table_btn th:nth-child(4) {
+  width: 35%;
+}
+.table_btn th:last-child {
+  width: 10%;
+}
+.table-body-btn td:first-child{
+  border-top-left-radius:10px;
+  border-bottom-left-radius:10px;
+}
+.table-body-btn td:last-child{
+  border-top-right-radius:10px;
+  border-bottom-right-radius:10px;
+}
+.table-body-btn tr {
+  line-height: 3;
+}
+.icon-ban {
+  color: red;
+  cursor: pointer;
+}
+i.active{
+  color: red !important;
+}
+.icon-setting{
+  color: green;
+  cursor: pointer;
+}

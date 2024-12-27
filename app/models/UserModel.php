@@ -6,6 +6,12 @@
             return $query->fetch(PDO::FETCH_OBJ);
         }
 
+        public function getAllUserNotBan() {
+            $stmt = $this->db->prepare("SELECT * FROM users WHERE banned = ?");
+            $stmt->execute([0]);
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        }
+
         public function getUserByEmail($email){
             $query = $this->db->prepare("SELECT * FROM users WHERE email = ?");
             $query->execute([$email]);
@@ -45,6 +51,12 @@
             } catch (PDOException $e) {
                 echo $e->getMessage();
             }
+        }
+
+        public function getAllUser() {
+            $stmt = $this->db->prepare("SELECT * FROM users");
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
 
 
@@ -154,7 +166,7 @@
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
 
-        public function completedOrder($user_id ,$product_id_list) {
+        public function completedOrder($user_id ,$product_id_list, $info_checkout) {
             try {
                 $this->db->beginTransaction();
                 $itemCheckouts = $this->getProductBeforCheckout($user_id ,$product_id_list);
@@ -169,6 +181,9 @@
                 foreach($itemCheckouts as $item) {
                     $stmt->execute([$order_id, $item->product_id, $item->product_price, $item->quantity]);
                 }
+
+                $stmt = $this->db->prepare("INSERT INTO shipping(order_id, phone_number, address, receiver) VALUE (?, ?, ?, ?)");
+                $stmt->execute([$order_id, $info_checkout["phone_number"], $info_checkout["address"], $info_checkout["username"]]);
 
                 $stmt = $this->db->prepare("DELETE FROM cart WHERE user_id = ? AND product_id = ?");
                 foreach($product_id_list as $id) {
@@ -185,6 +200,18 @@
                     "code" => $e->getCode(),
                     "message" => $e->getMessage()
                 ];
+            }
+        }
+        public function updateRole($userId, $role) {
+            $query = $this->db->prepare("UPDATE users SET roles = ? WHERE user_id = ?");
+            return $query->execute([$role, $userId]);
+        }
+        public function banUser($userId) {
+            try{
+                $stmt = $this->db->prepare("UPDATE users SET banned = ? WHERE user_id = ?");
+                return $stmt->execute([1, $userId]);
+            } catch(PDOException $e) {
+                return  $e->getMessage();
             }
         }
     }
