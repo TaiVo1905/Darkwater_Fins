@@ -1,17 +1,23 @@
-.table th,
-.table td {
-  overflow: hidden; /* Ẩn phần nội dung tràn ra ngoài */
-  text-overflow: ellipsis; /* Hiển thị dấu chấm lửng (...) */
+.big_container {
+  border-radius: 35px;
+  padding: 20px;
+  background-color: #fff;
+  margin: 0;
+  width: 936px;
+  top: 200px;
+  margin-left: 485px;
+  position: absolute;
+}
+
+.small_container th,
+.small_container td {
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
   vertical-align: middle;
   text-align: center;
 }
 
-.table-container{
-  border-radius: 35px;
-  padding: 20px;
-  background-color: #fff;
-}
 .role-select {
   display: none; /* Ẩn ô select mặc định */
   margin-top: 5px;
@@ -41,36 +47,49 @@
 .btn-danger i {
   font-size: 16px;
 }
-.table{
-  border-spacing: 0 10px; /* Khoảng cách giữa các hàng */
-  border-collapse: separate; 
-  table-layout: fixed; /* Cố định chiều rộng cột */
+.table_btn {
+  border-spacing: 0 10px;
+  border-collapse: separate;
+  table-layout: fixed;
   width: 100%;
 }
-.table tbody tr:hover {
-  background-color: #e9ecef;
+.table_btn tbody tr{
+  background-color: #E9F6F7;
+  transition: background-color 0.3s;
 }
-.table th{
+.table_btn tbody tr:hover {
+  background-color: #BCD9FF;
+}
+
+.table_btn th {
   border-right: 1px solid gray;
   background-color: white;
   line-height: 40px;
-  
+
 }
-.table th:last-child {
+
+.table_btn th:last-child {
   border-right: none;
-  }
-  .table th:first-child {
-      width: 60px;
-  }
-.table-head tr{
-  
+}
+
+.table_btn th:first-child {
+  width: 60px;
+}
+.table_btn th:nth-child(4) {
+  width: 120px;
+}
+.table_btn th:nth-child(5) {
+  width: 150px;
+}
+.table_btn th:last-child {
+  width: 120px;
 }
 .table-body{
   background-color: #E9F6F7;
 }
 .table-body tr{
   border-radius: 30%;
-  line-height: 30px;
+  line-height: 3;
 }
 .icon-setting{
   color: blue;
@@ -96,13 +115,13 @@
 }
 
 .product-row td:first-child{
-  border-top-left-radius: 25px;
-  border-bottom-left-radius: 25px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
 
 }
 
 .product-row td:last-child{
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 
 }
