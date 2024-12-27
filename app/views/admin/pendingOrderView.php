@@ -28,8 +28,8 @@
               <th>Receiver</th>
               <th>Phone number</th>
               <th>Order date</th>
-              <th>Status</th>
               <th>Total</th>
+              <th>Options</th>
             </tr>
           </thead>
           <tbody class="table-body-order">
@@ -42,8 +42,11 @@
                         <td>$order->receiver</td>
                         <td>$order->phone_number</td>
                         <td>$order->order_date</td>
-                        <td>$order->order_status</td>
                         <td>$order->total_price</td>
+                        <td>
+                          <i class='icon-confirm bi bi-check-circle fs-4'></i>
+                          <i class='icon-cancel bi bi-x-circle m-1 fs-4'></i>
+                        </td>
                       </tr>
                     ";
               }
@@ -52,7 +55,50 @@
           </tbody>
         </table>
       </div>
-      <div class="order-detail w-75">
+      <!-- form xác nhậnn confirm-->
+      <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="confirmationModalLabel">
+                Confirm Order
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Are you sure you want to confirm this order?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary" id="confirmButton">Confirm</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Form xac nhận xóa -->
+      <div class="modal fade" id="confirmRejectionModal" tabindex="-1" aria-labelledby="confirmRejectionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="confirmRejectionModalLabel">Confirm order rejection</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Are you sure you want to reject this order?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary" id="rejection_btn">Confirm</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="order-detail w-75 ">
         <h2 class="text-center">Order Detail</h2>
         <div class="order-info">
           <p> <b>Order ID: </b><span id="order-id"></span></p>
@@ -79,6 +125,7 @@
             </tbody>
           </table>
         </div>
+        <button class="confirm-btn btn btn-sm btn-primary float-end">Confirm</button>
       </div>
   </div>
   <?php include_once  './app/components/toast.php';
