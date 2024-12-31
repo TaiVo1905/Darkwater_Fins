@@ -47,7 +47,7 @@
                     <div class="profile-card">
                         <div class="profile-header">
                             <div class="image-container">
-                                <img id="img-user" name="user_img" src="<?php echo $data['userInfo']->user_img_url; ?>" alt="User Img" class="image-user">
+                                <img id="img-user" name="user_img" src="<?php echo $data['userInfo']->getUserImgUrl(); ?>" alt="User Img" class="image-user">
                                 <div class="icon-overlay">
                                     <i class="bi bi-camera-fill camera-image-user"></i>
                                 </div>
@@ -60,22 +60,22 @@
                     <div class="profile-update-file p-5 pt-3 ">
                         <div class="mb-3">
                             <label for="fullname-user" class="form-label">Full name</label>
-                            <input type="text" class="form-control " name="username" id="fullname-user" value="<?php echo $data['userInfo']->user_name; ?>" required>
+                            <input type="text" class="form-control " name="username" id="fullname-user" value="<?php echo $data['userInfo']->getUserName(); ?>" required>
                             <span class="form-message"></span>
                         </div>
                         <div class="mb-3">
                             <label for="email-user" class="form-label">Email</label>
-                            <input type="email" class="form-control" name="email" id="email-user" readonly value="<?php echo $data['userInfo']->email; ?> " required>
+                            <input type="email" class="form-control" name="email" id="email-user" readonly value="<?php echo $data['userInfo']->getEmail(); ?> " required>
                             <span class="form-message"></span>
                         </div>
                         <div class="mb-3">
                             <label for="phone-user" class="form-label">Phone</label>
-                            <input type="text" class="form-control" name="phone" id="phone-user" value="<?php echo $data['userInfo']->phone_number; ?>">
+                            <input type="text" class="form-control" name="phone" id="phone-user" value="<?php echo $data['userInfo']->getPhoneNumber(); ?>">
                             <span class="form-message"></span>
                         </div>
                         <div class="mb-3">
                             <label for="address-user" class="form-label">Address</label>
-                            <input type="text" class="form-control" name="address" id="address-user" value="<?php echo $data['userInfo']->address; ?>">
+                            <input type="text" class="form-control" name="address" id="address-user" value="<?php echo $data['userInfo']->getAddress(); ?>">
                             <span class="form-message"></span>
                         </div>
                     </div>
@@ -124,7 +124,7 @@
                         <?php
                             require './app/components/orderItems.php';
                             foreach ($data['order'] as $order) {
-                                echo renderOrderItems($order->order_id, $order->order_status, $order->product_img_url, $order->product_name, $order->product_category, $order->quantity, $order->product_price, $order->total_price);
+                                echo renderOrderItems($order->gerOrderId(), $order->gerOrderStatus(), $order->getProductImgUrl(), $order->getProductName(), $order->getProductCategory(), $order->getQuantity(), $order->getProductPrice(), $order->getTotalPrice());
                             }
                         ?>
                     </div>

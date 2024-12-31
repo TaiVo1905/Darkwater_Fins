@@ -14,8 +14,7 @@
 <body>
     <div style="background-color: #F4F4F4;height:100vh;">
         <?php include_once './app/components/headerAdmin.php' ;
-            $dashboardHTML = generateDashboard('hide-element', '34 orders', '$20000', '33', "Users management");
-            echo $dashboardHTML;
+            echo generateDashboard('hide-element', '34 orders', '$20000', '33', "Users management");
         ?>
         <?php include_once './app/components/sidebarAdmin.php' ?>
         <div class="table-container big_container">
@@ -32,7 +31,7 @@
                 <tbody class="table-body-btn">
                     <?php
                     foreach ($data as $user) {
-                        if($user->roles == 1){
+                        if($user->getRoles() == 1){
                             $active = "active";
                             $roles_1 = "Admin";
                             $roles_2 = "User";
@@ -42,18 +41,18 @@
                             $roles_2 = "Admin";
                         }
                             echo "
-                                <tr data-userId = '".$user->user_id."'>
-                                    <td>$user->user_id</td>
-                                    <td title='$user->user_name'>$user->user_name</td>
-                                    <td title='$user->email'>$user->email</td>
-                                    <td title='$user->address'>$user->address</td>
+                                <tr data-userId = '$user->getUserId()'>
+                                    <td>$user->getUserId()</td>
+                                    <td title='$user->getUserName()'>$user->getUserName()</td>
+                                    <td title='$user->getEmail()'>$user->getEmail()</td>
+                                    <td title='$user->getAddress()'>$user->getAddress()</td>
                                     <td>
                                         <i
-                                            class='icon-setting bi bi-gear admin ". $active ."'
+                                            class='icon-setting bi bi-gear admin  $active'
                                             ></i>
                                         <select class='role-select' onchange='updateUserRole(this)'>
-                                            <option value='$roles_1'>".$roles_1."</option>
-                                            <option value='$roles_2'>".$roles_2."</option>
+                                            <option value='$roles_1'>$roles_1</option>
+                                            <option value='$roles_2'>$roles_2</option>
                                         </select>
                                         <i class='icon-ban bi bi-ban m-1'></i>
 

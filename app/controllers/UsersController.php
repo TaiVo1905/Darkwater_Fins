@@ -1,12 +1,23 @@
 <?php
+    require_once("./app/models/ProductModel.php");
     class UsersController extends Controller {
+        private $__userService;
+        private $__orderService;
+        private $__mailerService;
+
+        public function __construct() {
+            $this->service("User");
+            $this->service("Order");
+            $this->service("Mailer");
+            $this->__userService = new UserService();
+            $this->__orderService = new OrderService();
+            $this->__mailerService = new MailerService();
+        }
         //profile
         public function index(){
-            $this -> model('User');
-            $user = new UserModel();
             $id = $_SESSION['user_id'];
-            $userinfo = $user->getUser($id);
-            $order =$user->getOrder($id);
+            $userinfo = $this->__userService->getUserById($id);
+            $order = $this->__orderService->getOrder($id);
             $data = array(
                 'userInfo' => $userinfo,
                 'order' => $order
@@ -14,13 +25,11 @@
             
             $this->view('users/profile', $data);
         }
+
         public function updateProfile(){
             if($_SERVER['REQUEST_METHOD'] === 'POST'){
-                
                 $id = $_SESSION['user_id'];
-                $this -> model('User');
-                $user = new UserModel();
-                $data = $user->getUser($id);
+                $data = $this->__userService->getUserById($id);
                 $username = $_POST['username'];
                 $phone = $_POST['phone'];
                 $address = $_POST['address'];   
@@ -35,9 +44,9 @@
                         echo "<p style='color: red;'>Failed to upload image.</p>";
                     }
                 }  
-                $user -> updateUser($id, $username,$user_img, $phone, $address);
-                $userinfo = $user->getUser($id);
-                $order =$user->getOrder($id);    
+                $this->__userService -> updateUser($id, $username, $user_img, $phone, $address);
+                $userinfo = $this->__userService->getUserById($id);
+                $order = $this->__orderService->getOrder($id);    
                 $data = array(
                     'userInfo' => $userinfo,
                     'order' => $order
@@ -45,15 +54,14 @@
                 $this->view('users/profile', $data);
             }
         }
+
         public function executeChangePassword(){
             if($_SERVER['REQUEST_METHOD'] === 'POST'){
-                $this -> model('User');
-                $user = new UserModel();
                 $id = $_SESSION['user_id'];
                 $new_password = password_hash($_POST['new-password'], PASSWORD_BCRYPT);
-                $user -> updatePassword($id, $new_password);
-                $userinfo = $user->getUser($id);
-                $order =$user->getOrder($id);
+                $this->__userService -> updatePassword($id, $new_password);
+                $userinfo = $this->__userService->getUserById($id);
+                $order =$this->__orderService->getOrder($id);
                 $data = array(
                     'userInfo' => $userinfo,
                     'order' => $order
@@ -69,15 +77,11 @@
                 if($_SERVER["REQUEST_METHOD"] == "POST") {
                     $user_email = $_POST["user_email"];
                     $user_password = $_POST["user_password"];
-                    $this->model("User");
-                    $userModel = new UserModel();
-                    $user = $userModel->verifyAccount($user_email, $user_password);
+                    $user = $this->__userService->verifyAccount($user_email, $user_password);
                     if(!empty($user)) {
-                        session_start();
-                        $_SESSION["user_id"] = $user->user_id;
-                        if($user->roles = 1) {
-                        header("location:" . BASE_URL . "admin");
-
+                        $_SESSION["user_id"] = $user->getUserId();
+                        if($user->getRoles() == 1) {
+                            header("location:" . BASE_URL . "admin");
                         } else {
                             header("location:" . BASE_URL . "home");
                         }
@@ -91,6 +95,7 @@
                 echo $e->getMessage();
             }
         }
+
         public function checkLogin() {
             if($_SERVER["REQUEST_METHOD"] == "POST") {
                 if(isset($_SESSION["user_id"])) {
@@ -100,12 +105,11 @@
                 }
             }
         }
+
         public function register() {
             try {
                 $data = null;
                 if($_SERVER["REQUEST_METHOD"] == "POST") {
-                    $this->model("User");
-                    $userModel = new UserModel();
                     $user_password_error  = "";
                     $user_name = $_POST["user_name"];
                     $user_email = $_POST["user_email"];
@@ -114,7 +118,7 @@
                     $user_authentication_code = $_POST["user_authentication_code"];
                     $codeCookie = isset($_COOKIE["code"]) ? $_COOKIE["code"] : "";
                     $emailCookie = isset($_COOKIE["email"]) ? $_COOKIE["email"] : "";
-                    if (($user_authentication_code != $codeCookie && $user_email != $emailCookie) || $userModel->getUserByEmail($user_email)) {
+                    if (($user_authentication_code != $codeCookie && $user_email != $emailCookie) || $this->__userService->getUserByEmail($user_email)) {
                         $data = 
                             ["user_name" => $user_name,
                             "user_password" => $user_password,
@@ -123,8 +127,12 @@
                             "user_authentication_code" => $user_authentication_code
                             ];
                     } else {
-                        if($userModel->addUser($user_name, $user_email, $user_password)){
-                            header("location: users/LogIn");
+                        if(isset($_COOKIE["code"])) {
+                            unset($_COOKIE["code"]);
+                        }
+                        $user = new UserModel($user_name, $user_email, $user_password);
+                        if($this->__userService->addUser($user)){
+                            header("location:" . BASE_URL . "Users/LogIn");
                             exit();
                         };
                     }
@@ -135,6 +143,7 @@
                 echo $e->getMessage();
             }
         }
+
         public function logOut() {
             session_unset();
             session_destroy();
@@ -142,27 +151,13 @@
             exit();
         }
 
-        //order
-        public function saveInfoCheckout() {
-            if($_SERVER["REQUEST_METHOD"] == "POST") {
-                try{
-                    $jsonData = file_get_contents("php://input");
-                    $request = json_decode($jsonData, true);
-                    $_SESSION["info_checkout"] = $request;
-                    echo true;
-
-                } catch(PDOException $e) {
-                    echo $e->getMessage();
-                }
-            }
-        }
-        public function deleteOrder($order_id ){
-            if($_SERVER['REQUEST_METHOD'] === 'POST'){
-                $this -> model('User');
-                $user = new UserModel();          
-                if($order_id){
-                    $user -> removeOrder($order_id);
-                }
+        public function authEmail() {
+            if (isset($_POST['email']) && isset($_POST["user_name"])) {
+                $email = $_POST['email'];
+                $user_name = $_POST['user_name'];
+                echo $this->__mailerService->sendEmailCode($email, $user_name);
+            } else { 
+                echo "Tham số không hợp lệ.";
             }
         }
     }

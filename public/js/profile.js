@@ -282,7 +282,7 @@ document.addEventListener("DOMContentLoaded", function () {
     button.addEventListener("click", function () {
         const orderId = button.getAttribute("data-order-id");
         const xhr = new XMLHttpRequest();
-        xhr.open("POST", `Users/deleteOrder/${encodeURIComponent(orderId)}`, true);
+        xhr.open("POST", `order/deleteOrder/${encodeURIComponent(orderId)}`, true);
         xhr.onreadystatechange = function () {
             if(xhr.readyState == 4 && xhr.status == 200) {
                 button.closest(".order-item").remove();

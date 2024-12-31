@@ -1,5 +1,3 @@
-
-
 const itemCarts = $$(".shoppingCart tr");
 const countCart = $(".countCart");
 
@@ -123,7 +121,6 @@ async function countItems() {
 }
 
 // checkout
-
 function checkedItemList() {
     const product_id_list = [];
     itemCarts.forEach( itemCart => {
@@ -144,7 +141,7 @@ $(".checkout")?.addEventListener("click", () => {
         return;
     }
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "./shoppingCart/storeProductIdBeforCheckout", true);
+    xhr.open("POST", "./checkout/storeProductIdBeforCheckout", true);
     xhr.onreadystatechange = function () {
         if(this.readyState == 4 && this.status == 200) {
             if(this.response == 1) {

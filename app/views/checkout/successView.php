@@ -20,9 +20,9 @@
             <p class="mt-4">Payment has been successfully made. Darkwater Fins will confirm contact to deliver your order as soon as possible.</p>
         </div>
         <?php
-            $username = $_SESSION["info_checkout"]["username"] ?? $data[1]->user_name;
-            $phone_number = $_SESSION["info_checkout"]["phone_number"] ?? $data[1]->phone_number;
-            $address = $_SESSION["info_checkout"]["address"] ?? $data[1]->address;
+            $username = $_SESSION["info_checkout"]["username"] ?? $data[1]->getUserName();
+            $phone_number = $_SESSION["info_checkout"]["phone_number"] ?? $data[1]->getPhoneNumber();
+            $address = $_SESSION["info_checkout"]["address"] ?? $data[1]->getAddress();
             echo "
                 <div class='address d-flex justify-content-between mb-4'>
                     <span class='address-title gay-color'>Receiver</span>

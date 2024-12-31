@@ -59,7 +59,7 @@ $(".editProfileForm")?.addEventListener("submit", (e) => {
     console.log(user_address, username, phonenumber)
     e.preventDefault();
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "./Users/saveInfoCheckout", true);
+    xhr.open("POST", "./checkout/saveInfoCheckout", true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function () {
         if(this.readyState == 4 && this.status == 200) {
@@ -134,7 +134,7 @@ function checkInfo() {
 
 function storeProductIdBeforCheckout(product_id_list) {
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "./shoppingCart/storeProductIdBeforCheckout", true);
+    xhr.open("POST", "./checkout/storeProductIdBeforCheckout", true);
     xhr.onreadystatechange = function () {
         if(this.readyState == 4 && this.status == 200) {
             if(this.response == 1) {

@@ -36,15 +36,15 @@
                         foreach ($data as $product){
                             echo "
                                <tr class='product-row'>
-                                    <td>".$product->product_id."</td>
-                                    <td><img style='width: 60px; margin-bottom: 3px;' src='".$product->product_img_url."' alt=''></td>
-                                    <td>".$product->product_name."</td>
-                                    <td>".$product->product_price."</td>
-                                    <td>".$product->product_stock."</td>
+                                    <td>$product->getProductId()</td>
+                                    <td><img style='width: 60px; margin-bottom: 3px;' src='$product->getProductImgUrl()' alt=''></td>
+                                    <td>$product->getProductName()</td>
+                                    <td>$product->getProductPrice()</td>
+                                    <td>$product->getProductStock()</td>
                                     <td>
-                                        <i class='icon-setting bi bi-gear admin' data-id = ".$product->product_id."></i>
+                                        <i class='icon-setting bi bi-gear admin' data-id = '$product->getProductId()'></i>
                                         
-                                        <i class='icon-delete bi bi-trash m-1' data-id = ".$product->product_id."></i>
+                                        <i class='icon-delete bi bi-trash m-1' data-id = '$product->getProductId()'></i>
                                         
                                     </td>
                         </tr>

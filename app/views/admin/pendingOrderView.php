@@ -16,8 +16,7 @@
 <body>
   <div style="background-color: #F4F4F4; height:100vh;">
       <?php include_once './app/components/headerAdmin.php';
-      $dashboardHTML = generateDashboard('hide-element', '34 orders', '$20000', '33', "Pending orders");
-      echo $dashboardHTML;
+            echo generateDashboard('hide-element', '34 orders', '$20000', '33', "Pending orders");
       ?>
       <?php include_once './app/components/sidebarAdmin.php' ?>
       <div class="table-container big_container">
@@ -35,14 +34,14 @@
           <tbody class="table-body-order">
             <?php
               foreach($data as $order) {
-                $order_id = $order->order_id;
+                $order_id = $order->getOrderId();
                 echo "
-                      <tr data-order-id='$order->order_id' class='order-row'>
-                        <td>$order->order_id</td>
-                        <td>$order->receiver</td>
-                        <td>$order->phone_number</td>
-                        <td>$order->order_date</td>
-                        <td>$order->total_price</td>
+                      <tr data-order-id='$order->getOrderId()' class='order-row'>
+                        <td>$order->getOrderId()</td>
+                        <td>$order->getReceiver()</td>
+                        <td>$order->getPhoneNumber()</td>
+                        <td>$order->getOrderDate()</td>
+                        <td>$order->getTotalPrice()</td>
                         <td>
                           <i class='icon-confirm bi bi-check-circle fs-4'></i>
                           <i class='icon-cancel bi bi-x-circle m-1 fs-4'></i>

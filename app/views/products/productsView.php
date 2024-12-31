@@ -51,7 +51,7 @@
                         <?php
                             require_once("./app/components/itemCard.php");
                                 foreach($data[0] as $item) {
-                                    echo displayItemCard($item->product_id, $item->product_img_url, $item->product_name, $item->product_sub, $item->product_price, $url);
+                                    echo displayItemCard($item->getProductId(), $item->getProductImgUrl(), $item->getProductName(), $item->getProductSub(), $item->getProductPrice(), $url);
                                 }
                         ?>
                     </div>

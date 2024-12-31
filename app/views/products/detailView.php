@@ -16,13 +16,13 @@
 <body>
     <?php include_once './app/components/header.php' ?>
     <?php include_once './app/components/banner.php';
-     echo showBanner($data[0]->product_name, ['Home', $data[0]->product_name]); 
+     echo showBanner($data[0]->getProductName(), ['Home', $data[0]->getProductName()]); 
     ?>
     <div class="container">
         <?php 
          require_once("./app/components/detail.php");
          foreach($data as $data) {
-            echo displayProductCard($data->product_id, $data->product_img_url, $data->product_description, $data->product_price, $data->product_sub, $data->product_category);
+            echo displayProductCard($data->getProductId(), $data->getProductImgUrl(), $data->getProductDescription(), $data->getProductPrice(), $data->getProductSub(), $data->getProductCategory());
          } ?>
     </div>
     <?php

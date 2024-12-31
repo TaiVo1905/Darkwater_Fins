@@ -5,11 +5,11 @@ document.addEventListener('DOMContentLoaded', function () {
         xhr.onload = function () {
             if (xhr.status === 200) {
                 try {
-                    let products = JSON.parse(xhr.responseText);
+                    let products = JSON.parse(xhr.response);
                     callback(products);
                 } catch (e) {
                     console.error("Error parsing JSON:", e);
-                    console.log("Response was:", xhr.responseText);
+                    console.log("Response was:", xhr.response);
                 }
             } else {
                 console.error("Request failed with status: " + xhr.status);
@@ -28,18 +28,18 @@ document.addEventListener('DOMContentLoaded', function () {
             let productElement = document.createElement("div");
             productElement.classList.add("col", "col-md-4", "col-sm-6", "item");
             productElement.innerHTML = `
-                <div class="card" data-product-id="${product.product_id}">
-                    <img src="${product.product_img_url}" alt="" class="card-img-top">
+                <div class="card" data-product-id="${product.getProductId()}">
+                    <img src="${product.getProductImgUrl()}" alt="" class="card-img-top">
                     <div class="icon-overlay">
                         <i class="bi bi-cart-plus add-to-cart"></i>
-                        <a href="products/${product.product_type == 'Fish' ? 'fishes' : product.product_type == 'Fish Food' ? 'fishfoods' : 'aquariums'}/${product.product_id}">
+                        <a href="products/${product.getProductType() == 'Fish' ? 'fishes' : product.getProductType() == 'Fish Food' ? 'fishfoods' : 'aquariums'}/${product.getProductId()}">
                             <i class="bi bi-link"></i>
                         </a>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">${product.product_name}</h5>
-                        <p class="card-text">${product.product_sub}</p>
-                        <div class="fish-price">$${product.product_price}</div>
+                        <h5 class="card-title">${product.getProductName()}</h5>
+                        <p class="card-text">${product.getProductSub()}</p>
+                        <div class="fish-price">$${product.getProductPrie()}</div>
                     </div>
                 </div>
             `;

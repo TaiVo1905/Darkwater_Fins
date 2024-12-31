@@ -16,16 +16,19 @@
 
 function sendEmailCode(email, user_name) {
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", `./app/services/mailerService.php?func=sendEmailCode&email=${encodeURIComponent(email)}&user_name=${encodeURIComponent(user_name)}`, true);
+    const formData = new FormData();
+    formData.append("email", email);
+    formData.append("user_name", user_name);
+    xhr.open("POST", "./users/authEmail", true);
     xhr.onreadystatechange = function () {
         if(xhr.readyState == 4 && xhr.status == 200) {
             showToast("Your code is sent");
-            console.log(xhr.responseText);
+            console.log(xhr.response);
         } else {
             console.log("Error");
         }
     }
-    xhr.send();
+    xhr.send(formData);
 }
 
 

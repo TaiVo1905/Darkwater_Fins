@@ -16,10 +16,10 @@
     $totalMoney = 0;
     $productSold = 0;
     foreach($data as $order) {
-      $totalMoney += $order->product_price * $order->quantity;
+      $totalMoney += $order->getProductPrice() * $order->getQuantity();
     }
     foreach($data as $order) {
-      $productSold += $order->quantity;
+      $productSold += $order->getQuantity();
     }
     require_once("./app/components/headerAdmin.php");
     echo generateDashboard(null , $totalOrder, $totalMoney, $productSold, "Dashboard");
