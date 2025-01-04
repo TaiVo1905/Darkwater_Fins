@@ -8,21 +8,21 @@
         public function getAllOrder() {
             $stmt = $this->__model->db->prepare("SELECT * FROM orderView");
             $stmt->execute();
-            $stmt->setFetchMode(PDO::FETCH_CLASS, "OrderViewModel");
+            $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "OrderViewModel");
             return $stmt->fetchAll();
         }
 
         public function getAllOrderPending() {
             $stmt = $this->__model->db->prepare("SELECT DISTINCT order_id, receiver, phone_number, order_date, total_price FROM orderView WHERE order_status = ?");
             $stmt->execute(["Pending"]);
-            $stmt->setFetchMode(PDO::FETCH_CLASS, "OrderViewModel");
+            $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "OrderViewModel");
             return $stmt->fetchAll();
         }
 
         public function getAllOrderNotPending() {
             $stmt = $this->__model->db->prepare("SELECT DISTINCT order_id, receiver, phone_number, order_date, order_status, total_price FROM orderView WHERE order_status != ?");
             $stmt->execute(["Pending"]);
-            $stmt->setFetchMode(PDO::FETCH_CLASS, "OrderViewModel");
+            $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "OrderViewModel");
             return $stmt->fetchAll();
         }
 
@@ -48,8 +48,8 @@
             try {
                 $stmt = $this->__model->db->prepare("SELECT * FROM orderView WHERE order_id = ?");
                 $stmt->execute([$order_id]);
-                $stmt->setFetchMode(PDO::FETCH_CLASS, "OrderViewModel");
-                return $stmt->fetch();
+                $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "OrderViewModel");
+                return $stmt->fetchAll();
             } catch(PDOException $e) {
                 return $e->getMessage();
             }
@@ -75,7 +75,7 @@
                                                 o.user_id = ?;
                                             ");
             $stmt->execute([$user_id]); //true false
-            $stmt->setFetchMode(PDO::FETCH_CLASS, "OrderViewModel");
+            $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "OrderViewModel");
             return $stmt->fetchAll();                          
         }
 
@@ -84,7 +84,7 @@
             return $stmt->execute([$order_id]);
         }
 
-        public function getProductBeforCheckout($user_id ,$product_id_list) {
+        public function getProductBeforeCheckout($user_id ,$product_id_list) {
             $place = implode(", ", array_fill(0, count($product_id_list), "?"));
             $stmt = $this->__model->db->prepare("SELECT * FROM cart AS c
                                         JOIN products AS p
@@ -96,7 +96,7 @@
         public function completedOrder($user_id ,$product_id_list, $info_checkout) {
             try {
                 $this->__model->db->beginTransaction();
-                $itemCheckouts = $this->getProductBeforCheckout($user_id ,$product_id_list);
+                $itemCheckouts = $this->getProductBeforeCheckout($user_id ,$product_id_list);
                 $stmt = $this->__model->db->prepare("INSERT INTO orders(user_id, order_status, order_date) VALUE (?, 'pending', NOW())");
                 $stmt->execute([$user_id]);
 

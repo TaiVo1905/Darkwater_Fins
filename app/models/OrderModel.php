@@ -21,7 +21,7 @@
         public function getUser() {
             return $this->user;
         }
-        public function getToltalPrice() {
+        public function getTotalPrice() {
             return $this->total_price;
         }
         public function getOrderStatus() {
@@ -38,7 +38,7 @@
         public function setUser(UserModel $user) {
             $this->user = $user;
         }
-        public function setToltalPrice($total_price) {
+        public function setTotalPrice($total_price) {
             $this->total_price = $total_price;
         }
         public function setOrderStatus($order_status) {

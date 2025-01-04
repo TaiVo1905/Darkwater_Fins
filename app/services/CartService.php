@@ -62,7 +62,6 @@
         public function countItems($user_id) {
             $stmt = $this->__model->db->prepare("SELECT sum(quantity) AS totalQuantity FROM cart WHERE user_id = ?");
             $stmt->execute([$user_id]);
-            $stmt->setFetchMode(PDO::FETCH_CLASS, "CartModel");
             return $stmt->fetch();
         }
 

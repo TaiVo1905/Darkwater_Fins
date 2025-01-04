@@ -1,5 +1,5 @@
 <?php
-function createFish($id, $fishImage, $fishName, $fishSub, $fishPrice, $url) {
+function createHotFishCard($id, $fishImage, $fishName, $fishSub, $fishPrice, $url) {
     $html = "
             <div class='col-lg-3 col-md-4 col-sm-6  d-flex justify-content-center'>
                 <div class='card' data-product-id='$id'>

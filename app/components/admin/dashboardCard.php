@@ -1,5 +1,5 @@
 <?php
-    function createDashbỏadCards($title, $subTitle, $icon) {
+    function createDashboardCard($title, $subTitle, $icon) {
         return "
             <div class='card d-flex flex-row' style='width: 10rem;'>
                 <div class='w-75 d-flex flex-column justify-content-center align-items-center'>

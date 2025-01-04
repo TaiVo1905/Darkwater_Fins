@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Darkwater Fins</title>
-    <?php include_once './app/components/bootStrapAndFontLink.php' ?>
+    <?php include_once './app/components/link.php' ?>
     <base href="<?php echo BASE_URL ?>">
     <link rel="stylesheet" href="./public/css/common.css">
-    <link rel="stylesheet" href="./public/css/headerAdmin.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="./public/css/sidebarAdmin.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="./public/css/userManagement.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="./public/css/admin/header.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="./public/css/admin/sidebar.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="./public/css/admin/userManagement.css?v=<?php echo time(); ?>">
 </head>
 <body>
     <div style="background-color: #F4F4F4;height:100vh;">
-        <?php include_once './app/components/headerAdmin.php' ;
+        <?php
+            include_once './app/components/admin/header.php' ;
             echo generateDashboard('hide-element', '34 orders', '$20000', '33', "Users management");
+            include_once './app/components/admin/sidebar.php';
         ?>
-        <?php include_once './app/components/sidebarAdmin.php' ?>
         <div class="table-container big_container">
             <table class="table_btn align-middle text-center small_container">
                 <thead class="table-head">
@@ -41,11 +42,11 @@
                             $roles_2 = "Admin";
                         }
                             echo "
-                                <tr data-userId = '$user->getUserId()'>
-                                    <td>$user->getUserId()</td>
-                                    <td title='$user->getUserName()'>$user->getUserName()</td>
-                                    <td title='$user->getEmail()'>$user->getEmail()</td>
-                                    <td title='$user->getAddress()'>$user->getAddress()</td>
+                                <tr data-userId = '{$user->getUserId()}'>
+                                    <td>{$user->getUserId()}</td>
+                                    <td title='{$user->getUserName()}'>{$user->getUserName()}</td>
+                                    <td title='{$user->getEmail()}'>{$user->getEmail()}</td>
+                                    <td title='{$user->getAddress()}'>{$user->getAddress()}</td>
                                     <td>
                                         <i
                                             class='icon-setting bi bi-gear admin  $active'
@@ -68,7 +69,7 @@
     <?php include_once  './app/components/toast.php';
     echo displayToast(''); ?>
     <script src="./public/js/define.js?v=<?php echo time(); ?>"></script>
-    <script src="./public/js/userManagement.js?v=<?php echo time(); ?>"></script>
-    <script src="./public/js/sidebarAdmin.js?v=<?php echo time(); ?>"></script>
+    <script src="./public/js/admin/userManagement.js?v=<?php echo time(); ?>"></script>
+    <script src="./public/js/admin/sidebar.js?v=<?php echo time(); ?>"></script>
 </body>
 </html>

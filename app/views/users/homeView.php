@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Darkwater Fins</title>
-    <?php include_once './app/components/bootStrapAndFontLink.php'?>
+    <?php include_once './app/components/link.php'?>
     <base href="<?php echo BASE_URL ?>">
     <link rel="stylesheet" href="./public/css/common.css">
     <link rel="stylesheet" href="./public/css/header.css?v=<?php echo time(); ?>">
@@ -87,13 +87,13 @@
             </div>
         </div>
     </div>
-       <?php include_once './app/components/products.php'?>
+       <?php include_once './app/components/product.php'?>
         <h1 class="title">Hot fishes</h1>
         <div class='d-flex'>
             <?php
                 if (isset($data)) {
                     foreach ($data as $fish) {
-                        echo createFish($fish->getProductId(), $fish->getProductImgUrl(), $fish->getProductName(), $fish->getProductSub(), $fish->getProductPrice(), "./products/fishes");
+                        echo createHotFishCard($fish->getProductId(), $fish->getProductImgUrl(), $fish->getProductName(), $fish->getProductSub(), $fish->getProductPrice(), "./products/fishes");
                 }
                     }
             ?>

@@ -11,10 +11,10 @@ fileInput.addEventListener('change', (event) => {
     if (file) {
         const reader = new FileReader();
         reader.onload = (e) => {
-        img.src = e.target.result; 
+        img.src = e.target.result;
         };
         reader.readAsDataURL(file);
-        img.style.display = "block"; 
+        img.style.display = "block";
     }
 });
 
@@ -34,7 +34,7 @@ $('#yes-button').addEventListener("click", (e) => {
     $('#productStock').value = "";
     $('#productCategory').value = "";
 });
-document.getElementById("save-btn").addEventListener("click", function(){
+document.getElementById("save-btn").addEventListener("click", function(event){
     event.preventDefault();
     
     const product_name = $('#productName').value;

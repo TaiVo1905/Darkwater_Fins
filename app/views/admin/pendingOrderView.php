@@ -5,20 +5,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <?php include_once './app/components/bootStrapAndFontLink.php' ?>
+  <?php include_once './app/components/link.php' ?>
   <base href="<?php echo BASE_URL ?>">
   <link rel="stylesheet" href="./public/css/common.css">
-  <link rel="stylesheet" href="./public/css/headerAdmin.css?v=<?php echo time(); ?>">
-  <link rel="stylesheet" href="./public/css/sidebarAdmin.css?v=<?php echo time(); ?>">
-  <link rel="stylesheet" href="./public/css/orderManagement.css?v=<?php echo time(); ?>">
+  <link rel="stylesheet" href="./public/css/admin/header.css?v=<?php echo time(); ?>">
+  <link rel="stylesheet" href="./public/css/admin/sidebar.css?v=<?php echo time(); ?>">
+  <link rel="stylesheet" href="./public/css/admin/orderManagement.css?v=<?php echo time(); ?>">
 </head>
 
 <body>
   <div style="background-color: #F4F4F4; height:100vh;">
-      <?php include_once './app/components/headerAdmin.php';
-            echo generateDashboard('hide-element', '34 orders', '$20000', '33', "Pending orders");
-      ?>
-      <?php include_once './app/components/sidebarAdmin.php' ?>
+    <?php
+      require_once("./app/components/admin/header.php");
+      echo generateDashboard('hide-element', '34 orders', '$20000', '33', "Pending orders");
+      require_once("./app/components/admin/sidebar.php");
+    ?>
       <div class="table-container big_container">
         <table class="table_btn align-middle text-center small_container">
           <thead class="table-head">
@@ -36,12 +37,12 @@
               foreach($data as $order) {
                 $order_id = $order->getOrderId();
                 echo "
-                      <tr data-order-id='$order->getOrderId()' class='order-row'>
-                        <td>$order->getOrderId()</td>
-                        <td>$order->getReceiver()</td>
-                        <td>$order->getPhoneNumber()</td>
-                        <td>$order->getOrderDate()</td>
-                        <td>$order->getTotalPrice()</td>
+                      <tr data-order-id='{$order->getOrderId()}' class='order-row'>
+                        <td>{$order->getOrderId()}</td>
+                        <td>{$order->getReceiver()}</td>
+                        <td>{$order->getPhoneNumber()}</td>
+                        <td>{$order->getOrderDate()}</td>
+                        <td>{$order->getTotalPrice()}</td>
                         <td>
                           <i class='icon-confirm bi bi-check-circle fs-4'></i>
                           <i class='icon-cancel bi bi-x-circle m-1 fs-4'></i>
@@ -131,8 +132,8 @@
     echo displayToast('');
   ?>
       <script src="./public/js/define.js?v=<?php echo time(); ?>"></script>
-      <script src="./public/js/orderManagement.js?v=<?php echo time(); ?>"></script>
-      <script src="./public/js/sidebarAdmin.js?v=<?php echo time(); ?>"></script>
+      <script src="./public/js/admin/orderManagement.js?v=<?php echo time(); ?>"></script>
+      <script src="./public/js/admin/sidebar.js?v=<?php echo time(); ?>"></script>
 </body>
 
 </html>

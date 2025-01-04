@@ -23,23 +23,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function displayProducts(products) {
         let productContainer = $("#product-container");
-        productContainer.innerHTML = ''; 
+        productContainer.innerHTML = '';
+        console.log(products)
         products.forEach(function (product) {
             let productElement = document.createElement("div");
             productElement.classList.add("col", "col-md-4", "col-sm-6", "item");
             productElement.innerHTML = `
-                <div class="card" data-product-id="${product.getProductId()}">
-                    <img src="${product.getProductImgUrl()}" alt="" class="card-img-top">
+                <div class="card" data-product-id="${product.product_id}">
+                    <img src="${product.product_img_url}" alt="" class="card-img-top">
                     <div class="icon-overlay">
                         <i class="bi bi-cart-plus add-to-cart"></i>
-                        <a href="products/${product.getProductType() == 'Fish' ? 'fishes' : product.getProductType() == 'Fish Food' ? 'fishfoods' : 'aquariums'}/${product.getProductId()}">
+                        <a href="products/${product.product_type} == 'Fish' ? 'fishes' : product.product_type == 'Fish Food' ? 'fishfoods' : 'aquariums'}/${product.product_id}">
                             <i class="bi bi-link"></i>
                         </a>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">${product.getProductName()}</h5>
-                        <p class="card-text">${product.getProductSub()}</p>
-                        <div class="fish-price">$${product.getProductPrie()}</div>
+                        <h5 class="card-title">${product.product_name}</h5>
+                        <p class="card-text">${product.product_sub}</p>
+                        <div class="fish-price">$${product.product_price}</div>
                     </div>
                 </div>
             `;
@@ -49,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
         addToCartFunction(addToCarts);
         const pagination = $(".pagination");
         pagination.innerHTML = "";
-        for(let i = 1; i <= Math.floor((products.length % 6 + 1)); i++) {
+        for(let i = 1; i <= Math.floor((products.length / 6 + 1)); i++) {
             pagination.innerHTML += `<li class='page-item'><a class='page-link' data-page='${i}'>${i}</a></li>`;
         }
         const pageLinks = $$(".page-link[data-page]");

@@ -1,4 +1,3 @@
-
 const itemsPerPage = 6; // Số item hiển thị trên mỗi trang
 const items = $$(".item");
 const pageLinks = $$(".page-link[data-page]");

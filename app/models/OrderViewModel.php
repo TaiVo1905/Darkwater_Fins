@@ -1,8 +1,8 @@
 <?php
     #[AllowDynamicProperties]
-    class OrderViewViewModel {
+    class OrderViewModel {
         private $order_id;
-        private $user;
+        private $user_id;
         private $total_price;
         private $order_status;
         private $order_date;
@@ -14,7 +14,7 @@
         private $product_price;
 
         public function __construct ($order_id = null,
-                                    UserModel $user = null,
+                                    $user_id = null,
                                     $total_price = null,
                                     $order_status = null,
                                     $order_date = null,
@@ -25,7 +25,7 @@
                                     $quantity = null,
                                     $product_price = null) {
             $this->order_id = $order_id;
-            $this->user = $user;
+            $this->user_id = $user_id;
             $this->total_price = $total_price;
             $this->order_status = $order_status;
             $this->order_date = $order_date;
@@ -41,10 +41,10 @@
         public function getOrderId() {
             return $this->order_id;
         }
-        public function getUser() {
-            return $this->user;
+        public function getUserId() {
+            return $this->user_id;
         }
-        public function getToltalPrice() {
+        public function getTotalPrice() {
             return $this->total_price;
         }
         public function getOrderStatus() {
@@ -73,10 +73,7 @@
         }
 
         //Setter
-        public function setUser(UserModel $user) {
-            $this->user = $user;
-        }
-        public function setToltalPrice($total_price) {
+        public function setTotalPrice($total_price) {
             $this->total_price = $total_price;
         }
         public function setOrderStatus($order_status) {
@@ -102,6 +99,22 @@
         }
         public function setProductPrice($product_price) {
             $this->product_price = $product_price;
+        }
+
+        public function returnDataJson() {
+            return (object) array(
+                'order_id' => $this->order_id,
+                'user_id' => $this->user_id,
+                'total_price' => $this->total_price,
+                'order_status' => $this->order_status,
+                'order_date' => $this->order_date,
+                'receiver' => $this->receiver,
+                'address' => $this->address,
+                'phone_number' => $this->phone_number,
+                'product_name' => $this->product_name,
+                'quantity' => $this->quantity,
+                'product_price' => $this->product_price
+            );
         }
     }
 ?>

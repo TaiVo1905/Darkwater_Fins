@@ -91,5 +91,23 @@
         public function setDeleted() {
             $this->deleted = $deleted;
         }
+
+        //Func
+        public function returnDataJson() {
+            return (object)
+                array(
+                    'product_id' => $this->product_id,
+                    'product_name' => $this->product_name,
+                    'product_img_url' => $this->product_img_url,
+                    'product_price' => $this->product_price,
+                    'product_sub' => $this->product_sub,
+                    'product_description' => $this->product_description,
+                    'product_stock' => $this->product_stock,
+                    'product_category' => $this->product_category,
+                    'product_type' => $this->product_type,
+                    'purchases' => $this->purchases,
+                    'deleted' => $this->deleted
+                );
+        }
     }
 ?>

@@ -14,23 +14,23 @@
             return $stmt->fetchAll();
         }
 
-        public function getproductsByType ($produc_type) {
-            $stmt = $this->__model->db->prepare("SELECT * FROM products WHERE product_type = '$produc_type' AND deleted != ?");
+        public function getproductsByType ($product_type) {
+            $stmt = $this->__model->db->prepare("SELECT * FROM products WHERE product_type = '$product_type' AND deleted != ?");
             $stmt->execute([1]);
             $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "ProductModel");
             return $stmt->fetchAll();
         }
 
-        public function getHighestPrice($produc_type) {
+        public function getHighestPrice($product_type) {
             $stmt = $this->__model->db->prepare("SELECT product_price FROM products WHERE product_type = ? AND deleted != ? ORDER BY product_price DESC LIMIT 1");
-            $stmt->execute([$produc_type, 1]);
+            $stmt->execute([$product_type, 1]);
             $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "ProductModel");
             return $stmt->fetch();
         }
 
-        public function getCategories($produc_type) {
+        public function getCategories($product_type) {
             $stmt = $this->__model->db->prepare("SELECT DISTINCT product_category FROM products WHERE product_type = ? AND deleted != ?");
-            $stmt->execute([$produc_type, 1]);
+            $stmt->execute([$product_type, 1]);
             return $stmt->fetchAll(PDO::FETCH_OBJ);
         }
         
@@ -56,7 +56,7 @@
         }
             
         public function filterProductsByPrice($price, $type) {
-            $sql = "SELECT * FROM products WHERE (product_price <= $price) AND deleted != ?";
+            $sql = "SELECT * FROM products WHERE product_price <= $price AND deleted != ?";
             if ($type) {
                 $sql .= " AND product_type = '$type'";
             }

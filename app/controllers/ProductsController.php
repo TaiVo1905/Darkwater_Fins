@@ -62,7 +62,11 @@
             $type = $_GET['type'] ?? null;
             if ($price) {
                 $filteredProducts = $this->__productService->filterProductsByPrice($price, $type);
-                echo json_encode($filteredProducts);
+                $dataJson = [];
+                foreach ($filteredProducts as $value) {
+                    array_push($dataJson, $value->returnDataJson());
+                }
+                echo json_encode($dataJson);
             } else {
                 echo json_encode([]);
             }
@@ -73,7 +77,11 @@
             $type = $_GET['type'] ?? null;
             if ($sortOption) {
                 $sortedProducts = $this->__productService->sortProducts($sortOption, $type);
-                echo json_encode($sortedProducts);
+                $dataJson = [];
+                foreach ($sortedProducts as $value) {
+                    array_push($dataJson, $value->returnDataJson());
+                }
+                echo json_encode($dataJson);
             } else {
                 echo json_encode([]);
             }
@@ -81,10 +89,14 @@
 
         public function filterByCategory($categories = null) {
             $categories = $_GET['categories'] ?? '[]';
-            $categories = json_decode($categories, true);  
+            $categories = json_decode($categories, true);
             if ($categories && is_array($categories) && count($categories) > 0) {
                 $filteredProducts = $this->__productService->filterProductsByCategory($categories);
-                echo json_encode($filteredProducts);
+                $dataJson = [];
+                foreach ($filteredProducts as $value) {
+                    array_push($dataJson, $value->returnDataJson());
+                }
+                echo json_encode($dataJson);
             } else {
                 echo json_encode([]);
             }

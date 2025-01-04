@@ -9,7 +9,7 @@
             $this->service("User");
             $this->service("Order");
             $this->service("Product");
-            $this->__cartService = new UserService();
+            $this->__userService = new UserService();
             $this->__orderService = new OrderService();
             $this->__productService = new ProductService();
         }
@@ -31,7 +31,7 @@
         }
 
         public function productManagement() {
-            $data = $this->__productService->getAllProduct();
+            $data = $this->__productService->getAllProducts();
             $this->view("admin/productManagement", $data);
         }
 
@@ -46,7 +46,7 @@
                 $role = $_POST['role'] === 'Admin' ? 1 : 0;
                 $success = $this->__userService->updateRole($userId, $role);
                 if($success){
-                    echo $role ;
+                    echo $role;
                 };
             }
         }
@@ -55,7 +55,6 @@
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $jsonData = file_get_contents("php://input");
                 $request = json_decode($jsonData, true);
-
                 echo json_encode($this->__userService->banUser($request["user_id"]));
             }
         }
@@ -66,7 +65,7 @@
         }
 
         public function changeOrderStatus() {
-            if($_SERVER["REQUEST_METHOD"] = "POST") {
+            if($_SERVER["REQUEST_METHOD"] == "POST") {
                 $jsonData = file_get_contents("php://input");
                 $request = json_decode($jsonData, true);
                 echo json_encode($this->__orderService->changeOrderStatus($request["order_id"], $request["orderStatus"]));
@@ -74,9 +73,13 @@
         }
 
         public function getOrderById($order_id) {
-            if($_SERVER["REQUEST_METHOD"] = "GET") {
-                $order_id = json_decode($order_id);
-                echo json_encode($this->__orderService->getOrderById($order_id));
+            if($_SERVER["REQUEST_METHOD"] === "GET") {
+                $data = $this->__orderService->getOrderById($order_id);
+                $dataJson = [];
+                foreach ($data as $value) {
+                    array_push($dataJson, $value->returnDataJson());
+                }
+                echo json_encode($dataJson);
             }
 
         }
@@ -89,13 +92,13 @@
             if($_SERVER["REQUEST_METHOD"] == "POST") {
                 $product_name = $_POST["productName"];
                 $uploadDir = './public/images/uploads/';
-                $product_img = null;  
+                $product_img_url = null;  
                 if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
                     $fileName = basename($_FILES['image']['name']);
                     $currentTime = date("Y-m-d-H-i-s");
                     $filePath = $uploadDir . $currentTime.str_replace(['$', '/', ':'], '', password_hash($fileName, PASSWORD_BCRYPT));;
                     if (move_uploaded_file($_FILES['image']['tmp_name'], $filePath)) {
-                        $product_img = $filePath;          
+                        $product_img_url = $filePath;          
                     } else {
                         echo "<p style='color: red;'>Failed to upload image.</p>";
                     }
@@ -107,7 +110,7 @@
                 $product_stock = $_POST["productStock"];
                 $product_category = $_POST["productCategory"];
                 $product = new ProductModel($product_name, $product_img_url, $product_price, $product_sub, $product_description, $product_stock, $product_category, $product_type);
-                $result = $this->__productService -> addProduct($product);
+                $result = $this->__productService->addProduct($product);
                 echo $result;
                 
             };
@@ -115,10 +118,9 @@
 
         public function showInfoProduct($id) {
             if($_SERVER['REQUEST_METHOD'] === 'POST'){
-                $this->model('Products');
                 $product = $this->__productService->getProductById($id);
                 header('Content-Type: application/json');
-                echo json_encode($product);
+                echo json_encode($product->returnDataJson());
             }
         }
 
@@ -128,13 +130,13 @@
                 $product = $this->__productService->getProductById($product_id);
                 $product_name = $_POST["productName"];
                 $uploadDir = './public/images/uploads/';
-                $product_img = $product->product_img_url;  
+                $product_img_url = $product->product_img_url;  
                 if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
                     $fileName = basename($_FILES['image']['name']);
                     $currentTime = date("Y-m-d-H-i-s");
                     $filePath = $uploadDir . $currentTime.str_replace(['$', '/', ':'], '', password_hash($fileName, PASSWORD_BCRYPT));;
                     if (move_uploaded_file($_FILES['image']['tmp_name'], $filePath)) {
-                        $product_img = $filePath;          
+                        $product_img_url = $filePath;          
                     } else {
                         echo "<p style='color: red;'>Failed to upload image.</p>";
                     }

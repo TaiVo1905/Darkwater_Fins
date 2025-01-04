@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Darkwater Fins</title>
     <base href="<?php echo BASE_URL ?>">
-    <?php include_once './app/components/bootStrapAndFontLink.php'; ?>
+    <?php include_once './app/components/link.php'; ?>
     <link rel="stylesheet" href="./public/css/common.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./public/css/banner.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./public/css/header.css?v=<?php echo time(); ?>">

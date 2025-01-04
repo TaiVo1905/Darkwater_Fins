@@ -23,7 +23,7 @@ class CheckoutController extends Controller {
         $this->view('checkout/success');
     }
 
-    public function storeProductIdBeforCheckout() {
+    public function storeProductIdBeforeCheckout() {
         if($_SERVER["REQUEST_METHOD"] == "POST") {
             $jsonData = file_get_contents("php://input");
             $request = json_decode($jsonData, true);
