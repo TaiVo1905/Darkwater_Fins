@@ -42,7 +42,7 @@
             </div>
             <!-- Main content -->
             <div class="col-9 content-area">
-                <form class=" body-profile mx-auto  needs-validation" style="width:80%; " method="POST" enctype="multipart/form-data" id="profile-form" action="Profile/updateProfile" novalidate>
+                <form class=" body-profile mx-auto  needs-validation" style="width:80%; " method="POST" enctype="multipart/form-data" id="profile-form" action="Users/updateProfile" novalidate>
                     <h3 class="profile-title mb-4">Profile Image</h3>
                     <div class="profile-card">
                         <div class="profile-header">
@@ -82,7 +82,7 @@
                     <button type="submit" id="save-btn" name="save_btn" class="btn btn-primary float-end m-1 w-25 mt-4 ">Save</button>
                 </form>
                 <!-- Thay đổi password -->
-                <form class="change-password mx-auto  needs-validation" style="width:80%; " method="POST" id="change-password-form" action="Profile/executeChangePassword" novalidate>
+                <form class="change-password mx-auto  needs-validation" style="width:80%; " method="POST" id="change-password-form" action="Users/executeChangePassword" novalidate>
                     <h3 class="profile-title mb-4">Change password</h3>
                     <div class="profile-change-password p-5 pt-5 ">
                         <div class="mb-3">
@@ -122,9 +122,10 @@
                     </ul>
                     <div class="row mx-auto" >
                         <?php
-                            require './app/components/orderItems.php';
+                            require './app/components/orderItem.php';
+                            // echo var_dump($data['order']);
                             foreach ($data['order'] as $order) {
-                                echo renderOrderItems($order->gerOrderId(), $order->gerOrderStatus(), $order->getProductImgUrl(), $order->getProductName(), $order->getProductCategory(), $order->getQuantity(), $order->getProductPrice(), $order->getTotalPrice());
+                                echo renderOrderItem($order->getOrderId(), $order->getOrderStatus(), $order->getProductImgUrl(), $order->getProductName(), $order->getProductCategory(), $order->getQuantity(), $order->getProductPrice(), $order->getTotalPrice());
                             }
                         ?>
                     </div>

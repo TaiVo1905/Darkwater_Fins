@@ -20,7 +20,7 @@ function generateDashboard($hideClass , $orders, $money, $productsSold, $pageNam
                     </div>
                 </div>
             </div>
-            <h3 class='mt-3'>$pageName</h3>
+            <h3 class='ml-3'>$pageName</h3>
             <div class='d-flex justify-content-end flex-wrap gap-5 $hideClass'>
                 <div class='bg-white text-dark p-3 rounded card-header'>
                     <div class='d-flex align-items-center'  style='position:relative;'>

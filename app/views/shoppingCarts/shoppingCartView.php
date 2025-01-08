@@ -39,7 +39,7 @@
           <?php
             require_once("./app/components/cartItem.php");
             foreach($data[0] as $item) {
-              echo createCartItem($item->getProductId(), $item->getProductName(), $item->getProductImgUrl(), $item->getProductType(), $item->getQuantity(), $item->getProductPrice());
+              echo createCartItem($item->getProduct()->getProductId(), $item->getProduct()->getProductName(), $item->getProduct()->getProductImgUrl(), $item->getProduct()->getProductType(), $item->getQuantity(), $item->getProduct()->getProductPrice());
             }
           ?>
         </tbody>

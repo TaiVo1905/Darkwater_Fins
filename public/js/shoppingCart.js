@@ -141,7 +141,7 @@ $(".checkout")?.addEventListener("click", () => {
         return;
     }
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "./checkout/storeProductIdBeforCheckout", true);
+    xhr.open("POST", "./checkout/storeProductIdBeforeCheckout", true);
     xhr.onreadystatechange = function () {
         if(this.readyState == 4 && this.status == 200) {
             if(this.response == 1) {

@@ -32,11 +32,11 @@
             <th>Total</th>
           </tr>
         </thead>
-        <tbody class="table-body-order">
+        <table class="table-body-order table-btn align-middle text-center small_container">
           <?php
             foreach($data as $order) {
               echo "
-                    <tr data-order-id='{$order->getOrderId()}' class='order-row'>
+                    <tr data-order-id='{$order->getOrderId()}' class='order-row admin-table-row'>
                       <td>{$order->getOrderId()}</td>
                       <td>{$order->getReceiver()}</td>
                       <td>{$order->getPhoneNumber()}</td>
@@ -48,8 +48,22 @@
             }
           ?>
           
-        </tbody>
+        </table>
       </table>
+      <div class="d-flex justify-content-center mt-3">
+          <nav>
+              <ul class="pagination mb-0">
+                  <?php
+                      $pageNum = count($data)/25 + 1;
+                      if($pageNum > 2) {
+                          for($i = 1; $i <= $pageNum; $i++) {
+                              echo '<li class="page-item"><a class="page-link" data-page="' . $i . '">' . $i . '</a></li>';
+                          }
+                      }
+                  ?>
+              </ul>
+          </nav>
+      </div>
     </div>
     <div class="order-detail w-75">
       <h2 class="text-center">Order Detail</h2>
@@ -86,6 +100,7 @@
       <script src="./public/js/define.js?v=<?php echo time(); ?>"></script>
       <script src="./public/js/admin/orderManagement.js?v=<?php echo time(); ?>"></script>
       <script src="./public/js/admin/sidebar.js?v=<?php echo time(); ?>"></script>
+      <script src="./public/js/pagination.js?v=<?php echo time(); ?>"></script>
 </body>
 
 </html>

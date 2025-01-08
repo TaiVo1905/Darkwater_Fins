@@ -10,12 +10,6 @@
     <link rel="stylesheet" href="./public/css/admin/header.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./public/css/admin/sidebar.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./public/css/admin/productManagement.css?v=<?php echo time(); ?>">
-    <style>
-        table.scrolldown tbody,
-        table.scrolldown thead {
-            display: block;
-        }
-    </style>
 </head>
 <body>
 <div style="background-color: #F4F4F4; height:100vh;">
@@ -37,29 +31,41 @@
                         <th>Options</th>
                     </tr>
                 </thead>
-                <tbody class="table-body">
+                <table class="table-body table_btn align-middle text-center small_container">
                     <?php 
                         foreach ($data as $product){
                             echo "
-                            <tr class='product-row'>
+                            <tr class='product-row admin-table-row'>
                                     <td>{$product->getProductId()}</td>
-                                    <td><img style='width: 60px; margin-bottom: 3px;' src='{$product->getProductImgUrl()}' alt=''></td>
+                                    <td><img style='width: 60px; height: 60px; margin-bottom: 3px;' src='{$product->getProductImgUrl()}' alt=''></td>
                                     <td>{$product->getProductName()}</td>
                                     <td>{$product->getProductPrice()}</td>
                                     <td>{$product->getProductStock()}</td>
                                     <td>
                                         <i class='icon-setting bi bi-gear admin' data-id = '{$product->getProductId()}'></i>
-                                        
                                         <i class='icon-delete bi bi-trash m-1' data-id = '{$product->getProductId()}'></i>
-                                        
                                     </td>
                         </tr>
                             ";
                         
                         }
                     ?>
-                </tbody>
+                </table>
             </table>
+            <div class="d-flex justify-content-center mt-3">
+                <nav>
+                    <ul class="pagination mb-0">
+                        <?php
+                            $pageNum = count($data)/25 + 1;
+                            if($pageNum > 2) {
+                                for($i = 1; $i <= $pageNum; $i++) {
+                                    echo '<li class="page-item"><a class="page-link" data-page="' . $i . '">' . $i . '</a></li>';
+                                }
+                            }
+                        ?>
+                    </ul>
+                </nav>
+            </div>
     </div>
 
             
@@ -123,6 +129,7 @@
     <script src="./public/js/define.js?v=<?php echo time(); ?>"></script>
     <script src="./public/js/admin/productManagement.js?v=<?php echo time(); ?>"></script>
     <script src="./public/js/admin/sidebar.js?v=<?php echo time(); ?>"></script>
+    <script src="./public/js/pagination.js?v=<?php echo time(); ?>"></script>
     <?php include_once  './app/components/toast.php';
     echo displayToast('No changes have been made yet'); ?>
 </body>

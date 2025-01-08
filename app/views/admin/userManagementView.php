@@ -29,7 +29,7 @@
                         <th>Options</th>
                     </tr>
                 </thead>
-                <tbody class="table-body-btn">
+                <table class="table-body-btn table_btn align-middle text-center small_container">
                     <?php
                     foreach ($data as $user) {
                         if($user->getRoles() == 1){
@@ -62,8 +62,22 @@
                             ";
                         }
                     ?>
-                </tbody>
+                </table>
             </table>
+            <div class="d-flex justify-content-center mt-3">
+                <nav>
+                    <ul class="pagination mb-0">
+                        <?php
+                            $pageNum = count($data)/25 + 1;
+                            if($pageNum > 2) {
+                                for($i = 1; $i <= $pageNum; $i++) {
+                                    echo '<li class="page-item"><a class="page-link" data-page="' . $i . '">' . $i . '</a></li>';
+                                }
+                            }
+                        ?>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </div>
     <?php include_once  './app/components/toast.php';
@@ -71,5 +85,6 @@
     <script src="./public/js/define.js?v=<?php echo time(); ?>"></script>
     <script src="./public/js/admin/userManagement.js?v=<?php echo time(); ?>"></script>
     <script src="./public/js/admin/sidebar.js?v=<?php echo time(); ?>"></script>
+    <script src="./public/js/pagination.js?v=<?php echo time(); ?>"></script>
 </body>
 </html>
