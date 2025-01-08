@@ -62,13 +62,13 @@ icon_confirms.forEach((confirm) => {
   });
 });
 
-$(".confirm-btn").addEventListener("click", (e) => {
+$(".confirm-btn")?.addEventListener("click", (e) => {
   const modal = new bootstrap.Modal($("#confirmationModal"));
   modal.show();
   e.stopPropagation();
 })
 
-$("#confirmButton").addEventListener("click", function () {
+$("#confirmButton")?.addEventListener("click", function () {
   if (orderId !== null) {
       changeOrderStatus(orderId, "shipping", "Confirm successfully!");
   }
@@ -120,7 +120,7 @@ icon_cancels.forEach((icon) => {
   });
 });
 
-$("#rejection_btn").addEventListener("click", () => {
+$("#rejection_btn")?.addEventListener("click", () => {
   if (orderId !== null) {
     changeOrderStatus(orderId, "canceled", "reject the order successfully!");
 }

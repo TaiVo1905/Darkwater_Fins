@@ -33,18 +33,22 @@
                 $username = $_POST['username'];
                 $phone = $_POST['phone'];
                 $address = $_POST['address'];   
-                $uploadDir = './public/images/uploads/';
-                $user_img = $data -> user_img_url;  
+                $uploadDir = './storage/uploads/';
+                $user_img_url = $data->getUserImgUrl();  
                 if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
                     $fileName = basename($_FILES['image']['name']);
                     $filePath = $uploadDir . $fileName;
                     if (move_uploaded_file($_FILES['image']['tmp_name'], $filePath)) {
-                        $user_img = $filePath;  
+                        $user_img_url = $filePath;  
                     } else {
                         echo "<p style='color: red;'>Failed to upload image.</p>";
                     }
-                }  
-                $this->__userService -> updateUser($id, $username, $user_img, $phone, $address);
+                }
+                $data->setUserName($username);
+                $data->setUserImgUrl($user_img_url);
+                $data->setPhoneNumber($phone);
+                $data->setAddress($address);
+                $this->__userService->updateUser($data);
                 $userinfo = $this->__userService->getUserById($id);
                 $order = $this->__orderService->getOrder($id);    
                 $data = array(
@@ -162,6 +166,10 @@
             } else { 
                 echo "Tham số không hợp lệ.";
             }
+        }
+
+        public function _404() {
+            $this->view('users/404');
         }
     }
 ?>

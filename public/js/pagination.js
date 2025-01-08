@@ -1,5 +1,9 @@
-const itemsPerPage = 6; // Số item hiển thị trên mỗi trang
-const items = $$(".item");
+let itemsPerPage = 6;
+let items = $$(".item");
+if (window.location.href.includes("admin")) {
+    itemsPerPage = 25; // Số item hiển thị trên mỗi trang
+    items = $$(".admin-table-row");
+}
 const pageLinks = $$(".page-link[data-page]");
 
 function displayPage(page, items, itemsPerPage) {
@@ -8,7 +12,11 @@ function displayPage(page, items, itemsPerPage) {
 
     items.forEach((item, index) => {
         if (index >= startIndex && index < endIndex) {
-            item.style.display = "block"; 
+            if (window.location.href.includes("admin")) {
+                item.style.display = "table"; 
+            } else {
+                item.style.display = "block"; 
+            }
         } else {
             item.style.display = "none"; 
         }
@@ -30,4 +38,4 @@ function preparepagination(pageLinks, items, itemsPerPage) {
 }
 
 preparepagination(pageLinks, items, itemsPerPage);
-$(".page-link[data-page='1']").click();
+$(".page-link[data-page='1']")?.click();

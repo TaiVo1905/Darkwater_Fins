@@ -1,4 +1,5 @@
 <?php
+    require_once("./app/services/UserService.php");
     class Router {
         protected $controller = "HomeController";
         protected $method = "index";
@@ -24,12 +25,30 @@
                 }
                 $this->params = $url ? array_values($url) : [];
             }
+            if(empty($_SESSION["user_id"])
+                && (($this->controller == "UsersController" && $this->method == "index")
+                    || $this->controller == "ShoppingCartController"
+                    || $this->controller == "CheckoutController"
+                    || ($this->controller == "AdminController"))) {
+                    $this->controller = "UsersController";
+                    $this->method = "_404";
+            } else if (!empty($_SESSION["user_id"]) && $this->controller == "AdminController" && (
+                (new UserService)->getUserById($_SESSION["user_id"] ?? -1) ? 
+                    ((new UserService)->getUserById($_SESSION["user_id"]))->getRoles() == 0 : true)) {
+                        $this->controller = "UsersController";
+                        $this->method = "_404";
+            }
             require_once("./app/controllers/" . $this->controller . ".php");
             $this->controller = new $this->controller;
         }
 
         public function dispatch() {
-            call_user_func_array([$this->controller, $this->method], $this->params);
+            if(method_exists($this->controller, $this->method)) {
+                call_user_func_array([$this->controller, $this->method], $this->params);
+            } else {
+                require_once("./app/controllers/UsersController.php");
+                call_user_func_array([new UsersController, "_404"], $this->params);
+            }
         }
     }
 ?>

@@ -66,7 +66,7 @@ create table shipping (
 
 CREATE VIEW orderView AS
     SELECT 
-        o.*, s.receiver, s.address, s.phone_number, p.product_name, od.quantity, p.product_price
+        o.*, s.receiver, s.address, s.phone_number,p.product_img_url, p.product_name, p.product_category, od.quantity, p.product_price
     FROM orders AS o
 	JOIN order_details AS od ON o.order_id = od.order_id
 	JOIN shipping AS s ON o.order_id = s.order_id

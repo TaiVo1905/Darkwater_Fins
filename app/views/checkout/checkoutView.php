@@ -31,8 +31,8 @@
         <div class="address_order row mb-4 p-3 rounded">
             <?php
                 $username = $data[1]->getUserName() ?? $_SESSION["info_checkout"]["username"];
-                $phone_number = $data[1]->getPhoneNumber() ?? $_SESSION["info_checkout"]["phone_number"] ?? 'Not have phone number yet';
-                $address = $data[1]->getAddress() ?? $_SESSION["info_checkout"]["address"] ?? 'Not have address yet';
+                $phone_number = ($data[1]->getPhoneNumber()) ?? $_SESSION["info_checkout"]["phone_number"] ?? 'Not have phone number yet';
+                $address = ($data[1]->getAddress()) ?? $_SESSION["info_checkout"]["address"] ?? 'Not have address yet';
                 echo "
                     <div class='col-8'>
                         <span class='fw-semibold delevery_address'><i class='bi bi-geo-alt me-2 delevery_address'></i>Delivery address</span>

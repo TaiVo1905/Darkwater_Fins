@@ -33,7 +33,7 @@
                                                             phone_number = ?,
                                                             address = ?  WHERE
                                                             user_id =?");
-            return $stmt->execute([$user->getUserName(), $user->getUserImgUrl(), $user->getUserPhoneNumber(), $user->getAddress(), $user->getUserId()]);
+            return $stmt->execute([$user->getUserName(), $user->getUserImgUrl(), $user->getPhoneNumber(), $user->getAddress(), $user->getUserId()]);
              
         }
 

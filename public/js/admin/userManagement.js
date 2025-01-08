@@ -16,13 +16,17 @@ iconSettings.forEach((iconSetting, index) => {
     roleSelect.addEventListener('change', (event) => {
         const newRole = event.target.value;
         const userId = parseInt(event.target.closest('tr').dataset.userid);
-        updateUserRole(userId, newRole);
-        if (newRole === "User") {
-            iconSetting.classList.remove("active");
-        } else if (newRole === "Admin") {
-            iconSetting.classList.add("active");
+        console.log($$(".icon-setting.active").length);
+        if (($$(".icon-setting.active").length) <= 1 && newRole == "User") {
+            showToast("There must be at least 1 administrator!");
+        } else {
+            updateUserRole(userId, newRole);
+            if (newRole === "User") {
+                iconSetting.classList.remove("active");
+            } else if (newRole === "Admin") {
+                iconSetting.classList.add("active");
+            }
         }
-
         roleSelect.style.display = "none";
         iconSetting.style.display = "inline-block";
         iconBan.style.display = "inline-block";
@@ -34,7 +38,7 @@ function updateUserRole(userId, newRole) {
     xhr.open("POST", `./admin/updateUserRole/`, true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onload = function() {
-        if (xhr.status === 200) {
+        if (xhr.readyState == 4 && xhr.status === 200) {
             console.log("Role updated", xhr.responseText);
             showToast("Change role successfully!");
         } else {
@@ -60,10 +64,20 @@ document.addEventListener('click', (event) => {
 
 iconBans.forEach((iconBan) => {
     iconBan.addEventListener("click", (event) => {
-        const userId = parseInt(event.target.closest('tr').dataset.userid);
-        console.log(userId)
-        banUser(userId);
-        event.target.closest('tr').remove();
+        if(event.target.closest("tr").querySelector(".icon-setting").classList.contains("active")) {
+            showToast("Administrators cannot be banned!");
+            return;
+        }
+        const modal = new bootstrap.Modal($("#confirmBanUser"));
+        modal.show();
+        event.stopPropagation();
+        $("#confirmButton").addEventListener("click", function () {
+            const userId = parseInt(event.target.closest('tr').dataset.userid);
+            banUser(userId);
+            event.target.closest('tr').remove();
+            const modal = bootstrap.Modal.getInstance($("#confirmBanUser"));
+            modal.hide();
+        });
     })
 })
 
