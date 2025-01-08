@@ -58,15 +58,18 @@
         public function executeChangePassword(){
             if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 $id = $_SESSION['user_id'];
-                $new_password = password_hash($_POST['new-password'], PASSWORD_BCRYPT);
-                $this->__userService -> updatePassword($id, $new_password);
-                $userinfo = $this->__userService->getUserById($id);
-                $order =$this->__orderService->getOrder($id);
-                $data = array(
-                    'userInfo' => $userinfo,
-                    'order' => $order
-                );
-                $this->view('users/profile', $data);
+                $user = $this->__userService->getUserById($id);
+                $json = file_get_contents('php://input');
+                $data = json_decode($json, true);
+                $oldPassword = $data['oldPassword'];
+                $newPassword = $data['newPassword'];
+                $confirmPassword = $data['confirmPassword'];
+                if(password_verify($oldPassword, $user->getPasswords()) && $newPassword == $confirmPassword){
+                    $new_password = password_hash($newPassword, PASSWORD_BCRYPT);
+                    $this->__userService -> updatePassword($id, $new_password);
+                }else{
+                    echo 2;
+                }
             }
         }
 
@@ -97,7 +100,7 @@
         }
 
         public function checkLogin() {
-            if($_SERVER["REQUEST_METHOD"] == "POST") {
+            if($_SERVER["REQUEST_METHOD"] == "GET") {
                 if(isset($_SESSION["user_id"])) {
                     echo true;
                 } else {

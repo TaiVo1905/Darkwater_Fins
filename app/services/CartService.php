@@ -13,27 +13,27 @@
                                         JOIN products AS p
                                         ON c.product_id = p.product_id WHERE user_id = ?");
             $stmt->execute([$user_id]);
-            $stmt->setFetchMode(PDO::FETCH_CLASS, "CartModel");
+            $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "CartModel");
             $carts = $stmt->fetchAll();
             $user = new UserService();
             $user = $user->getUserById($user_id);
             foreach ($carts as $cart) {
                 $product = new ProductService();
-                $product = $product->getProductById($product_id);
+                $product = $product->getProductById($cart->product_id);
                 $cart->setUser($user);
                 $cart->setProduct($product);
                 unset($cart->user_id,
-                    $cart->$__product_id,
-                    $cart->$__product_name,
-                    $cart->$__product_img_url,
-                    $cart->$__product_price,
-                    $cart->$__product_sub,
-                    $cart->$__product_description,
-                    $cart->$__product_stock,
-                    $cart->$__product_category,
-                    $cart->$__product_type,
-                    $cart->$__purchases,
-                    $cart->$__deleted);
+                    $cart->product_id,
+                    $cart->product_name,
+                    $cart->product_img_url,
+                    $cart->product_price,
+                    $cart->product_sub,
+                    $cart->product_description,
+                    $cart->product_stock,
+                    $cart->product_category,
+                    $cart->product_type,
+                    $cart->purchases,
+                    $cart->deleted);
             }
             return $carts;
         }
@@ -62,7 +62,7 @@
         public function countItems($user_id) {
             $stmt = $this->__model->db->prepare("SELECT sum(quantity) AS totalQuantity FROM cart WHERE user_id = ?");
             $stmt->execute([$user_id]);
-            return $stmt->fetch();
+            return $stmt->fetch(PDO::FETCH_OBJ);
         }
 
         private function getCart($user_id, $product_id) {
@@ -73,7 +73,7 @@
 
         public function addToCart($user_id, $product_id) {
             try{
-                if($this->__model->getCart($user_id, $product_id)->hasItem != 0) {
+                if($this->getCart($user_id, $product_id)->hasItem != 0) {
                     $stmt = $this->__model->db->prepare("UPDATE cart SET quantity = quantity + ? WHERE user_id = ? AND product_id = ?");
                     $stmt->execute([1, $user_id, $product_id]);
                 } else {

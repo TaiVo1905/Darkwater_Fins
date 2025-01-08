@@ -45,7 +45,7 @@
             );
             $stmt->execute(['%'.$searchQuery.'%', '%'.$searchQuery.'%', '%'.$searchQuery.'%', '%'.$searchQuery.'%', 1]);
             $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "ProductModel");
-            return $stmt->fetch();
+            return $stmt->fetchAll();
         }
         
         public function getProductById($id) {

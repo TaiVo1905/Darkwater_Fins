@@ -85,10 +85,10 @@
         public function setProductType($product_type) {
             $this->product_type = $product_type;
         }
-        public function setPurchases() {
+        public function setPurchases($purchases) {
             $this->purchases = $purchases;
         }
-        public function setDeleted() {
+        public function setDeleted($deleted) {
             $this->deleted = $deleted;
         }
 

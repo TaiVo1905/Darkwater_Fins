@@ -23,8 +23,8 @@ cartIcon.addEventListener("click", () => {
     checkLogin("You need log in before view your cart")
         .then (response => {
             console.log(response)
+            console.log("a")
             if(response) {
-                console.log("a")
                 navigatorCart();
             }
         })

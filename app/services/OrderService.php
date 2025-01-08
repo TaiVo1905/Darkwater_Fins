@@ -1,4 +1,6 @@
 <?php
+    require_once("./app/services/UserService.php");
+    require_once("./app/services/ProductService.php");
     class OrderService {
         private $__model;
 
@@ -80,17 +82,39 @@
         }
 
         public function removeOrder($order_id){
-            $stmt = $this -> db -> prepare("UPDATE ORDERS SET ORDER_STATUS = 'canceled' WHERE ORDER_ID = ?");
+            $stmt = $this ->__model->db->prepare("UPDATE ORDERS SET ORDER_STATUS = 'canceled' WHERE ORDER_ID = ?");
             return $stmt->execute([$order_id]);
         }
 
-        public function getProductBeforeCheckout($user_id ,$product_id_list) {
+        public function getProductBeforeCheckout($user_id, $product_id_list) {
             $place = implode(", ", array_fill(0, count($product_id_list), "?"));
             $stmt = $this->__model->db->prepare("SELECT * FROM cart AS c
                                         JOIN products AS p
                                         ON c.product_id = p.product_id WHERE c.user_id = ? AND c.product_id IN ($place)");
             $stmt->execute(array_merge([$user_id], $product_id_list));
-            return $stmt->fetchAll(PDO::FETCH_OBJ);
+            $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "CartModel");
+            $carts = $stmt->fetchAll();
+            $user = new UserService();
+            $user = $user->getUserById($user_id);
+            foreach ($carts as $cart) {
+                $product = new ProductService();
+                $product = $product->getProductById($cart->product_id);
+                $cart->setUser($user);
+                $cart->setProduct($product);
+                unset($cart->user_id,
+                    $cart->product_id,
+                    $cart->product_name,
+                    $cart->product_img_url,
+                    $cart->product_price,
+                    $cart->product_sub,
+                    $cart->product_description,
+                    $cart->product_stock,
+                    $cart->product_category,
+                    $cart->product_type,
+                    $cart->purchases,
+                    $cart->deleted);
+            }
+            return $carts;  
         }
 
         public function completedOrder($user_id ,$product_id_list, $info_checkout) {
@@ -106,7 +130,7 @@
 
                 $stmt = $this->__model->db->prepare("INSERT INTO order_details(order_id, product_id, price, quantity) VALUE (?, ?, ?, ?)");
                 foreach($itemCheckouts as $item) {
-                    $stmt->execute([$order_id, $item->product_id, $item->product_price, $item->quantity]);
+                    $stmt->execute([$order_id, $item->getProduct()->getProductId(), $item->getProduct()->getProductPrice(), $item->getQuantity()]);
                 }
 
                 $stmt = $this->__model->db->prepare("INSERT INTO shipping(order_id, phone_number, address, receiver) VALUE (?, ?, ?, ?)");

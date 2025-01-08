@@ -108,7 +108,7 @@ $(".checkout")?.addEventListener("click", () => {
                     if(this.readyState == 4 && this.status == 200) {
                         const response = JSON.parse(this.response);
                         if(response.status == "success") {
-                            storeProductIdBeforCheckout([product_id]);
+                            storeProductIdBeforeCheckout([product_id]);
                         } else if(response["status"] == "fall" && response["code"] == "45000") {
                             showToast("Quantity exceeds the allowed limit.")
                         }
@@ -132,9 +132,9 @@ function checkInfo() {
 
 }
 
-function storeProductIdBeforCheckout(product_id_list) {
+function storeProductIdBeforeCheckout(product_id_list) {
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "./checkout/storeProductIdBeforCheckout", true);
+    xhr.open("POST", "./checkout/storeProductIdBeforeCheckout", true);
     xhr.onreadystatechange = function () {
         if(this.readyState == 4 && this.status == 200) {
             if(this.response == 1) {

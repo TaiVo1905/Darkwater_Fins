@@ -35,11 +35,11 @@
                                 require_once("./app/components/itemCard.php");
                                 $url = "";
                                 foreach ($data as $item) {
-                                    if($item->product_type == "Fish") {
+                                    if($item->getProductType() == "Fish") {
                                         $url = "./products/fishes";
-                                    } elseif($item->product_type == "Fish Food") {
+                                    } elseif($item->getProductType() == "Fish Food") {
                                         $url = "./products/fishfoods";
-                                    } elseif($item->product_type == "Aquarium") {
+                                    } elseif($item->getProductType() == "Aquarium") {
                                         $url = "./products/aquariums";
                                     }
                                     echo displayItemCard($item->getProductId(), $item->getProductImgUrl(), $item->getProductName(), $item->getProductSub(), $item->getProductPrice(), $url);

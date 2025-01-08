@@ -1,21 +1,24 @@
 <?php
 class CheckoutController extends Controller {
     private $__userService;
+    private $__orderService;
 
     public function __construct() {
-        $thi->service("User");
-        $__userService = new userService();
+        $this->service("User");
+        $this->service("Order");
+        $this->__userService = new userService();
+        $this->__orderService = new orderService();
     }
 
     public function index() {
-        $product_list = $this->__userService->getProductBeforCheckout($_SESSION["user_id"], $_SESSION["product_id_list"]);
-        $user = $this->__userService->getUser($_SESSION["user_id"]);
-        $this->view('checkout/checkout', [$product_list, $user]);
+        $cart = $this->__orderService->getProductBeforeCheckout($_SESSION["user_id"], $_SESSION["product_id_list"]);
+        $user = $this->__userService->getUserById($_SESSION["user_id"]);
+        $this->view('checkout/checkout', [$cart, $user]);
     }
 
     public function completedOrder() {
         if($_SERVER["REQUEST_METHOD"] == "POST") {
-            echo json_encode($this->__userService->completedOrder($_SESSION["user_id"], $_SESSION["product_id_list"], $_SESSION["info_checkout"]));
+            echo json_encode($this->__orderService->completedOrder($_SESSION["user_id"], $_SESSION["product_id_list"], $_SESSION["info_checkout"]));
         }
     }
 
@@ -48,7 +51,7 @@ class CheckoutController extends Controller {
     public function deleteOrder($order_id ){
         if($_SERVER['REQUEST_METHOD'] === 'POST'){       
             if($order_id){
-                $this->__userService -> removeOrder($order_id);
+                $this->__orderService -> removeOrder($order_id);
             }
         }
     }

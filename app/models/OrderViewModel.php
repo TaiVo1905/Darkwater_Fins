@@ -9,7 +9,9 @@
         private $receiver;
         private $address;
         private $phone_number;
+        private $product_img_url;
         private $product_name;
+        private $product_category;
         private $quantity;
         private $product_price;
 
@@ -21,7 +23,9 @@
                                     $receiver = null,
                                     $address = null,
                                     $phone_number = null,
+                                    $product_img_url = null,
                                     $product_name = null,
+                                    $product_category = null,
                                     $quantity = null,
                                     $product_price = null) {
             $this->order_id = $order_id;
@@ -32,7 +36,9 @@
             $this->receiver = $receiver;
             $this->address = $address;
             $this->phone_number = $phone_number;
+            $this->product_img_url = $product_img_url;
             $this->product_name = $product_name;
+            $this->product_category = $product_category;
             $this->quantity = $quantity;
             $this->product_price = $product_price;
         }
@@ -62,8 +68,14 @@
         public function getPhoneNumber() {
             return $this->phone_number;
         }
+        public function getProductImgUrl() {
+            return $this->product_img_url;
+        }
         public function getProductName() {
             return $this->product_name;
+        }
+        public function getProductCategory() {
+            return $this->product_category;
         }
         public function getQuantity() {
             return $this->quantity;
@@ -91,8 +103,14 @@
         public function setPhoneNumber($phone_number) {
             $this->phone_number = $phone_number;
         }
+        public function setProductUImgUrl($product_img_url) {
+            $this->product_img_url = $product_img_url;
+        }
         public function setProductName($product_name) {
             $this->product_name = $product_name;
+        }
+        public function setProductCategory($product_category) {
+            $this->product_category = $product_category;
         }
         public function setQuantity($quantity) {
             $this->quantity = $quantity;
@@ -111,7 +129,9 @@
                 'receiver' => $this->receiver,
                 'address' => $this->address,
                 'phone_number' => $this->phone_number,
+                'product_img_url' => $this->product_img_url,
                 'product_name' => $this->product_name,
+                'product_category' => $this->product_category,
                 'quantity' => $this->quantity,
                 'product_price' => $this->product_price
             );

@@ -122,9 +122,35 @@
                     </ul>
                     <div class="row mx-auto" >
                         <?php
-                            require './app/components/orderItems.php';
+                            $groupedOrders = [];
                             foreach ($data['order'] as $order) {
-                                echo renderOrderItems($order->gerOrderId(), $order->gerOrderStatus(), $order->getProductImgUrl(), $order->getProductName(), $order->getProductCategory(), $order->getQuantity(), $order->getProductPrice(), $order->getTotalPrice());
+                                $groupedOrders[$order->getOrderId()][] = $order;
+                                
+                            }
+                            foreach ($groupedOrders as $orderId => $products) {
+                                $order_status = $products[0]->getOrderStatus(); 
+                                echo "<div class='border mb-3 order-item'>";
+                                echo "<div class='d-flex justify-content-end p-2 '>";
+                                echo "<span class='text-primary'>{$order_status}</span>";
+                                echo "</div>";
+                                foreach ($products as $product) {
+                                    echo "<div class='d-flex p-3 border-top my-3'>";
+                                    echo "<img src='{$product->getProductImgUrl()}' alt='Fish' style='width: 80px; height: 80px;' class='me-3 rounded'>";
+                                    echo "<div class='flex-grow-1 '>";
+                                    echo "<h5 class='mb-1'>{$product->getProductName()}</h5>";
+                                    echo "<p class='mb-1 text-muted'>Category: {$product->getProductCategory()}</p>";
+                                    echo "<small>Quantity: {$product->getQuantity()}</small>";
+                                    echo "</div>";
+                                    echo "<div class='text-end'>";
+                                    echo "<span class='fw-bold'>\${$product->getProductPrice()}</span>";
+                                    echo "</div>";
+                                    echo "</div>";
+                                }
+                                echo "<div class='border-top p-3 d-flex flex-column align-items-end '>";
+                                echo "<span class='fw-bold pb-3'>Total: \${$product->getTotalPrice()}</span>";
+                                echo "<button class='cancel-btn btn btn-primary btn-sm rounded-0' data-order-id='{$product->getOrderId()}'>Cancel</button>";
+                                echo "</div>";
+                                echo "</div>";
                             }
                         ?>
                     </div>

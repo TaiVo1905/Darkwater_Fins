@@ -6,7 +6,7 @@
         private $product;
         private $quantity;
 
-        public function __construct (UserModel $user = null, Product $product = null, $quantity = null) {
+        public function __construct (UserModel $user = null, ProductModel $product = null, $quantity = null) {
             $this->user = $user;
             $this->product = $product;
             $this->quantity = $quantity;
