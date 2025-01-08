@@ -78,7 +78,7 @@
         }
 
         //Login, register and logout
-        public function logIn() {
+        public function SignIn() {
             try {
                 $data = null;
                 if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -113,7 +113,7 @@
             }
         }
 
-        public function register() {
+        public function SignUp() {
             try {
                 $data = null;
                 if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -139,7 +139,7 @@
                         }
                         $user = new UserModel($user_name, $user_email, $user_password);
                         if($this->__userService->addUser($user)){
-                            header("location:" . BASE_URL . "Users/LogIn");
+                            header("location:" . BASE_URL . "Users/SignIn");
                             exit();
                         };
                     }

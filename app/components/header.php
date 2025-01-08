@@ -36,10 +36,10 @@
                 } else {
                     echo '
                             <div style="background-color: black;border-radius: 20px;margin-bottom: 5px;">
-                                <a href="Users/logIn">Sign in</a>
+                                <a href="Users/SignIn">Sign in</a>
                             </div>
                             <div style="background-color: black;border-radius: 20px;">
-                                <a href="Users/register">Sign up</a>
+                                <a href="Users/SignUp">Sign up</a>
                             </div>
                     ';
                 }

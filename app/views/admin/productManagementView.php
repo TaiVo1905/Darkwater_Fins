@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <?php include_once './app/components/link.php' ?>
+    <title>Product management</title>
     <base href="<?php echo BASE_URL ?>">
+    <?php include_once './app/components/link.php' ?>
     <link rel="stylesheet" href="./public/css/common.css">
     <link rel="stylesheet" href="./public/css/admin/header.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./public/css/admin/sidebar.css?v=<?php echo time(); ?>">
@@ -39,7 +39,7 @@
                                     <td>{$product->getProductId()}</td>
                                     <td><img style='width: 60px; height: 60px; margin-bottom: 3px;' src='{$product->getProductImgUrl()}' alt=''></td>
                                     <td>{$product->getProductName()}</td>
-                                    <td>{$product->getProductPrice()}</td>
+                                    <td>$" . $product->getProductPrice() ."</td>
                                     <td>{$product->getProductStock()}</td>
                                     <td>
                                         <i class='icon-setting bi bi-gear admin' data-id = '{$product->getProductId()}'></i>

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html Exampleg="en">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Darkwater Fins</title>
-    <?php include_once './app/components/link.php'?>
     <base href="<?php echo BASE_URL ?>">
+    <link rel="icon" href="./public/images/logo/icon-x.jpg" type="image/x-icon">
+    <?php include_once './app/components/link.php'?>
     <link rel="stylesheet" href="./public/css/common.css">
     <link rel="stylesheet" href="./public/css/header.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./public/css/hotFish.css?v=<?php echo time(); ?>">

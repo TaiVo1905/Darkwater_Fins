@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <?php include_once './app/components/link.php' ?>
+  <title>Pending order</title>
   <base href="<?php echo BASE_URL ?>">
+  <?php include_once './app/components/link.php' ?>
   <link rel="stylesheet" href="./public/css/common.css">
   <link rel="stylesheet" href="./public/css/admin/header.css?v=<?php echo time(); ?>">
   <link rel="stylesheet" href="./public/css/admin/sidebar.css?v=<?php echo time(); ?>">
@@ -42,7 +42,7 @@
                         <td>{$order->getReceiver()}</td>
                         <td>{$order->getPhoneNumber()}</td>
                         <td>{$order->getOrderDate()}</td>
-                        <td>{$order->getTotalPrice()}</td>
+                        <td>$" . $order->getTotalPrice() . "</td>
                         <td>
                           <i class='icon-confirm bi bi-check-circle fs-5'></i>
                           <i class='icon-cancel bi bi-x-circle m-1 fs-5'></i>

@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Darkwater Fins</title>
-    <?php include_once './app/components/link.php' ?>
+    <title>User management</title>
     <base href="<?php echo BASE_URL ?>">
+    <?php include_once './app/components/link.php' ?>
     <link rel="stylesheet" href="./public/css/common.css">
     <link rel="stylesheet" href="./public/css/admin/header.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./public/css/admin/sidebar.css?v=<?php echo time(); ?>">
