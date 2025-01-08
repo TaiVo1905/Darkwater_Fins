@@ -37,7 +37,7 @@
             </ul>
         </div>
         <div class="footer-section">
-            <h6 style="padding-top: 10px;">CONTACTS</h6>
+            <h6 style="padding-top: 10px;"><a href="users/contact">CONTACTS</a></h6>
             <ul>
                 <li><a href="#">Address:<br>
                         <p>99 To Hien Thanh, Phuoc My, Son Tra, Da Nang</p>
