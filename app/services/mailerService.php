@@ -42,17 +42,27 @@ class MailerService {
             $mail->setFrom('congdoan0806@gmail.com', 'Darkwater Fins');
             $mail->addAddress($email);
             $mail->isHTML(true);
-            $mail->Subject = 'AUTHENTICATION CODE FOR DARKWATER FINS WEBSITE ACCOUNT REGISTRATION';
+            $mail->Subject = $user_name == null ? 'AUTHENTICATION CODE FOR DARKWATER FINS WEBSITE ACCOUNT REGISTRATION' : 'THE CODE FOR YOUR NEW PASSWORD';
             $mail->Body    =
-                            "<p>Dear $user_name,</p>
-                            <span>This is your code to comspanlete our website account registration:</span>
+                            $user_name == null ? "<p>Dear $user_name,</p>
+                            <span>This is your code to complete our website account registration:</span>
                             <span><strong>$randomCode</strong></span>
-                            <p>This code has value in 1 minute. Please enter your code in registration page to cmplete.</p>
+                            <p>This code has value in 5 minute. Please enter your code in registration page to complete.</p>
+                            <p>Best regards,<br>Darkwater Fins</p>" :
+                            "<p>Dear our customer,</p>
+                            <span>This is your code to complete get your new password:</span>
+                            <span><strong>$randomCode</strong></span>
+                            <p>This code has value in 5 minute. Please enter your code in forgotten password page to complete.</p>
                             <p>Best regards,<br>Darkwater Fins</p>";
             $mail->AltBody =
-                            "Dear $user_name,\n
-                            This is your code to comspanlete our website account registration: $$randomCode\n
-                            This code has value in 1 minute. Please enter your code in registration page to cmplete.\n
+                            $user_name == null ? "Dear $user_name,\n
+                            This is your code to complete our website account registration: $randomCode\n
+                            This code has value in 1 minute. Please enter your code in registration page to complete.\n
+                            Best regards,\n
+                            Darkwater Fins" :
+                            "Dear our customer,\n
+                            This is your code to complete get your new password: $randomCode\n
+                            This code has value in 1 minute. Please enter your code in forgotten password page to complete.\n
                             Best regards,\n
                             Darkwater Fins";
         

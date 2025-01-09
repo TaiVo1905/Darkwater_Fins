@@ -117,7 +117,6 @@
             try {
                 $data = null;
                 if($_SERVER["REQUEST_METHOD"] == "POST") {
-                    $user_password_error  = "";
                     $user_name = $_POST["user_name"];
                     $user_email = $_POST["user_email"];
                     $user_password = $_POST["user_password"];
@@ -151,6 +150,48 @@
             }
         }
 
+        public function forgottenPassword() {
+            try {
+                $data = null;
+                if($_SERVER["REQUEST_METHOD"] == "POST") {
+                    $user_email = $_POST["user_email"];
+                    $user_password = $_POST["user_password"];
+                    $user_confirm_password = $_POST["user_confirm_password"];
+                    $user_authentication_code = $_POST["user_authentication_code"];
+                    $codeCookie = isset($_COOKIE["code"]) ? $_COOKIE["code"] : "";
+                    $emailCookie = isset($_COOKIE["email"]) ? $_COOKIE["email"] : "";
+                    if (($user_authentication_code != $codeCookie && $user_email != $emailCookie)) {
+                        $data = 
+                            ["user_password" => $user_password,
+                            "user_email" => $user_email,
+                            "user_confirm_password" => $user_confirm_password,
+                            "user_authentication_code" => $user_authentication_code
+                            ];
+                    } else {
+                        if(isset($_COOKIE["code"])) {
+                            unset($_COOKIE["code"]);
+                        }
+                        
+                        $user = $this->__userService->getUserByEmail($user_email);
+                        $password_hash = password_hash($user_password, PASSWORD_BCRYPT);
+                        if(password_needs_rehash($password_hash, PASSWORD_BCRYPT)) {
+                            $password_hash = password_hash($password_hash, PASSWORD_BCRYPT);
+                        }
+                        echo var_dump($user);
+                        $user->setPasswords($password_hash);
+                        if($this->__userService->addUser($user)){
+                            header("location:" . BASE_URL . "Users/SignIn");
+                            exit();
+                        };
+                    }
+                }
+                $this->view("Users/ForgottenPassword", $data);
+
+            } catch(PDOException $e) {
+                echo $e->getMessage();
+            }
+        }
+
         public function logOut() {
             session_unset();
             session_destroy();
@@ -162,7 +203,11 @@
             if (isset($_POST['email']) && isset($_POST["user_name"])) {
                 $email = $_POST['email'];
                 $user_name = $_POST['user_name'];
-                echo $this->__mailerService->sendEmailCode($email, $user_name);
+                if($this->__userService->getUserByEmail($email)) {
+                    echo $this->__mailerService->sendEmailCode($email, $user_name);
+                } else {
+                    echo "This account was banned!";
+                }
             } else { 
                 echo "Tham số không hợp lệ.";
             }
