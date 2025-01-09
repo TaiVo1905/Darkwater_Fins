@@ -4,22 +4,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <?php include_once './app/components/bootStrapAndFontLink.php' ?>
+  <title>Pending order</title>
   <base href="<?php echo BASE_URL ?>">
+  <?php include_once './app/components/link.php' ?>
   <link rel="stylesheet" href="./public/css/common.css">
-  <link rel="stylesheet" href="./public/css/headerAdmin.css?v=<?php echo time(); ?>">
-  <link rel="stylesheet" href="./public/css/sidebarAdmin.css?v=<?php echo time(); ?>">
-  <link rel="stylesheet" href="./public/css/orderManagement.css?v=<?php echo time(); ?>">
+  <link rel="stylesheet" href="./public/css/admin/header.css?v=<?php echo time(); ?>">
+  <link rel="stylesheet" href="./public/css/admin/sidebar.css?v=<?php echo time(); ?>">
+  <link rel="stylesheet" href="./public/css/admin/orderManagement.css?v=<?php echo time(); ?>">
 </head>
 
 <body>
   <div style="background-color: #F4F4F4; height:100vh;">
-      <?php include_once './app/components/headerAdmin.php';
-      $dashboardHTML = generateDashboard('hide-element', '34 orders', '$20000', '33', "Pending orders");
-      echo $dashboardHTML;
-      ?>
-      <?php include_once './app/components/sidebarAdmin.php' ?>
+    <?php
+      require_once("./app/components/admin/header.php");
+      echo generateDashboard('hide-element', '34 orders', '$20000', '33', "Pending order");
+      require_once("./app/components/admin/sidebar.php");
+    ?>
       <div class="table-container big_container">
         <table class="table_btn align-middle text-center small_container">
           <thead class="table-head">
@@ -32,28 +32,42 @@
               <th>Options</th>
             </tr>
           </thead>
-          <tbody class="table-body-order">
+          <table class="table-body-order table-btn align-middle text-center small_container">
             <?php
               foreach($data as $order) {
-                $order_id = $order->order_id;
+                $order_id = $order->getOrderId();
                 echo "
-                      <tr data-order-id='$order->order_id' class='order-row'>
-                        <td>$order->order_id</td>
-                        <td>$order->receiver</td>
-                        <td>$order->phone_number</td>
-                        <td>$order->order_date</td>
-                        <td>$order->total_price</td>
+                      <tr data-order-id='{$order->getOrderId()}' class='order-row admin-table-row'>
+                        <td>{$order->getOrderId()}</td>
+                        <td>{$order->getReceiver()}</td>
+                        <td>{$order->getPhoneNumber()}</td>
+                        <td>{$order->getOrderDate()}</td>
+                        <td>$" . $order->getTotalPrice() . "</td>
                         <td>
-                          <i class='icon-confirm bi bi-check-circle fs-4'></i>
-                          <i class='icon-cancel bi bi-x-circle m-1 fs-4'></i>
+                          <i class='icon-confirm bi bi-check-circle fs-5'></i>
+                          <i class='icon-cancel bi bi-x-circle m-1 fs-5'></i>
                         </td>
                       </tr>
                     ";
               }
             ?>
             
-          </tbody>
+          </table>
         </table>
+        <div class="d-flex justify-content-center mt-3">
+            <nav>
+                <ul class="pagination mb-0">
+                    <?php
+                        $pageNum = count($data)/25 + 1;
+                        if($pageNum > 2) {
+                            for($i = 1; $i <= $pageNum; $i++) {
+                                echo '<li class="page-item"><a class="page-link" data-page="' . $i . '">' . $i . '</a></li>';
+                            }
+                        }
+                    ?>
+                </ul>
+            </nav>
+        </div>
       </div>
       <!-- form xác nhậnn confirm-->
       <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
@@ -132,8 +146,9 @@
     echo displayToast('');
   ?>
       <script src="./public/js/define.js?v=<?php echo time(); ?>"></script>
-      <script src="./public/js/orderManagement.js?v=<?php echo time(); ?>"></script>
-      <script src="./public/js/sidebarAdmin.js?v=<?php echo time(); ?>"></script>
+      <script src="./public/js/admin/orderManagement.js?v=<?php echo time(); ?>"></script>
+      <script src="./public/js/admin/sidebar.js?v=<?php echo time(); ?>"></script>
+      <script src="./public/js/pagination.js?v=<?php echo time(); ?>"></script>
 </body>
 
 </html>

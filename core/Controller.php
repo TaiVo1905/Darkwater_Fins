@@ -8,11 +8,11 @@
             }
         }
 
-        protected function model($model) {
-            if(file_exists("./app/models/" . $model . "Model.php")) {
-                require_once("./app/models/" . $model . "Model.php");
+        protected function service($service) {
+            if(file_exists("./app/services/" . $service . "Service.php")) {
+                require_once("./app/services/" . $service . "Service.php");
             } else {
-                die($model . "Model.php does not exist.");
+                die($service . "Service.php does not exist.");
             }
         }
     }

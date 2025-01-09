@@ -1,7 +1,7 @@
 <?php
     require_once("./config/config.php");
     class Model {
-        protected $db;
+        public $db;
 
         public function __construct () {
             try {

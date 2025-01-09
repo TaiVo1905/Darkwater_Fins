@@ -2,6 +2,9 @@
 window.addEventListener('scroll', function() {
     var header = $('.header_container');
     if (window.scrollY < 80) {
+        if (!window.location.href.includes("contactUs") || !window.location.href.includes("aboutUs")) {
+            return;
+        }
         header.classList.remove('scrolled');
         // Cuộn xuống
     } else {
@@ -23,8 +26,8 @@ cartIcon.addEventListener("click", () => {
     checkLogin("You need log in before view your cart")
         .then (response => {
             console.log(response)
+            console.log("a")
             if(response) {
-                console.log("a")
                 navigatorCart();
             }
         })

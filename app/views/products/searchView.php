@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Darkwater Fins</title>
+    <title>Search products</title>
     <base href="<?php echo BASE_URL ?>">
-    <?php include_once './app/components/bootStrapAndFontLink.php'; ?>
+    <?php include_once './app/components/link.php'; ?>
     <link rel="stylesheet" href="./public/css/common.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./public/css/banner.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./public/css/header.css?v=<?php echo time(); ?>">
@@ -35,14 +35,14 @@
                                 require_once("./app/components/itemCard.php");
                                 $url = "";
                                 foreach ($data as $item) {
-                                    if($item->product_type == "Fish") {
+                                    if($item->getProductType() == "Fish") {
                                         $url = "./products/fishes";
-                                    } elseif($item->product_type == "Fish Food") {
+                                    } elseif($item->getProductType() == "Fish Food") {
                                         $url = "./products/fishfoods";
-                                    } elseif($item->product_type == "Aquarium") {
+                                    } elseif($item->getProductType() == "Aquarium") {
                                         $url = "./products/aquariums";
                                     }
-                                    echo displayItemCard($item->product_id, $item->product_img_url, $item->product_name, $item->product_sub, $item->product_price, $url);
+                                    echo displayItemCard($item->getProductId(), $item->getProductImgUrl(), $item->getProductName(), $item->getProductSub(), $item->getProductPrice(), $url);
                                 }
                             }
                         ?>

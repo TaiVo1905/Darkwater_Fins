@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Darkwater Fins</title>
+    <title>Checkout successfully</title>
     <base href="<?php echo BASE_URL ?>">
-    <?php include_once './app/components/bootStrapAndFontLink.php' ?>
+    <?php include_once './app/components/link.php' ?>
     <link rel="stylesheet" href="./public/css/common.css">
     <link rel="stylesheet" href="./public/css/success.css?v=<?php echo time(); ?>">
   
@@ -20,9 +20,9 @@
             <p class="mt-4">Payment has been successfully made. Darkwater Fins will confirm contact to deliver your order as soon as possible.</p>
         </div>
         <?php
-            $username = $_SESSION["info_checkout"]["username"] ?? $data[1]->user_name;
-            $phone_number = $_SESSION["info_checkout"]["phone_number"] ?? $data[1]->phone_number;
-            $address = $_SESSION["info_checkout"]["address"] ?? $data[1]->address;
+            $username = $_SESSION["info_checkout"]["username"] ?? $data[1]->getUserName();
+            $phone_number = $_SESSION["info_checkout"]["phone_number"] ?? $data[1]->getPhoneNumber();
+            $address = $_SESSION["info_checkout"]["address"] ?? $data[1]->getAddress();
             echo "
                 <div class='address d-flex justify-content-between mb-4'>
                     <span class='address-title gay-color'>Receiver</span>

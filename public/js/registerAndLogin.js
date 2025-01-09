@@ -14,18 +14,21 @@
     })
 })()
 
-function sendEmailCode(email, user_name) {
+function sendEmailCode(email, user_name = null) {
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", `./app/services/mailerService.php?func=sendEmailCode&email=${encodeURIComponent(email)}&user_name=${encodeURIComponent(user_name)}`, true);
+    const formData = new FormData();
+    formData.append("email", email);
+    formData.append("user_name", user_name);
+    xhr.open("POST", "./users/authEmail", true);
     xhr.onreadystatechange = function () {
         if(xhr.readyState == 4 && xhr.status == 200) {
-            showToast("Your code is sent");
-            console.log(xhr.responseText);
+            showToast(xhr.response);
+            console.log(1);
         } else {
             console.log("Error");
         }
     }
-    xhr.send();
+    xhr.send(formData);
 }
 
 
@@ -35,6 +38,10 @@ $("#register-form button[type=button]")?.addEventListener("click", () => {
     const user_name = $("#user_name").value;
     sendEmailCode(email, user_name);
     
+})
+$("#forgottenPassword-form button[type=button]")?.addEventListener("click", () => {
+    const email = $("#user_email").value;
+    sendEmailCode(email);
 })
 
 $("#register-form")?.addEventListener("submit", (e) => {
@@ -46,9 +53,13 @@ $("#register-form")?.addEventListener("submit", (e) => {
     }
 })
 
-document.querySelector(".login-btn")?.addEventListener("click", () => {
-    const passwordInput = document.querySelector("#user_password");
-    if (passwordInput) {
-        sessionStorage.setItem("old-password", passwordInput.value);
+$("#forgottenPassword-form")?.addEventListener("submit", (e) => {
+    const pass = $("#user_password").value;
+    const passConfirm = $("#user_confirm_password").value;
+    if(pass != passConfirm) {
+        showToast("Invalid password confirmation");
+        e.preventDefault();
     }
-});
+})
+
+

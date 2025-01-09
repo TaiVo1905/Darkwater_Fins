@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
     const url = (window.location.pathname);
-    console.log(url)
     if(url.includes("userManagement")) {
         $$(".sidebar a")[1].classList.add("active");
     } else if(url.includes("productManagement")) {

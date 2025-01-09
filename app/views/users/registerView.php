@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Darkwater Fins</title>
-    <?php include_once("./app/components/bootStrapAndFontLink.php"); ?>
+    <title>Sign up</title>
+    <?php include_once("./app/components/link.php"); ?>
     <base href="<?php echo BASE_URL ?>">
     <link rel="stylesheet" href="./public/css/common.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./public/css/register.css?v=<?php echo time(); ?>">
@@ -20,7 +20,7 @@
             <div class="col-7">
                 <div class="display-3 fw-bold text-white mx-auto p-5">Welcome, Looks like you're new here!</div>
             </div>
-            <form action="users/register" method="POST" class= "col-4 mx-auto shadow px-3 py-5 rounded-3 needs-validation" novalidate>
+            <form action="users/SignUp" method="POST" class= "col-4 mx-auto shadow px-3 py-5 rounded-3 needs-validation" novalidate>
                 <div class="mb-3">
                     <input type="text" class="form-control form-control custom-opacity-form" id="user_name" name="user_name" placeholder="Full name" required value="<?php echo isset($data["user_name"]) ? $data["user_name"] : "" ?>">
                     <div class="invalid-feedback">Please provide your name</div>
@@ -51,7 +51,7 @@
                 <div class="d-grid">
                     <button type="submit" class="btn custom-btn-outline fw-bold">Sign up</button>
                 </div>
-                <h6 class="pt-3 text-center">Already a member? <a href="users/logIn" class="custom-color">Sign in</a></h6>
+                <h6 class="pt-3 text-center">Already a member? <a href="users/SignIn" class="custom-color">Sign in</a></h6>
             </form>
         </div>
     </div>

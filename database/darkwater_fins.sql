@@ -24,7 +24,7 @@ create table products (
     product_category varchar(40),
     product_type varchar(40),
     purchases int default 0,
-    deleted boolean default 0,
+    deleted boolean default 0
 );
 
 create table cart (
@@ -35,6 +35,43 @@ create table cart (
     foreign key (user_id) references users(user_id),
     foreign key (product_id) references products(product_id)
 );
+
+create table orders (
+	order_id int primary key auto_increment,
+    user_id int not null,
+    total_price float default 0,
+    order_status varchar(8) check (order_status in ("pending", "shipping", "shipped", "canceled")),
+    order_date datetime,
+    foreign key (user_id) references users(user_id)
+);
+
+create table order_details (
+	order_detail_id int primary key auto_increment,
+    order_id int not null,
+    product_id int not null,
+    price float not null,
+    quantity int check (quantity > 0),
+    foreign key (product_id) references products(product_id),
+	foreign key (order_id) references orders(order_id)
+);
+
+create table shipping (
+	shipping_id int primary key auto_increment,
+    order_id int not null unique,
+    phone_number varchar(11) not null,
+    address varchar(250) not null,
+    receiver varchar(40) not null,
+    foreign key (order_id) references orders(order_id)
+);
+
+CREATE VIEW orderView AS
+    SELECT 
+        o.*, s.receiver, s.address, s.phone_number,p.product_img_url, p.product_name, p.product_category, od.quantity, p.product_price
+    FROM orders AS o
+	JOIN order_details AS od ON o.order_id = od.order_id
+	JOIN shipping AS s ON o.order_id = s.order_id
+	JOIN products AS p ON p.product_id = od.product_id;
+
 
 DELIMITER $$
 	create trigger check_stock_insert_cart
@@ -89,33 +126,6 @@ DELIMITER $$
 		end if;
 	end$$
 DELIMITER ;
-
-
-create table orders (
-	order_id int primary key auto_increment,
-    user_id int not null,
-    total_price float default (0),
-    order_status varchar(8) check (order_status in ("pending", "shipping", "shipped", "canceled")),
-    order_date datetime,
-    foreign key (user_id) references users(user_id)
-);
-
-create table order_details (
-	order_detail_id int primary key auto_increment,
-    order_id int not null,
-    product_id int not null,
-    price float not null,
-    quantity int check (quantity > 0),
-	foreign key (order_id) references orders(order_id)
-);
-
-create table shipping (
-	shipping_id int primary key auto_increment,
-    order_id int not null unique,
-    phone_number varchar(11) not null,
-    address varchar(250) not null,
-    receiver varchar(40) not null
-);
 
 INSERT INTO products (product_name, product_img_url, product_price, product_sub, product_description, product_stock, product_category, product_type, purchases) 
 VALUES ('Siamese Fighting Fish, White', 'https://i.imgur.com/fQou4dN.jpg', 10.99, 'Known for its striking white color and aggressive nature, often a favorite for its elegance.', 'The Siamese Fighting Fish, or Betta splendens, is a species well known for its vivid colors and elaborate fins. Among the various colorations, the White Siamese Fighting Fish stands out for its immaculate, snow-like appearance. These fish are native to the rice paddies, floodplains, and canals of Thailand and neighboring Southeast Asian countries. The species has been selectively bred for its aggressive behavior towards other males, making it famous among aquarium enthusiasts.

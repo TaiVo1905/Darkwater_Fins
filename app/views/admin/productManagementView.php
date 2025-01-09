@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <?php include_once './app/components/bootStrapAndFontLink.php' ?>
+    <title>Product management</title>
     <base href="<?php echo BASE_URL ?>">
+    <?php include_once './app/components/link.php' ?>
     <link rel="stylesheet" href="./public/css/common.css">
-    <link rel="stylesheet" href="./public/css/headerAdmin.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="./public/css/sidebarAdmin.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="./public/css/productManagement.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="./public/css/admin/header.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="./public/css/admin/sidebar.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="./public/css/admin/productManagement.css?v=<?php echo time(); ?>">
 </head>
 <body>
 <div style="background-color: #F4F4F4; height:100vh;">
-        <?php include_once './app/components/headerAdmin.php' ;
-            $dashboardHTML = generateDashboard('hide-element', '34 orders', '$20000', '33', "Products management");
-            echo $dashboardHTML;
-        ?>
-        <?php include_once './app/components/sidebarAdmin.php' ?>
-    <a href="./admin/addProducts/"><div class="addNewProducs"><i class="bi bi-patch-plus p-1"></i>Add new products</div></a>
+    <?php
+        require_once("./app/components/admin/header.php");
+        echo generateDashboard('hide-element', '34 orders', '$20000', '33', "Product management");
+        require_once("./app/components/admin/sidebar.php");
+    ?>
+    <a href="./admin/addProducts/"><div class="addNewProducts"><i class="bi bi-patch-plus p-1"></i>Add new products</div></a>
     <div class="table-container big_container">
             <table class="table_btn align-middle text-center small_container">
                 <thead class="table-primary table-head">
@@ -29,31 +29,43 @@
                         <th>Price</th>
                         <th>Stock</th>
                         <th>Options</th>
-                </tr>
+                    </tr>
                 </thead>
-                <tbody class="table-body">
+                <table class="table-body table_btn align-middle text-center small_container product-table">
                     <?php 
                         foreach ($data as $product){
                             echo "
-                               <tr class='product-row'>
-                                    <td>".$product->product_id."</td>
-                                    <td><img style='width: 60px; margin-bottom: 3px;' src='".$product->product_img_url."' alt=''></td>
-                                    <td>".$product->product_name."</td>
-                                    <td>".$product->product_price."</td>
-                                    <td>".$product->product_stock."</td>
+                            <tr class='product-row admin-table-row'>
+                                    <td>{$product->getProductId()}</td>
+                                    <td><img style='width: 60px; height: 60px; margin-bottom: 3px;' src='{$product->getProductImgUrl()}' alt=''></td>
+                                    <td>{$product->getProductName()}</td>
+                                    <td>$" . $product->getProductPrice() ."</td>
+                                    <td>{$product->getProductStock()}</td>
                                     <td>
-                                        <i class='icon-setting bi bi-gear admin' data-id = ".$product->product_id."></i>
-                                        
-                                        <i class='icon-delete bi bi-trash m-1' data-id = ".$product->product_id."></i>
-                                        
+                                        <i class='icon-setting bi bi-gear admin' data-id = '{$product->getProductId()}'></i>
+                                        <i class='icon-delete bi bi-trash m-1' data-id = '{$product->getProductId()}'></i>
                                     </td>
                         </tr>
                             ";
                         
                         }
                     ?>
-                </tbody>
+                </table>
             </table>
+            <div class="d-flex justify-content-center mt-3">
+                <nav>
+                    <ul class="pagination mb-0">
+                        <?php
+                            $pageNum = count($data)/25 + 1;
+                            if($pageNum > 2) {
+                                for($i = 1; $i <= $pageNum; $i++) {
+                                    echo '<li class="page-item"><a class="page-link" data-page="' . $i . '">' . $i . '</a></li>';
+                                }
+                            }
+                        ?>
+                    </ul>
+                </nav>
+            </div>
     </div>
 
             
@@ -115,8 +127,9 @@
       </div>
     </div>
     <script src="./public/js/define.js?v=<?php echo time(); ?>"></script>
-    <script src="./public/js/productManagement.js?v=<?php echo time(); ?>"></script>
-    <script src="./public/js/sidebarAdmin.js?v=<?php echo time(); ?>"></script>
+    <script src="./public/js/admin/productManagement.js?v=<?php echo time(); ?>"></script>
+    <script src="./public/js/admin/sidebar.js?v=<?php echo time(); ?>"></script>
+    <script src="./public/js/pagination.js?v=<?php echo time(); ?>"></script>
     <?php include_once  './app/components/toast.php';
     echo displayToast('No changes have been made yet'); ?>
 </body>

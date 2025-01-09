@@ -8,7 +8,7 @@
             <p><a href="products/aquariums">Aquarium</a></p>
             <p><a href="products/fishFoods">Fish Food</a></p>
             <p><a href="products/fishes">Fish</a></p>
-            <p>About us</p>
+            <p><a href="home/aboutUs">About us</a></p>
         </div>
         <div class="icon_header">
             <div class="search-container icon-header-search">
@@ -23,25 +23,22 @@
                 <?php
                 if (isset($_SESSION["user_id"])) {
                     echo '
-                                <div style="background-color: black;border-radius: 20px;margin-bottom: 5px;">
-                                    <a href="Users">Profile</a>
-                                </div>
-                                <div style="background-color: black;border-radius: 20px;margin-bottom: 5px;">
-                                    <a href="#">Change password</a>
-                                </div>
-                                <div style="background-color: black;border-radius: 20px;">
-                                    <a href="Users/logOut">Log out</a>
-                                </div>
+                            <div style="background-color: black;border-radius: 20px;margin-bottom: 5px;">
+                                <a href="Users">Profile</a>
+                            </div>
+                            <div style="background-color: black;border-radius: 20px;">
+                                <a href="Users/logOut">Log out</a>
+                            </div>
                         ';
                 } else {
                     echo '
-                                <div style="background-color: black;border-radius: 20px;margin-bottom: 5px;">
-                                    <a href="Users/logIn">Sign in</a>
-                                </div>
-                                <div style="background-color: black;border-radius: 20px;">
-                                    <a href="Users/register">Sign up</a>
-                                </div>
-                        ';
+                            <div style="background-color: black;border-radius: 20px;margin-bottom: 5px;">
+                                <a href="Users/SignIn">Sign in</a>
+                            </div>
+                            <div style="background-color: black;border-radius: 20px;">
+                                <a href="Users/SignUp">Sign up</a>
+                            </div>
+                    ';
                 }
                 ?>
             </div>

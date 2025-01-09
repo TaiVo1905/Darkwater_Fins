@@ -1,4 +1,3 @@
-
 function renderChart(xValues, yValues, maxValue) {
     new Chart("dashBoardChart", {
       type: "line",
@@ -34,12 +33,15 @@ function getProductSoldPerMonth() {
             const yValues = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
             const response = JSON.parse(this.response);
             console.log(response)
-            response.forEach(item => {
-                yValues[item.month - 1] = parseInt(item.quantity);
-            });
-            renderChart(xValues, yValues, Math.max(...yValues));
+            if(response[0].month != null && response[0].quantity != null) {
+              response.forEach(item => {
+                  yValues[item.month - 1] = parseInt(item.quantity);
+              });
+            }
+            renderChart(xValues, yValues, (Math.max(...yValues) || 10));
         }
     }
     xhr.send();
 }
+
 getProductSoldPerMonth();

@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Darkwater Fins</title>
+    <title>Profile</title>
     <base href="<?php echo BASE_URL ?>">
-    <?php include_once './app/components/bootStrapAndFontLink.php' ?>
+    <?php include_once './app/components/link.php' ?>
     <link rel="stylesheet" href="./public/css/common.css">
     <link rel="stylesheet" href="./public/css/header.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./public/css/footer.css?v=<?php echo time(); ?>">
@@ -42,12 +42,12 @@
             </div>
             <!-- Main content -->
             <div class="col-9 content-area">
-                <form class=" body-profile mx-auto  needs-validation" style="width:80%; " method="POST" enctype="multipart/form-data" id="profile-form" action="Profile/updateProfile" novalidate>
+                <form class=" body-profile mx-auto  needs-validation" style="width:80%; " method="POST" enctype="multipart/form-data" id="profile-form" action="Users/updateProfile" novalidate>
                     <h3 class="profile-title mb-4">Profile Image</h3>
                     <div class="profile-card">
                         <div class="profile-header">
                             <div class="image-container">
-                                <img id="img-user" name="user_img" src="<?php echo $data['userInfo']->user_img_url; ?>" alt="User Img" class="image-user">
+                                <img id="img-user" name="user_img" src="<?php echo $data['userInfo']->getUserImgUrl(); ?>" alt="User Img" class="image-user">
                                 <div class="icon-overlay">
                                     <i class="bi bi-camera-fill camera-image-user"></i>
                                 </div>
@@ -60,29 +60,29 @@
                     <div class="profile-update-file p-5 pt-3 ">
                         <div class="mb-3">
                             <label for="fullname-user" class="form-label">Full name</label>
-                            <input type="text" class="form-control " name="username" id="fullname-user" value="<?php echo $data['userInfo']->user_name; ?>" required>
+                            <input type="text" class="form-control " name="username" id="fullname-user" value="<?php echo $data['userInfo']->getUserName(); ?>" required>
                             <span class="form-message"></span>
                         </div>
                         <div class="mb-3">
                             <label for="email-user" class="form-label">Email</label>
-                            <input type="email" class="form-control" name="email" id="email-user" readonly value="<?php echo $data['userInfo']->email; ?> " required>
+                            <input type="email" class="form-control" name="email" id="email-user" readonly value="<?php echo $data['userInfo']->getEmail(); ?> " required>
                             <span class="form-message"></span>
                         </div>
                         <div class="mb-3">
                             <label for="phone-user" class="form-label">Phone</label>
-                            <input type="text" class="form-control" name="phone" id="phone-user" value="<?php echo $data['userInfo']->phone_number; ?>">
+                            <input type="text" class="form-control" name="phone" id="phone-user" value="<?php echo $data['userInfo']->getPhoneNumber(); ?>">
                             <span class="form-message"></span>
                         </div>
                         <div class="mb-3">
                             <label for="address-user" class="form-label">Address</label>
-                            <input type="text" class="form-control" name="address" id="address-user" value="<?php echo $data['userInfo']->address; ?>">
+                            <input type="text" class="form-control" name="address" id="address-user" value="<?php echo $data['userInfo']->getAddress(); ?>">
                             <span class="form-message"></span>
                         </div>
                     </div>
                     <button type="submit" id="save-btn" name="save_btn" class="btn btn-primary float-end m-1 w-25 mt-4 ">Save</button>
                 </form>
                 <!-- Thay đổi password -->
-                <form class="change-password mx-auto  needs-validation" style="width:80%; " method="POST" id="change-password-form" action="Profile/executeChangePassword" novalidate>
+                <form class="change-password mx-auto  needs-validation" style="width:80%; " method="POST" id="change-password-form" action="Users/executeChangePassword" novalidate>
                     <h3 class="profile-title mb-4">Change password</h3>
                     <div class="profile-change-password p-5 pt-5 ">
                         <div class="mb-3">
@@ -122,9 +122,35 @@
                     </ul>
                     <div class="row mx-auto" >
                         <?php
-                            require './app/components/orderItems.php';
+                            $groupedOrders = [];
                             foreach ($data['order'] as $order) {
-                                echo renderOrderItems($order->order_id, $order->order_status, $order->product_img_url, $order->product_name, $order->product_category, $order->quantity, $order->product_price, $order->total_price);
+                                $groupedOrders[$order->getOrderId()][] = $order;
+                                
+                            }
+                            foreach ($groupedOrders as $orderId => $products) {
+                                $order_status = $products[0]->getOrderStatus(); 
+                                echo "<div class='border mb-3 order-item'>";
+                                echo "<div class='d-flex justify-content-end p-2 '>";
+                                echo "<span class='text-primary'>{$order_status}</span>";
+                                echo "</div>";
+                                foreach ($products as $product) {
+                                    echo "<div class='d-flex p-3 border-top my-3'>";
+                                    echo "<img src='{$product->getProductImgUrl()}' alt='Fish' style='width: 80px; height: 80px;' class='me-3 rounded'>";
+                                    echo "<div class='flex-grow-1 '>";
+                                    echo "<h5 class='mb-1'>{$product->getProductName()}</h5>";
+                                    echo "<p class='mb-1 text-muted'>Category: {$product->getProductCategory()}</p>";
+                                    echo "<small>Quantity: {$product->getQuantity()}</small>";
+                                    echo "</div>";
+                                    echo "<div class='text-end'>";
+                                    echo "<span class='fw-bold'>\${$product->getProductPrice()}</span>";
+                                    echo "</div>";
+                                    echo "</div>";
+                                }
+                                echo "<div class='border-top p-3 d-flex flex-column align-items-end '>";
+                                echo "<span class='fw-bold pb-3'>Total: \${$product->getTotalPrice()}</span>";
+                                echo "<button class='cancel-btn btn btn-primary btn-sm rounded-0' data-order-id='{$product->getOrderId()}'>Cancel</button>";
+                                echo "</div>";
+                                echo "</div>";
                             }
                         ?>
                     </div>

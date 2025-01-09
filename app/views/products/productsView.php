@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Darkwater Fins</title>
+    <title>Products</title>
     <base href="<?php echo BASE_URL ?>">
-    <?php include_once './app/components/bootStrapAndFontLink.php'; ?>
+    <?php include_once './app/components/link.php'; ?>
     <link rel="stylesheet" href="./public/css/common.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./public/css/banner.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./public/css/header.css?v=<?php echo time(); ?>">
@@ -51,7 +51,7 @@
                         <?php
                             require_once("./app/components/itemCard.php");
                                 foreach($data[0] as $item) {
-                                    echo displayItemCard($item->product_id, $item->product_img_url, $item->product_name, $item->product_sub, $item->product_price, $url);
+                                    echo displayItemCard($item->getProductId(), $item->getProductImgUrl(), $item->getProductName(), $item->getProductSub(), $item->getProductPrice(), $url);
                                 }
                         ?>
                     </div>
@@ -80,8 +80,8 @@
     <script src="./public/js/sidebar.js?v=<?php echo time(); ?>"></script>
     <script src="./public/js/header.js?v=<?php echo time(); ?>"></script>
     <script src="./public/js/shoppingCart.js?v=<?php echo time() ?>"></script>
-    <script src="./public/js/products.js?v=<?php echo time(); ?>"></script>
     <script src="./public/js/pagination.js?v=<?php echo time(); ?>"></script>
+    <script src="./public/js/products.js?v=<?php echo time(); ?>"></script>
 </body>
 
 </html>

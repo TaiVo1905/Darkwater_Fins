@@ -183,40 +183,60 @@ document.addEventListener("DOMContentLoaded", () => {
 // xuử lý password
 document.addEventListener("DOMContentLoaded", () => {
   
-const passwordSession = sessionStorage.getItem("old-password")
-const changePasswordForm = document.getElementById('change-password-form');
-const oldPassword = document.getElementById('old-password');
-const newPassword = document.getElementById('new-password');
-const confirmPassword = document.getElementById('confirm-password');
-
-changePasswordForm.addEventListener('submit', (e) => {
- 
-  let checkPass = false;
-  if (oldPassword.value !== passwordSession) {
-    checkPass = true;
-  }
-
-  if (newPassword.value !== confirmPassword.value) {
-    checkPass = true;
-  }
-
- 
-  if (checkPass) {
-    e.preventDefault();
-    displayToast("Something went wrong")
-  } else {
-    console.log('Form is valid. Submitting...');
-  }
-});
-
-});
-// luư password mới vào session
-$("#save_btn_change_pass")?.addEventListener("click", () => {
-  const passwordInput = $("#new-password");
-  if (passwordInput) {
-      sessionStorage.setItem("old-password", passwordInput.value);
-  }
-});
+  // const passwordSession = sessionStorage.getItem("old-password")
+    const changePasswordForm = document.getElementById('change-password-form');
+    const oldPassword = document.getElementById('old-password');
+    const newPassword = document.getElementById('new-password');
+    const confirmPassword = document.getElementById('confirm-password');
+  
+    changePasswordForm.addEventListener('submit', (e) => {
+      e.preventDefault(); 
+      const data = {
+          oldPassword: oldPassword.value,
+          newPassword: newPassword.value,
+          confirmPassword: confirmPassword.value
+      };
+  
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", `Users/executeChangePassword/`, true);
+      xhr.setRequestHeader("Content-Type", "application/json"); 
+  
+      xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4) { 
+              if (xhr.status == 200) {
+                const response = xhr.responseText.trim();
+                console.log(response)  
+                if (Number(xhr.responseText) === 2){
+                  displayToast("Something went wrong");
+                }else{
+                  displayToast("Password changed successfully");
+                  hiddenChangePasswordForm();
+                }
+              } else {
+                  displayToast("Something went wrong");
+              }
+          }
+      };
+      xhr.send(JSON.stringify(data));
+  
+    });
+    function hiddenChangePasswordForm() {
+      oldPassword.value = '';
+      newPassword.value = '';
+      confirmPassword.value = '';
+      changePasswordForm.classList.remove('was-validated'); 
+  
+      oldPassword.classList.remove('is-invalid');
+      oldPassword.classList.remove('is-valid');
+  
+      newPassword.classList.remove('is-invalid');
+      newPassword.classList.remove('is-valid');
+  
+      confirmPassword.classList.remove('is-invalid');
+      confirmPassword.classList.remove('is-valid');
+    };
+  });
+  
 
 const nav_tab_links = $$('.nav_tab_link')
 
@@ -282,7 +302,7 @@ document.addEventListener("DOMContentLoaded", function () {
     button.addEventListener("click", function () {
         const orderId = button.getAttribute("data-order-id");
         const xhr = new XMLHttpRequest();
-        xhr.open("POST", `Users/deleteOrder/${encodeURIComponent(orderId)}`, true);
+        xhr.open("POST", `Checkout/deleteOrder/${encodeURIComponent(orderId)}`, true);
         xhr.onreadystatechange = function () {
             if(xhr.readyState == 4 && xhr.status == 200) {
                 button.closest(".order-item").remove();

@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Darkwater Fins</title>
+    <title>Checkout</title>
     <base href="<?php echo BASE_URL ?>">
-    <?php include_once './app/components/bootStrapAndFontLink.php' ?>
+    <?php include_once './app/components/link.php' ?>
     <link rel="stylesheet" href="./public/css/common.css">
     <link rel="stylesheet" href="./public/css/header.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./public/css/footer.css?v=<?php echo time(); ?>">
@@ -30,9 +30,9 @@
         
         <div class="address_order row mb-4 p-3 rounded">
             <?php
-                $username = $data[1]->user_name ?? $_SESSION["info_checkout"]["username"];
-                $phone_number = $data[1]->phone_number ?? $_SESSION["info_checkout"]["phone_number"] ?? 'Not have phone number yet';
-                $address = $data[1]->address ?? $_SESSION["info_checkout"]["address"] ?? 'Not have address yet';
+                $username = $data[1]->getUserName() ?? $_SESSION["info_checkout"]["username"];
+                $phone_number = ($data[1]->getPhoneNumber()) ?? $_SESSION["info_checkout"]["phone_number"] ?? 'Not have phone number yet';
+                $address = ($data[1]->getAddress()) ?? $_SESSION["info_checkout"]["address"] ?? 'Not have address yet';
                 echo "
                     <div class='col-8'>
                         <span class='fw-semibold delevery_address'><i class='bi bi-geo-alt me-2 delevery_address'></i>Delivery address</span>
@@ -64,24 +64,24 @@
                         <?php
                         $html = "";
                         $total = 0;
-                            foreach($data[0] as $product) {
+                            foreach($data[0] as $cart) {
                                 $html .= "
                                     <tr >
                                         <td>
                                             <div class='d-flex align-items-center'>
-                                                <img style='width: 80px; height: 80px; object-fit: cover;' src='$product->product_img_url' class='me-2' alt='Product'>
+                                                <img style='width: 80px; height: 80px; object-fit: cover;' src='{$cart->getProduct()->getProductImgUrl()}' class='me-2' alt='Product'>
                                                 <div>
-                                                    <p class='mb-0'>$product->product_name</p>
-                                                    <small class='text-muted'>Category: $product->product_category</small>
+                                                    <p class='mb-0'>{$cart->getProduct()->getProductName()}</p>
+                                                    <small class='text-muted'>Category:{$cart->getProduct()->getProductCategory()}</small>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class='quantity'>$product->quantity</td>
-                                        <td>$$product->product_price</td>
-                                        <td>$" . $product->quantity*$product->product_price . "</td>
+                                        <td class='quantity'>{$cart->getQuantity()}</td>
+                                        <td>$" . $cart->getProduct()->getProductPrice() ."</td>
+                                        <td>$" . $cart->getQuantity()*$cart->getProduct()->getProductPrice() . "</td>
                                     </tr>
                                     ";
-                                $total += $product->quantity*$product->product_price;
+                                $total += $cart->getQuantity()*$cart->getProduct()->getProductPrice();
                             }
                         echo $html;
                         ?>
@@ -120,9 +120,9 @@
     <!-- Form address -->
     <div class="form-container">
         <?php
-            $user_name = $data[1]->user_name ?? $_SESSION["info_checkout"]["username"];
-            $phone_number = $data[1]->phone_number ?? $_SESSION["info_checkout"]["phone_number"] ?? "";
-            $address = $data[1]->address ?? $_SESSION["info_checkout"]["address"] ?? "";
+            $user_name = $data[1]->getUserName() ?? $_SESSION["info_checkout"]["username"];
+            $phone_number = $data[1]->getPhoneNumber() ?? $_SESSION["info_checkout"]["phone_number"] ?? "";
+            $address = $data[1]->getAddress() ?? $_SESSION["info_checkout"]["address"] ?? "";
             echo "
                 <form class='editProfileForm' action='' method='POST'>
                     <div class='mb-4 input-fiel mb-5'>

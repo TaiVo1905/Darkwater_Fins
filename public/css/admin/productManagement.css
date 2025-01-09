@@ -72,25 +72,43 @@
   border-right: none;
 }
 
-.table_btn th:first-child {
+.table_btn th:first-child, td:first-child {
   width: 60px;
 }
-.table_btn th:nth-child(4) {
+.table_btn th:nth-child(4), td:nth-child(4) {
   width: 120px;
 }
-.table_btn th:nth-child(5) {
+.table_btn th:nth-child(5), td:nth-child(5) {
   width: 150px;
 }
-.table_btn th:last-child {
+.table_btn th:last-child, td:last-child {
   width: 120px;
 }
+
 .table-body{
-  background-color: #E9F6F7;
+  max-height: 50vh; 
+  overflow-y: auto; 
+  display: block;
+  height: 50vh;
 }
 .table-body tr{
-  border-radius: 30%;
+  border-radius: 10px;
   line-height: 3;
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  margin-bottom: 10px;
 }
+
+.table-body::-webkit-scrollbar {
+  width: 5px;
+}
+
+.table-body::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color4);
+  /* padding-left: -20px; */
+}
+
 .icon-setting{
   color: blue;
 }
@@ -126,7 +144,7 @@
 
 }
 
-.addNewProducs {
+.addNewProducts {
   width: 200px;
   height: 50px;
   background-color: var(--primary-color3);
@@ -141,6 +159,6 @@
   color: var(--primary-color1);
 }
 
-.addNewProducs:hover {
+.addNewProducts:hover {
   opacity: 0.8;
 }

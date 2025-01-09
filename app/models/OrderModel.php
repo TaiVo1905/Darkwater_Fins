@@ -1,49 +1,61 @@
 <?php
-    class OrderModel extends Model {
-        public function getAllOrder() {
-            $stmt = $this->db->prepare("SELECT * FROM orderView");
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_OBJ);
+    #[AllowDynamicProperties]
+    class OrderModel {
+        private $order_id;
+        private $user;
+        private $total_price;
+        private $order_status;
+        private $order_date;
+        public function __construct (UserModel $user = null, $total_price = null, $order_status = null, $order_date = null, ShippingModel $shipping = null) {
+            $this->user = $user;
+            $this->total_price = $total_price;
+            $this->order_status = $order_status;
+            $this->order_date = $order_date;
+            $this->shipping = $shipping;
         }
 
-        public function getAllOrderPending() {
-            $stmt = $this->db->prepare("SELECT DISTINCT order_id, receiver, phone_number, order_date, total_price FROM orderView WHERE order_status = ?");
-            $stmt->execute(["Pending"]);
-            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        //Getter
+        public function getOrderId() {
+            return $this->order_id;
+        }
+        public function getUser() {
+            return $this->user;
+        }
+        public function getTotalPrice() {
+            return $this->total_price;
+        }
+        public function getOrderStatus() {
+            return $this->order_status;
+        }
+        public function getOrderDate() {
+            return $this->order_date;
+        }
+        public function getShipping() {
+            return $this->shipping;
         }
 
-        public function getAllOrderNotPending() {
-            $stmt = $this->db->prepare("SELECT DISTINCT order_id, receiver, phone_number, order_date, order_status, total_price FROM orderView WHERE order_status != ?");
-            $stmt->execute(["Pending"]);
-            return $stmt->fetchAll(PDO::FETCH_OBJ);
+        //Setter
+        public function setUser(UserModel $user) {
+            $this->user = $user;
         }
-
-        public function getProductSoldPerMonth() {
-            $stmt = $this->db->prepare("SELECT month(order_date) AS month, sum(quantity) AS quantity
-                                        FROM orderView
-                                        WHERE  year(order_date) = year(now())
-                                        ORDER BY month");
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_OBJ);
-        }
-
-        public function changeOrderStatus($order_id, $orderStatus) {
-            try {
-                $stmt = $this->db->prepare("UPDATE orders set order_status = ? where order_id = ?");
-                return $stmt->execute([$orderStatus, $order_id]);
-            } catch(PDOException $e) {
-                return $e->getMessage();
+        public function setTotalPrice($total_price) {
+            if ($total_price <= 0) {
+                throw new Exception("Total price cannot be negative.");
             }
+            $this->total_price = $total_price;
         }
-
-        public function getOrderById($order_id) {
-            try {
-                $stmt = $this->db->prepare("SELECT * FROM orderView WHERE order_id = ?");
-                $stmt->execute([$order_id]);
-                return $stmt->fetchAll(PDO::FETCH_OBJ);
-            } catch(PDOException $e) {
-                return $e->getMessage();
+        public function setOrderStatus($order_status) {
+            $valid_statuses = ['pending', 'shipping', 'shipped', 'canceled'];
+            if (!in_array($order_status, $valid_statuses)) {
+                throw new Exception("Invalid order status.");
             }
+            $this->order_status = $order_status;
+        }
+        public function setOrderDate($order_date) {
+            $this->order_date = $order_date;
+        }
+        public function setShipping(ShippingModel $shipping) {
+            $this->shipping = $shipping;
         }
     }
 ?>

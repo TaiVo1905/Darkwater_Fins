@@ -5,11 +5,11 @@ document.addEventListener('DOMContentLoaded', function () {
         xhr.onload = function () {
             if (xhr.status === 200) {
                 try {
-                    let products = JSON.parse(xhr.responseText);
+                    let products = JSON.parse(xhr.response);
                     callback(products);
                 } catch (e) {
                     console.error("Error parsing JSON:", e);
-                    console.log("Response was:", xhr.responseText);
+                    console.log("Response was:", xhr.response);
                 }
             } else {
                 console.error("Request failed with status: " + xhr.status);
@@ -23,7 +23,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function displayProducts(products) {
         let productContainer = $("#product-container");
-        productContainer.innerHTML = ''; 
+        productContainer.innerHTML = '';
+        console.log(products)
         products.forEach(function (product) {
             let productElement = document.createElement("div");
             productElement.classList.add("col", "col-md-4", "col-sm-6", "item");
@@ -32,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <img src="${product.product_img_url}" alt="" class="card-img-top">
                     <div class="icon-overlay">
                         <i class="bi bi-cart-plus add-to-cart"></i>
-                        <a href="products/${product.product_type == 'Fish' ? 'fishes' : product.product_type == 'Fish Food' ? 'fishfoods' : 'aquariums'}/${product.product_id}">
+                        <a href="products/${product.product_type} == 'Fish' ? 'fishes' : product.product_type == 'Fish Food' ? 'fishfoods' : 'aquariums'}/${product.product_id}">
                             <i class="bi bi-link"></i>
                         </a>
                     </div>
@@ -49,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
         addToCartFunction(addToCarts);
         const pagination = $(".pagination");
         pagination.innerHTML = "";
-        for(let i = 1; i <= Math.floor((products.length % 6 + 1)); i++) {
+        for(let i = 1; i <= Math.floor((products.length / 6 + 1)); i++) {
             pagination.innerHTML += `<li class='page-item'><a class='page-link' data-page='${i}'>${i}</a></li>`;
         }
         const pageLinks = $$(".page-link[data-page]");
