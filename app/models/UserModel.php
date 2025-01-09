@@ -54,8 +54,11 @@
             $this->user_img_url = $user_img_url;
         }
         public function setEmail($email) {
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                throw new Exception("Invalid email format.");
+            }
             $this->email = $email;
-        }
+        }        
         public function setPasswords($passwords) {
             $this->passwords = $passwords;
         }
@@ -63,12 +66,23 @@
             $this->address = $address;
         }
         public function setPhoneNumber($phone_number) {
+            if (!preg_match('/^\d{10,11}$/', $phone_number)) {
+                throw new Exception("Invalid phone number format.");
+            }
+            
             $this->phone_number = $phone_number;
-        }
+        }         
         public function setRoles($roles) {
+            if ($roles != 0 && $roles != 1){ 
+                throw new Exception("Invalid role. Roles must be 0 or 1.");
+            }
             $this->roles = $roles;
         }
+
         public function setBanned($banned) {
+            if ($banned != 0 && $banned != 1) { 
+                throw new Exception("Invalid banned value. Must be 0 or 1.");
+            }
             $this->banned = $banned;
         }
     }

@@ -61,7 +61,7 @@ create table shipping (
     phone_number varchar(11) not null,
     address varchar(250) not null,
     receiver varchar(40) not null,
-    foreign key (product_id) references products(product_id)
+    foreign key (order_id) references orders(order_id)
 );
 
 CREATE VIEW orderView AS
