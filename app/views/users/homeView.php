@@ -20,7 +20,7 @@
        <div class="slider" id="slider">
             <p>Cultivating passion and bringing nature indoors</p>
             <h6>Discover a world of unique fish, diverse foods, and stunning aquariums.</h6>
-            <button type="button" class="btn btn-primary btn_contact">CONTACT US TODAY!</button>
+            <a href="home/contactUs"><button type="button" class="btn btn-primary btn_contact">CONTACT US TODAY!</button></a>
             <div class="icon_social_media">
                 <i class="bi bi-instagram"></i>
                 <i class="bi bi-facebook"></i>

@@ -21,3 +21,12 @@ function createHotFishCard($id, $fishImage, $fishName, $fishSub, $fishPrice, $ur
     return $html;
 }
 ?>
+<?php
+function createGallery($fishImage,$number) {
+    $html = "
+            <img src='$fishImage' alt='Fish' class='item-$number'>
+    ";
+    return $html;
+}
+?>
+

@@ -26,9 +26,6 @@
                             <div style="background-color: black;border-radius: 20px;margin-bottom: 5px;">
                                 <a href="Users">Profile</a>
                             </div>
-                            <div style="background-color: black;border-radius: 20px;margin-bottom: 5px;">
-                                <a href="#">Change password</a>
-                            </div>
                             <div style="background-color: black;border-radius: 20px;">
                                 <a href="Users/logOut">Log out</a>
                             </div>

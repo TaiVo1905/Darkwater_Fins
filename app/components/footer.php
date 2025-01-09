@@ -44,7 +44,7 @@
                     </a></li>
                 <li style="margin-bottom: 41px;"><a href="#">Phone: <span style="font-size: 13px;">+84 941 116 732</span></a></li>
                 <li style="margin-bottom: 40px;"><a href="mailto:info@gmail.com">Email:<span style="font-size: 13px;"> Fins@gmail.com</span></a></li>
-                <li style="margin-bottom: 39px;"><a href="#">Feedback</a></li>
+                <li style="margin-bottom: 39px;"><a href="home/contactUs">Feedback</a></li>
                 <li style="margin-bottom: 40px;"><a href="#">Bug report</a></li>
             </ul>
         </div>

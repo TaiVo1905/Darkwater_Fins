@@ -13,8 +13,14 @@
             $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "ProductModel");
             return $stmt->fetchAll();
         }
-
-        public function getproductsByType ($product_type) {
+        // many purchase
+        public function getTop6PurchasedFishes() {
+            $stmt = $this->__model->db->prepare("SELECT * FROM products WHERE product_type = 'Fish' AND deleted != ? ORDER BY purchases DESC LIMIT 6");
+            $stmt->execute([1]);
+            $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "ProductModel");
+            return $stmt->fetchAll();
+        }
+        public function getProductsByType ($product_type) {
             $stmt = $this->__model->db->prepare("SELECT * FROM products WHERE product_type = '$product_type' AND deleted != ?");
             $stmt->execute([1]);
             $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "ProductModel");
