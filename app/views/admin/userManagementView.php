@@ -15,7 +15,7 @@
     <div style="background-color: #F4F4F4;height:100vh;">
         <?php
             include_once './app/components/admin/header.php' ;
-            echo generateDashboard('hide-element', '34 orders', '$20000', '33', "Users management");
+            echo generateDashboard('hide-element', '34 orders', '$20000', '33', "User management");
             include_once './app/components/admin/sidebar.php';
         ?>
         <div class="table-container big_container">
@@ -42,7 +42,7 @@
                             $roles_2 = "Admin";
                         }
                             echo "
-                                <tr data-userId = '{$user->getUserId()}'>
+                                <tr data-userId = '{$user->getUserId()}' id='user_row'>
                                     <td>{$user->getUserId()}</td>
                                     <td title='{$user->getUserName()}'>{$user->getUserName()}</td>
                                     <td title='{$user->getEmail()}'>{$user->getEmail()}</td>

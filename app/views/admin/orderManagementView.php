@@ -17,7 +17,7 @@
   <div style="background-color: #F4F4F4; height:100vh;">
     <?php 
       require_once("./app/components/admin/header.php");
-      echo generateDashboard('hide-element', '34 orders', '$20000', '33', "Orders management");
+      echo generateDashboard('hide-element', '34 orders', '$20000', '33', "Order management");
       require_once("./app/components/admin/sidebar.php");
     ?>
     <div class="table-container big_container">

@@ -9,7 +9,7 @@ function generateDashboard($hideClass , $orders, $money, $productsSold, $pageNam
                 <div class='d-flex align-items-center icon_i'>
                     <div class='search-input'>
                         <i class='bi bi-search'></i>
-                        <input type='text' class='form-control me-4' placeholder='Type here...' style='width: 300px;'>
+                        <input type='text' class='form-control me-4 search-input-field' placeholder='Type here...' style='width: 300px;'>
                     </div>
                     <i class='bi bi-bell me-3'></i>
                     <i class='bi bi-person-circle'></i>

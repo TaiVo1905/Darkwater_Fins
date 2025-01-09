@@ -8,7 +8,7 @@
             <p><a href="products/aquariums">Aquarium</a></p>
             <p><a href="products/fishFoods">Fish Food</a></p>
             <p><a href="products/fishes">Fish</a></p>
-            <p>About us</p>
+            <p><a href="home/aboutUs">About us</a></p>
         </div>
         <div class="icon_header">
             <div class="search-container icon-header-search">

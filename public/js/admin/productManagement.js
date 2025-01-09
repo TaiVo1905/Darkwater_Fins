@@ -158,3 +158,36 @@ function displayToast(message) {
       })
     })
   });
+document.addEventListener('DOMContentLoaded', function() {
+    const inputElement = $('.search-input-field');
+    inputElement.addEventListener('keydown', function(event) {
+        const productResult = []; 
+        if (event.key === 'Enter') {   
+            const keywords = inputElement.value;
+            const productList = $$('.product-row')
+            productList.forEach(product => {
+                const nameCell = product.children[2];
+                if (nameCell.textContent.trim().toLowerCase().includes(keywords.toLowerCase())) {
+                    product.classList.remove('product_hidden');
+                    productResult.push(product);
+                }else{
+                    product.classList.add('product_hidden');
+                }
+            })
+
+            const pagination = $('.pagination');
+            pagination.innerHTML = '';
+            const currentPage = Math.floor(productResult.length / 25 + 1);
+            for(let i = 0; i < currentPage; i++){
+                pagination.innerHTML += `<li class='page-item'><a class='page-link' data-page='${i+1}'>${i+1}</a></li>`;
+            }
+            const pageLinks = $$(".page-link[data-page]");
+            const itemsPerPage = 25;
+            items = $$(".admin-table-row");
+            preparepagination(pageLinks, items, itemsPerPage);
+            $(".page-link[data-page='1']").click();
+        }
+    });
+});
+
+

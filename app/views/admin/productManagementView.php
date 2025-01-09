@@ -15,7 +15,7 @@
 <div style="background-color: #F4F4F4; height:100vh;">
     <?php
         require_once("./app/components/admin/header.php");
-        echo generateDashboard('hide-element', '34 orders', '$20000', '33', "Products management");
+        echo generateDashboard('hide-element', '34 orders', '$20000', '33', "Product management");
         require_once("./app/components/admin/sidebar.php");
     ?>
     <a href="./admin/addProducts/"><div class="addNewProducts"><i class="bi bi-patch-plus p-1"></i>Add new products</div></a>
@@ -31,7 +31,7 @@
                         <th>Options</th>
                     </tr>
                 </thead>
-                <table class="table-body table_btn align-middle text-center small_container">
+                <table class="table-body table_btn align-middle text-center small_container product-table">
                     <?php 
                         foreach ($data as $product){
                             echo "
