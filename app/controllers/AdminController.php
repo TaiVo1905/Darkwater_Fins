@@ -145,7 +145,7 @@
                 $product_sub = $_POST["productSub"];
                 $product_description = $_POST["productDescription"];
                 $product_stock = $_POST["productStock"];
-                $result = $this->__productService -> updateProduct($product_name, $product_img, $product_price, $product_stock, $product_sub, $product_description, $product_id);
+                $result = $this->__productService -> updateProduct($product_name, $product_img_url, $product_price, $product_stock, $product_sub, $product_description, $product_id);
                 echo $result;
             }
         }

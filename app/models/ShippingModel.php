@@ -35,8 +35,11 @@
             $this->__order = $__order;
         }
         public function setPhoneNumber($__phone_number) {
-            $this->__phone_number = $__phone_number;
-        }
+            if (!preg_match('/^\d{10,11}$/', $__phone_number)) {
+                throw new Exception("Invalid phone number format.");
+            }
+            $this->__phone_number= $__phone_number;
+        } 
         public function setAddress($__address) {
             $this->__address = $__address;
         }

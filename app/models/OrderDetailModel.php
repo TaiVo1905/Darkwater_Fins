@@ -5,11 +5,13 @@
         private $order;
         private $product;
         private $quantity;
+        private $price;
 
-        public function __construct (OrderModel $order = null, ProductModel $product = null, $quantity = null) {
+        public function __construct (OrderModel $order = null, ProductModel $product = null, $quantity = null, $price = null) {
             $this->order = $order;
             $this->product = $product;
             $this->quantity = $quantity;
+            $this->price = $price;
         }
 
         //Getter
@@ -34,6 +36,9 @@
             $this->product = $product;
         }
         public function setQuantity($quantity) {
+            if ($this->product && $this->product->getProductStock() < $quantity) {
+                throw new Exception("The required quantity exceeds the quantity in stock.");
+            }
             $this->quantity = $quantity;
         }
     }
