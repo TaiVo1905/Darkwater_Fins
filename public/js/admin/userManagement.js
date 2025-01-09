@@ -96,3 +96,29 @@ function banUser(userId) {
     }
     xhr.send(JSON.stringify({"user_id": userId}));
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const inputElement = $('.search-input-field');
+    inputElement.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {  
+            const keywords = inputElement.value;
+            const userList = $$('#user_row')
+            if(keywords ==""){
+                isUser = true;
+                userList.forEach(user => {
+                    user.classList.remove('hidden');
+                })
+                return
+            }
+            userList.forEach(user => {
+                const nameCell = user.children[1];
+                if (nameCell.textContent.trim().toLowerCase().includes(keywords.toLowerCase())) {
+                    user.classList.remove('hidden');
+                }else{
+                    user.classList.add('hidden');
+                }
+            
+            })  
+        }
+    });
+});

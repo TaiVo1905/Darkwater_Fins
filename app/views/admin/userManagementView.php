@@ -42,7 +42,7 @@
                             $roles_2 = "Admin";
                         }
                             echo "
-                                <tr data-userId = '{$user->getUserId()}'>
+                                <tr data-userId = '{$user->getUserId()}' id='user_row'>
                                     <td>{$user->getUserId()}</td>
                                     <td title='{$user->getUserName()}'>{$user->getUserName()}</td>
                                     <td title='{$user->getEmail()}'>{$user->getEmail()}</td>

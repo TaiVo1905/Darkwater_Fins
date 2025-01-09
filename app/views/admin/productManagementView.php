@@ -31,7 +31,7 @@
                         <th>Options</th>
                     </tr>
                 </thead>
-                <table class="table-body table_btn align-middle text-center small_container">
+                <table class="table-body table_btn align-middle text-center small_container product-table">
                     <?php 
                         foreach ($data as $product){
                             echo "

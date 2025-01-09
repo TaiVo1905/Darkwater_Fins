@@ -128,4 +128,28 @@ const modal = bootstrap.Modal.getInstance($("#confirmRejectionModal"));
 modal.hide();
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+  const inputElement = $('.search-input-field');
+  inputElement.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {   
+          const keywords = inputElement.value;
+          const orderList = $$('.order-row')
+          if(keywords ==""){
+            orderList.forEach(order => {
+                order.classList.remove('hidden');
+            })
+            return
+        }
+          orderList.forEach(order => {
+              const nameCell = order.children[1];
+              if (nameCell.textContent.trim().toLowerCase().includes(keywords.toLowerCase())) {
+                  order.classList.remove('hidden');
+              }else{
+                  order.classList.add('hidden');
+              }
 
+          })
+  
+      }
+  });
+});
