@@ -34,6 +34,9 @@
             $this->product = $product;
         }
         public function setQuantity($quantity) {
+            if ($this->product && $this->product->getProductStock() < $quantity) {
+                throw new Exception("The required quantity exceeds the quantity in stock.");
+            }
             $this->quantity = $quantity;
         }
     }

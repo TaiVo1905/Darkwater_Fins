@@ -68,6 +68,9 @@
             $this->product_img_url = $product_img_url;
         }
         public function setProductPrice($product_price) {
+            if ($product_price <= 0) {
+                throw new Exception("Product price must be greater than zero.");
+            }
             $this->product_price = $product_price;
         }
         public function setProductSub($product_sub) {
@@ -77,6 +80,9 @@
             $this->product_description = $product_description;
         }
         public function setProductStock($product_stock) {
+            if ($product_stock <= 0) {
+                throw new Exception("Product stock cannot be negative.");
+            }
             $this->product_stock = $product_stock;
         }
         public function setProductCategory($product_category) {

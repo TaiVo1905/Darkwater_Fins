@@ -86,9 +86,16 @@
 
         //Setter
         public function setTotalPrice($total_price) {
+            if ($total_price <= 0) {
+                throw new Exception("Total price cannot be negative.");
+            }
             $this->total_price = $total_price;
         }
         public function setOrderStatus($order_status) {
+            $valid_statuses = ['pending', 'shipping', 'shipped', 'canceled'];
+            if (!in_array($order_status, $valid_statuses)) {
+                throw new Exception("Invalid order status.");
+            }
             $this->order_status = $order_status;
         }
         public function setOrderDate($order_date) {
@@ -101,8 +108,12 @@
             $this->address = $address;
         }
         public function setPhoneNumber($phone_number) {
+            if (!preg_match('/^\d{10,11}$/', $phone_number)) {
+                throw new Exception("Invalid phone number format.");
+            }
+            
             $this->phone_number = $phone_number;
-        }
+        }        
         public function setProductUImgUrl($product_img_url) {
             $this->product_img_url = $product_img_url;
         }
@@ -113,12 +124,17 @@
             $this->product_category = $product_category;
         }
         public function setQuantity($quantity) {
+            if ($this->product && $this->product->getProductStock() < $quantity) {
+                throw new Exception("The required quantity exceeds the quantity in stock.");
+            }
             $this->quantity = $quantity;
         }
         public function setProductPrice($product_price) {
+            if ($product_price <= 0) {
+                throw new Exception("Product price must be greater than zero.");
+            }
             $this->product_price = $product_price;
         }
-
         public function returnDataJson() {
             return (object) array(
                 'order_id' => $this->order_id,
