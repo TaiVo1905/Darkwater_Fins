@@ -54,7 +54,7 @@
                 header("Location: /404");
                 exit;
             }
-            $this->view("products/detail", [$product]);
+            $this->view("products/detail", [$product, $userComment = null]);
         }
 
         public function filterByPrice($price=null, $type=null) {

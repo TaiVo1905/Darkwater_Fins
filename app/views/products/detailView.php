@@ -17,48 +17,64 @@
     <?php
         include_once './app/components/header.php';
         include_once './app/components/banner.php';
-        echo showBanner($data[0]->getProductName(), ['Home', $data[0]->getProductName()]); 
-        echo "
-            <div class='container'>
-                <div class='card mb-3' style='max-width: 1260px; border: none;' data-product-id ='{$data[0]->getProductId()}'>
-                    <div class='row g-5 align-items-center'>
-                        <div class='col-md-4'>
-                            <img src='{$data[0]->getProductImgUrl()}' class='img-fluid rounded-start' alt='Product Image'>
-                        </div>
-                        <div class='col-md-8'>
-                            <div class='card-body'>
-                                <p class='price'>$" . $data[0]->getProductPrice() . "</p>
-                                <p class='card-text'>
-                                    {$data[0]->getProductSub()}
-                                </p>
-                                <div class='d-flex align-items-center mb-4'>
-                                    <input type='number' value='1' min='1'>
-                                    <button class='btn btn-primary checkout'>BUY NOW</button>
+        echo showBanner($data[0]->getProductName(), ['Home', $data[0]->getProductName()]);
+    ?> 
+    <div class='container'>
+        <?php
+            $html = "
+                    <div class='card mb-3' style='max-width: 1260px; border: none;' data-product-id ='{$data[0]->getProductId()}'>
+                        <div class='row g-5 align-items-center'>
+                            <div class='col-md-4'>
+                                <img src='{$data[0]->getProductImgUrl()}' class='img-fluid rounded-start' alt='Product Image'>
+                            </div>
+                            <div class='col-md-8'>
+                                <div class='card-body'>
+                                    <p class='price'>$" . $data[0]->getProductPrice() . "</p>
+                                    <p class='card-text'>
+                                        {$data[0]->getProductSub()}
+                                    </p>
+                                    <div class='d-flex align-items-center mb-4'>
+                                        <input type='number' value='1' min='1'>
+                                        <button class='btn btn-primary checkout'>BUY NOW</button>
+                                    </div>
+                                    <h5 class='card-title'><span>CATEGORY:</span>{$data[0]->getProductCategory()}</h5>
+                                    <h5 class='card-title'><span>PRODUCT ID:</span>{$data[0]->getProductId()}</h5>
                                 </div>
-                                <h5 class='card-title'><span>CATEGORY:</span>{$data[0]->getProductCategory()}</h5>
-                                <h5 class='card-title'><span>PRODUCT ID:</span>{$data[0]->getProductId()}</h5>
                             </div>
                         </div>
                     </div>
-                </div>
-                <ul class='nav nav-tabs'>
-                    <li class='nav-item'>
-                        <a class='nav-link active' id='description-tab' data-bs-toggle='tab' href='#description'>DESCRIPTION</a>
-                    </li>
-                    <li class='nav-item'>
-                        <a class='nav-link' id='reviews-tab' data-bs-toggle='tab' href='#reviews'>REVIEWS (0)</a>
-                    </li>
-                </ul>
-                <div class='tab-content'>
-                    <div class='tab-pane fade show active' id='description'>
-                        <p>{$data[0]->getProductDescription()}/p>
-                    </div>
-                    <div class='tab-pane fade' id='reviews'>
-                        <p>No reviews yet. Be the first to write a review!</p>
-                    </div>
-                </div>
-            </div>
-        ";
+                    <ul class='nav nav-tabs'>
+                        <li class='nav-item'>
+                            <a class='nav-link active' id='description-tab' data-bs-toggle='tab' href='#description'>DESCRIPTION</a>
+                        </li>
+                        <li class='nav-item'>
+                            <a class='nav-link' id='reviews-tab' data-bs-toggle='tab' href='#reviews'>REVIEWS (" . count($data[1] ?? []) . ")</a>
+                        </li>
+                    </ul>
+                    <div class='tab-content'>
+                        <div class='tab-pane fade show active' id='description'>
+                            <p>{$data[0]->getProductDescription()}</p>
+                        </div>
+                        <div class='tab-pane fade' id='reviews'>
+                    ";
+            if(!$data[1]) {
+                $html .= "<p>No reviews yet. Be the first to write a review!</p>";
+            } else {
+                include_once("./app/components/commentItem.php");
+                $html . "<div class='card text-body'>";
+                foreach ($data[1] as $userComment) {
+                    $html .= renderUserComment($userComment->$user->getUserImgUrl(),
+                                            $userComment->$user->getUserName(),
+                                            $userComment->getDateCreate(),
+                                            $userComment->getCommentContent());
+                };
+                $html .= "</div>";
+            }
+            $html .= "</div></div>";
+            echo $html;
+        ?>
+    </div>
+    <?php
         include_once  './app/components/toast.php';
         echo displayToast("");
         include_once  './app/components/footer.php';
