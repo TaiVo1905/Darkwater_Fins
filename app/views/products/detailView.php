@@ -22,7 +22,7 @@
     <div class='container'>
         <?php
             $html = "
-                    <div class='card mb-3' style='max-width: 1260px; border: none;' data-product-id ='{$data[0]->getProductId()}'>
+                    <div class='card mb-3 product-detail' style='max-width: 1260px; border: none;' data-product-id ='{$data[0]->getProductId()}'>
                         <div class='row g-5 align-items-center'>
                             <div class='col-md-4'>
                                 <img src='{$data[0]->getProductImgUrl()}' class='img-fluid rounded-start' alt='Product Image'>
@@ -56,19 +56,39 @@
                             <p>{$data[0]->getProductDescription()}</p>
                         </div>
                         <div class='tab-pane fade' id='reviews'>
+                            <span>
                     ";
             if(!$data[1]) {
                 $html .= "<p>No reviews yet. Be the first to write a review!</p>";
             } else {
                 include_once("./app/components/commentItem.php");
-                $html . "<div class='card text-body'>";
+                $html .= "<div class='card text-body' id='comment-area'>";
                 foreach ($data[1] as $userComment) {
-                    $html .= renderUserComment($userComment->$user->getUserImgUrl(),
-                                            $userComment->$user->getUserName(),
+                    $html .= renderUserComment($userComment->getUser()->getUserImgUrl(),
+                                            $userComment->getUser()->getUserName(),
                                             $userComment->getDateCreate(),
                                             $userComment->getCommentContent());
                 };
                 $html .= "</div>";
+            }
+            $html .= "</span>";
+            if (isset($_SESSION["user_id"])) {
+                $html .= "
+                        <div class='card mt-3' id='comment-box'>
+                            <div class='card-body p-4'>
+                                <div class='d-flex flex-start w-100'>
+                                    <img class='rounded-circle shadow-1-strong me-3'
+                                        src='{$data[2]->getUserImgUrl()}' alt='avatar' width='60'height='60' />
+                                    <div class='w-100'>
+                                        <h5 id='userName'>{$data[2]->getUserName()}</h5>
+                                        <textarea class='form-control' id='commentContent' rows='2' data-user-id = '{$data[2]->getUserId()}'></textarea>
+                                        <div class='d-flex justify-content-end mt-3'>
+                                            <button  type='button' class='btn btn-primary'>Post</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>";
             }
             $html .= "</div></div>";
             echo $html;
@@ -82,5 +102,6 @@
     <script src="./public/js/define.js?v=<?php echo time(); ?>"></script>
     <script src="./public/js/header.js?v=<?php echo time(); ?>"></script>
     <script src="./public/js/checkout.js?v=<?php echo time(); ?>"></script>
+    <script src="./public/js/userComment.js?v=<?php echo time(); ?>"></script>
 </body>
 </html>

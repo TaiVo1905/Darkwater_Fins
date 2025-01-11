@@ -11,8 +11,9 @@
         private $roles;
         private $banned;
 
-        public function __construct ($user_name = null, $email = null, $passwords = null) {
+        public function __construct ($user_name = null, $user_img_url = null, $email = null, $passwords = null) {
             $this->user_name = $user_name;
+            $this->user_img_url = $user_img_url;
             $this->email = $email;
             $this->passwords = $passwords;
         }

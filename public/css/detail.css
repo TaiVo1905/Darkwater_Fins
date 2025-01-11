@@ -65,3 +65,17 @@ input[type="number"] {
     border: 1px solid #ddd;
     margin-bottom: 60px;
 }
+
+#comment-area {
+    max-height: 300px; 
+    overflow-y: auto; 
+    display: block;
+}
+
+#comment-area::-webkit-scrollbar {
+    width: 5px;
+}
+
+#comment-area::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color4);
+}

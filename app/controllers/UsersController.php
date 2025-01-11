@@ -136,7 +136,7 @@
                         if(isset($_COOKIE["code"])) {
                             unset($_COOKIE["code"]);
                         }
-                        $user = new UserModel($user_name, $user_email, $user_password);
+                        $user = new UserModel($user_name,"./public/images/avatar/default-person-image.webp", $user_email, $user_password);
                         if($this->__userService->addUser($user)){
                             header("location:" . BASE_URL . "Users/SignIn");
                             exit();

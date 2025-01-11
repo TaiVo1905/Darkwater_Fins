@@ -64,6 +64,16 @@ create table shipping (
     foreign key (order_id) references orders(order_id)
 );
 
+create table user_comment (
+    user_comment_id int primary key auto_increment,
+    user_id int not null,
+    product_id int not null,
+    comment_content text not null,
+    date_create datetime not null,
+    foreign key (user_id) references users(user_id),
+    foreign key (product_id) references products(product_id)
+);
+
 CREATE VIEW orderView AS
     SELECT 
         o.*, s.receiver, s.address, s.phone_number,p.product_img_url, p.product_name, p.product_category, od.quantity, p.product_price

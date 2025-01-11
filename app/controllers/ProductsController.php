@@ -1,10 +1,14 @@
 <?php
+    require_once("./app/models/UserCommentModel.php");
     class ProductsController extends Controller {
         private $__productService;
+        private $__userService;
 
         public function __construct() {
             $this->service("Product");
+            $this->service("User");
             $this->__productService = new ProductService();
+            $this->__userService = new UserService();
         }
 
         public function fishes($id = null) {
@@ -50,11 +54,9 @@
 
         private function detail($id) {
             $product = $this->__productService->getProductById($id);
-            if (!$product) {
-                header("Location: /404");
-                exit;
-            }
-            $this->view("products/detail", [$product, $userComment = null]);
+            $userComments = $this->__productService->getUserComment($_SESSION["user_id"], $id) ?? null;
+            $user = $this->__userService->getUserById($_SESSION["user_id"]);
+            $this->view("products/detail", [$product, $userComments, $user]);
         }
 
         public function filterByPrice($price=null, $type=null) {
@@ -100,6 +102,21 @@
             } else {
                 echo json_encode([]);
             }
-        }   
+        } 
+        
+        public function postComment() {
+            if($_SERVER["REQUEST_METHOD"] == "POST") {
+                $user_id = $_POST['user_id'];
+                $product_id = $_POST['product_id'];
+                $comment_content = $_POST['comment_content'];
+                $date_create = $_POST['date_create'];
+                $user = $this->__userService->getUserById($user_id);
+                $product = $this->__productService->getProductById($product_id);
+                $comment = new UserCommentModel($user, $product, $comment_content, $date_create);
+                echo $this->__productService->postComment($comment);
+            } else {
+                echo 0;
+            }
+        }
     }
 ?>

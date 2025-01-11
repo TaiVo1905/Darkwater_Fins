@@ -1,4 +1,6 @@
 <?php
+    require_once("./app/services/UserService.php");
+    require_once("./app/services/ProductService.php");
     class ProductService {
         private $__model;
 
@@ -118,8 +120,39 @@
         }
 
         public function removeProduct($product_id){
-            $stmt =$this->__model->db->prepare("UPDATE products SET deleted = ? WHERE product_id = ? ");
+            $stmt = $this->__model->db->prepare("UPDATE products SET deleted = ? WHERE product_id = ? ");
             return $stmt->execute([1, $product_id]);
+        }
+
+        public function postComment(UserCommentModel $comment) {
+            try {
+                $stmt = $this->__model->db->prepare("INSERT INTO user_comment (user_id, product_id, comment_content, date_create)
+                                                    VALUE (?, ?, ?, ?)");
+                return $stmt->execute([$comment->getUser()->getUSerId(),
+                                    $comment->getProduct()->getProductId(),
+                                    $comment->getCommentContent(),
+                                    $comment->getDateCreate()]);
+            } catch(PDOException $e) {
+                return  $e->getMessage();
+            }
+        }
+
+        public function getUserComment($user_id, $product_id) {
+            $stmt = $this->__model->db->prepare("SELECT * FROM user_comment WHERE user_id = ? AND product_id = ?");
+            $stmt->execute([$user_id, $product_id]);
+            $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "UserCommentModel");
+            $userComments = $stmt->fetchAll();
+            foreach ($userComments as $userComment) {
+                $user = new UserService();
+                $user = $user->getUserById($userComment->user_id);
+                $product = new ProductService();
+                $product = $product->getProductById($userComment->product_id);
+                $userComment->setUser($user);
+                $userComment->setProduct($product);
+                unset($userComment->user_id,
+                    $userComment->product_id);
+            }
+            return $userComments;
         }
     }
 ?>
