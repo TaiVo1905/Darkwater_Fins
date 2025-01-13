@@ -1,7 +1,7 @@
 # Darkwater_Fins
 A website is used to sell aquariums and services.
 DF-12 Feat addUpdateProfile
-# The princible of commit
+# The principle of commit
 commit message: <key> <type>: <description>
 <key>
 Example: DF-1 (key theo issue trên Jira, phải viết hoa)
@@ -21,11 +21,11 @@ branch name: <key>-<branch-name>
 <branch-name>: feat/<feat-name>
 
 
-# The princible of make files' name
+# The principle of make files' name
 Controller/Model: tên lớp + Controller (Viết hoa chữ cái đầu của tên lớp)
 Model:m tên lớp + Model (Viết hoa chữ cái đầu của tên lớp + tên lớp theo entity của database)
 View: tên page + View
 
 # Includes
 
-Luôn luôn thêm file "./app/public/css/common.css" & "./app/components/bootStrapAndFontLink.php" vào view files
+Luôn luôn thêm file "./app/public/css/common.css" & "./app/components/link.php" vào view files
