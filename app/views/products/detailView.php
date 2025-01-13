@@ -34,11 +34,12 @@
                                         {$data[0]->getProductSub()}
                                     </p>
                                     <div class='d-flex align-items-center mb-4'>
-                                        <input type='number' value='1' min='1'>
+                                        <input type='number' class='product-quantity' value='1' min='1'>
                                         <button class='btn btn-primary checkout'>BUY NOW</button>
                                     </div>
-                                    <h5 class='card-title'><span>CATEGORY:</span>{$data[0]->getProductCategory()}</h5>
-                                    <h5 class='card-title'><span>PRODUCT ID:</span>{$data[0]->getProductId()}</h5>
+                                    <h5 class='card-title'><span>CATEGORY: </span>{$data[0]->getProductCategory()}</h5>
+                                    <h5 class='card-title'><span>PRODUCT ID: </span>{$data[0]->getProductId()}</h5>
+                                    <h5 class='card-title'><span>PRODUCT STOCK: </span>{$data[0]->getProductStock()}</h5>
                                 </div>
                             </div>
                         </div>

@@ -137,9 +137,9 @@
             }
         }
 
-        public function getUserComment($user_id, $product_id) {
-            $stmt = $this->__model->db->prepare("SELECT * FROM user_comment WHERE user_id = ? AND product_id = ?");
-            $stmt->execute([$user_id, $product_id]);
+        public function getUserComment($product_id) {
+            $stmt = $this->__model->db->prepare("SELECT * FROM user_comment WHERE product_id = ?");
+            $stmt->execute([$product_id]);
             $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "UserCommentModel");
             $userComments = $stmt->fetchAll();
             foreach ($userComments as $userComment) {

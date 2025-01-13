@@ -32,7 +32,7 @@
                 <div class="d-grid">
                     <button type="submit" class="btn custom-btn-outline fw-bold login-btn">Sign in</button>
                 </div>
-                <h6 class="pt-4 text-center"><a href="Users/ForgottenPassword" class="custom-color">Forgot password?</a></h6>
+                <h6 class="pt-4 text-center"><a href="Users/ForgotPassword" class="custom-color">Forgot password?</a></h6>
                 <h6 class="pt-3 text-center">Not a member? <a href="./users/SignUp" class="custom-color">Sign up</a></h6>
             </form>
         </div>

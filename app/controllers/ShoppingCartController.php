@@ -17,7 +17,7 @@
             if($_SERVER["REQUEST_METHOD"] == "POST") {
                 $jsonData = file_get_contents("php://input");
                 $request = json_decode($jsonData, true);
-                $response = $this->__cartService->addToCart($_SESSION["user_id"], $request["product_id"]);
+                $response = $this->__cartService->addToCart($_SESSION["user_id"], $request["product_id"], $request["quantity"]);
                 echo json_encode($response);
             }
         }

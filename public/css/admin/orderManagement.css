@@ -61,7 +61,6 @@
 
 .table-body-order::-webkit-scrollbar-thumb {
   background-color: var(--primary-color4);
-  /* padding-left: -20px; */
 }
 
 .table-body-order tr {

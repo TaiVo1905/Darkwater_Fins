@@ -138,3 +138,19 @@ input.invalid {
 .nav_tab:hover{
     cursor: pointer;
 }
+
+/* scroll*/
+
+.order-page .row {
+    max-height: 500px; 
+    overflow-y: auto; 
+    display: block;
+}
+
+.order-page .row::-webkit-scrollbar {
+    width: 5px;
+}
+
+.order-page .row::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color4);
+}

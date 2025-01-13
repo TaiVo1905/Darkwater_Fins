@@ -150,7 +150,7 @@
             }
         }
 
-        public function forgottenPassword() {
+        public function forgotPassword() {
             try {
                 $data = null;
                 if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -185,7 +185,7 @@
                         };
                     }
                 }
-                $this->view("Users/ForgottenPassword", $data);
+                $this->view("Users/ForgotPassword", $data);
 
             } catch(PDOException $e) {
                 echo $e->getMessage();

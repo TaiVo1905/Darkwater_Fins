@@ -54,8 +54,8 @@
 
         private function detail($id) {
             $product = $this->__productService->getProductById($id);
-            $userComments = $this->__productService->getUserComment($_SESSION["user_id"], $id) ?? null;
-            $user = $this->__userService->getUserById($_SESSION["user_id"]);
+            $userComments = $this->__productService->getUserComment($id) ?? null;
+            $user =  isset($_SESSION["user_id"]) ? $this->__userService->getUserById($_SESSION["user_id"]) : null;
             $this->view("products/detail", [$product, $userComments, $user]);
         }
 
