@@ -2,7 +2,7 @@
 window.addEventListener('scroll', function() {
     var header = $('.header_container');
     if (window.scrollY < 80) {
-        if (!window.location.href.includes("contactUs") || !window.location.href.includes("aboutUs")) {
+        if (window.location.href.includes("contactUs") || window.location.href.includes("aboutUs")) {
             return;
         }
         header.classList.remove('scrolled');

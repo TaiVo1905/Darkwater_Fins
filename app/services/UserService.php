@@ -56,7 +56,7 @@
                 if(password_needs_rehash($password_hash, PASSWORD_BCRYPT)) {
                     $password_hash = password_hash($password_hash, PASSWORD_BCRYPT);
                 }
-                return $stmt->execute([$user->getUserName(), $user->getEmail(), $password_hash, 0]);
+                return $stmt->execute([$user->getUserName(), $user->getUserImgUrl(), $user->getEmail(), $password_hash, 0]);
 
             } catch (PDOException $e) {
                 echo $e->getMessage();

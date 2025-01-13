@@ -114,7 +114,7 @@ $(".checkout")?.addEventListener("click", () => {
                         }
                     }
                 }
-                xhr.send(JSON.stringify({"product_id": product_id}));
+                xhr.send(JSON.stringify({"product_id": product_id, "quantity": parseInt($(".product-quantity").value)}));
             }
         })
         .catch((error) => {

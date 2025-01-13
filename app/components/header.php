@@ -1,8 +1,10 @@
 <div class="header_container">
     <div class="header">
-        <div class="logo">
-            <img class="img_logo" src="./public/images/logo/Darkwater_Fins.png" alt="">
-        </div>
+        <a href="home">
+            <div class="logo">
+                <img class="img_logo" src="./public/images/logo/Darkwater_Fins.png" alt="">
+            </div>
+        </a>
         <div class="nav_text">
             <p><a href="home">Home</a></p>
             <p><a href="products/aquariums">Aquarium</a></p>
