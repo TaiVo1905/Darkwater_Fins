@@ -6,7 +6,7 @@
     <title>User management</title>
     <base href="<?php echo BASE_URL ?>">
     <?php include_once './app/components/link.php' ?>
-    <link rel="stylesheet" href="./public/css/common.css">
+    <link rel="stylesheet" href="./public/css/common.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./public/css/admin/header.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./public/css/admin/sidebar.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./public/css/admin/userManagement.css?v=<?php echo time(); ?>">

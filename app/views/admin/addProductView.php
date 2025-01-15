@@ -6,6 +6,7 @@
     <title>Adding products</title>
     <base href="<?php echo BASE_URL ?>">
     <?php include_once './app/components/link.php'; ?>
+    <link rel="stylesheet" href="./public/css/common.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./public/css/admin/addProduct.css?v=<?php echo time(); ?>">
 </head>
 <body>
@@ -56,7 +57,7 @@
                     <input class="input-area" type="text" id="productCategory" name="productCategory" required>
                 </div> 
                 <div class="button-fiel float-end">
-                    <button class = "cancel-btn btn btn-danger">Cancel</button>
+                    <a href="./admin/productManagement"><div class = "cancel-btn btn btn-danger">Cancel</div></a>
                     <button type="submit" id="save-btn" class = "save-btn btn btn-primary">Save</button>
                 </div>
             </div>

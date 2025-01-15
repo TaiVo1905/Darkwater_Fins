@@ -143,18 +143,23 @@ function displayToast(message) {
     const deleteButtons = $$(".icon-delete");
     deleteButtons.forEach(function (button) {
       button.addEventListener("click", function () {
-          const productId = button.getAttribute("data-id");
-          
-          const xhr = new XMLHttpRequest();
-          xhr.open("POST", `./Admin/deleteProduct/${encodeURIComponent(productId)}`, true);
-          xhr.onreadystatechange = function () {
-              if(xhr.readyState == 4 && xhr.status == 200) {
-                button.closest(".product-row").remove();
-              } else {
-                console.log("Error");
-              }
-          }
-          xhr.send();
+            const productId = button.getAttribute("data-id");
+            const modal = new bootstrap.Modal($("#confirmDeleteProduct"));
+            modal.show();
+            $("#confirmDeleteProductButton").addEventListener("click", () => {
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", `./Admin/deleteProduct/${encodeURIComponent(productId)}`, true);
+                xhr.onreadystatechange = function () {
+                    if(xhr.readyState == 4 && xhr.status == 200) {
+                        button.closest(".product-row").remove();
+                        const modal = bootstrap.Modal.getInstance($("#confirmDeleteProduct"));
+                        modal.hide();
+                    } else {
+                        console.log("Error");
+                    }
+                }
+                xhr.send();
+            })
       })
     })
   });

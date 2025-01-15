@@ -12,3 +12,7 @@
     box-sizing: border-box;
     font-family: 'Kaisei Tokumin', serif;
 }
+
+.pagination {
+    cursor: pointer;
+}
