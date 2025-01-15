@@ -106,7 +106,7 @@
   opacity: 0.7;
 }
 
-.icon-confirm {
+.icon-confirm, .icon-shipped {
   color: var(--primary-color3);
   cursor: pointer;
   opacity: 0.7;

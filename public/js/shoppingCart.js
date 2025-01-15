@@ -55,7 +55,7 @@ function addToCartFunction(addToCarts) {
                         xhr.onreadystatechange = function() {
                             if(this.readyState == 4 && this.status == 200) {
                                 const response = JSON.parse(this.response);
-                                console.log(response)
+                                console.log(this.response)
                                 if(response.status == "success") {
                                     showToast("Add "+product_name+" successfully!");
                                 }else if(response["status"] == "fall" && response["code"] == "45000") {
@@ -63,7 +63,7 @@ function addToCartFunction(addToCarts) {
                                 }
                             }
                         }
-                        xhr.send(JSON.stringify({"product_id": product_id}));
+                        xhr.send(JSON.stringify({"product_id": product_id, "quantity": 1}));
                     }
                 })
                 .catch((error) => {

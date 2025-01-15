@@ -203,7 +203,7 @@
             if (isset($_POST['email']) && isset($_POST["user_name"])) {
                 $email = $_POST['email'];
                 $user_name = $_POST['user_name'];
-                if($this->__userService->getUserByEmail($email)) {
+                if(empty($this->__userService->getUserByEmail($email, 1))) {
                     echo $this->__mailerService->sendEmailCode($email, $user_name);
                 } else {
                     echo "This account was banned!";
