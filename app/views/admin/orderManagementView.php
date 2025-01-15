@@ -35,13 +35,14 @@
         <table class="table-body-order table-btn align-middle text-center small_container">
           <?php
             foreach($data as $order) {
+              $shipping = $order->getOrderStatus() == 'shipping' ? " | <i class='icon-shipped bi bi-check-circle fs-5'></i>": '';
               echo "
                     <tr data-order-id='{$order->getOrderId()}' class='order-row admin-table-row'>
                       <td>{$order->getOrderId()}</td>
                       <td>{$order->getReceiver()}</td>
                       <td>{$order->getPhoneNumber()}</td>
                       <td>{$order->getOrderDate()}</td>
-                      <td>{$order->getOrderStatus()}</td>
+                      <td>{$order->getOrderStatus()}{$shipping}</td>
                       <td>$" .$order->getTotalPrice(). "</td>
                     </tr>
                   ";
@@ -94,6 +95,29 @@
       </div>
     </div>
   </div>
+  <div class="modal fade" id="confirmShippedModal" tabindex="-1" aria-labelledby="confirmShippedModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="confirmShippedModalLabel">
+                Confirm Order
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Are you sure you want to confirm this order shipped?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary" id="shipped-btn">Confirm</button>
+            </div>
+          </div>
+        </div>
+      </div>
   <?php include_once  './app/components/toast.php';
     echo displayToast('');
   ?>

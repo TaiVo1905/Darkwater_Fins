@@ -84,8 +84,11 @@ function changeOrderStatus(orderId, orderStatus, inform) {
     if(this.readyState == 4 && this.status == 200) {
       response = JSON.parse(this.response);
       if(response == 1) {
-        $(`tr[data-order-id = '${orderId}']`).remove();
+        if(window.location.href.includes("orderManagement")) {
+          location.reload();
+        }
         showToast(inform);
+        $(`tr[data-order-id = '${orderId}']`).remove();
       } else {
         showToast("An error has occurred!");
       }
@@ -152,4 +155,22 @@ document.addEventListener('DOMContentLoaded', function() {
   
       }
   });
+});
+
+const icon_shipped = $$(".icon-shipped");
+icon_shipped.forEach((icon) => {
+  icon.addEventListener("click", (e) => {
+    e.stopPropagation();
+    orderId = parseInt(icon.parentElement.parentElement.dataset.orderId);
+    const modal = new bootstrap.Modal($("#confirmShippedModal"));
+    modal.show();
+  });
+});
+
+$("#shipped-btn")?.addEventListener("click", () => {
+  if (orderId !== null) {
+    changeOrderStatus(orderId, "shipped", "Change the order status successfully!");
+  }
+  const modal = bootstrap.Modal.getInstance($("#confirmShippedModal"));
+  modal.hide();
 });

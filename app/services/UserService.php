@@ -20,9 +20,9 @@
             return $stmt->fetchAll();
         }
 
-        public function getUserByEmail($email){
+        public function getUserByEmail($email, $banned = 0){
             $stmt = $this->__model->db->prepare("SELECT * FROM users WHERE email = ? AND banned = ?");
-            $stmt->execute([$email, 0]);
+            $stmt->execute([$email, $banned]);
             $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, "UserModel");
             return $stmt->fetch();
         }
@@ -51,7 +51,7 @@
 
         public function addUser(UserModel $user) {
             try {
-                $stmt = $this->__model->db->prepare("INSERT INTO users(user_name, email, passwords, roles) VALUE (?, ?, ?, ?)");
+                $stmt = $this->__model->db->prepare("INSERT INTO users(user_name, user_img_url, email, passwords, roles) VALUE (?, ?, ?, ?, ?)");
                 $password_hash = password_hash($user->getPasswords(), PASSWORD_BCRYPT);
                 if(password_needs_rehash($password_hash, PASSWORD_BCRYPT)) {
                     $password_hash = password_hash($password_hash, PASSWORD_BCRYPT);
