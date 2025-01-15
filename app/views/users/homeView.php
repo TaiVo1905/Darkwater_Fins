@@ -7,7 +7,7 @@
     <base href="<?php echo BASE_URL ?>">
     <link rel="icon" href="./public/images/logo/icon-x.jpg" type="image/x-icon">
     <?php include_once './app/components/link.php'?>
-    <link rel="stylesheet" href="./public/css/common.css">
+    <link rel="stylesheet" href="./public/css/common.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./public/css/header.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./public/css/hotFish.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./public/css/text_banner.css?v=<?php echo time(); ?>">
@@ -46,7 +46,7 @@
                             <div class="product-text">
                                 <h4>Aquarium</h4>
                                 <p>Darkwater Fins has a wide range of aquariums available for both commercial.</p>
-                                <a href="#">MORE INFO</a>
+                                <a href="products/aquariums">MORE INFO</a>
                             </div>
                         </div>
                         <div class="col-md-4 text-center">
@@ -63,7 +63,7 @@
                             <div class="product-text">
                                 <h4>Fish</h4>
                                 <p>Darkwater Fins offers a variety of fish for your aquarium needs.</p>
-                                <a href="#">MORE INFO</a>
+                                <a href="products/fishes">MORE INFO</a>
                             </div>
                         </div>
                         <div class="col-md-4 text-center">
@@ -80,7 +80,7 @@
                             <div class="product-text">
                                 <h4>Fish food</h4>
                                 <p>Darkwater Fins provides high-quality food for all types of aquarium fish.</p>
-                                <a href="#">MORE INFO</a>
+                                <a href="products/fishFoods">MORE INFO</a>
                             </div>
                         </div>
                     </div>
@@ -106,7 +106,7 @@
                 Offering a wide range of services, Darkwater Fins has solidified its position as a leading provider
                 of ornamental fish in the industry.
             </h6>
-            <button type="button" class="btn btn-primary">VIEW OUR PORTFOLIO</button>
+            <a href="./home/aboutUs"><button type="button" class="btn btn-primary">VIEW OUR PORTFOLIO</button></a>
         </div>
         <?php include_once './app/components/footer.php'?>
     <?php

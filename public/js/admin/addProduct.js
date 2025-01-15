@@ -34,7 +34,7 @@ $('#yes-button').addEventListener("click", (e) => {
     $('#productStock').value = "";
     $('#productCategory').value = "";
 });
-document.getElementById("save-btn").addEventListener("click", function(event){
+$(".form-add-product").addEventListener("submit", function(event){
     event.preventDefault();
     
     const product_name = $('#productName').value;

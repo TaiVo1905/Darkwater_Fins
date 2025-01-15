@@ -6,7 +6,7 @@
     <title>Darkwater Fins</title>
     <?php include_once './app/components/link.php'?>
     <base href="<?php echo BASE_URL ?>">
-    <link rel="stylesheet" href="./public/css/common.css">
+    <link rel="stylesheet" href="./public/css/common.?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./public/css/header.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./public/css/footer.css?v=<?php echo time(); ?>">
 </head>

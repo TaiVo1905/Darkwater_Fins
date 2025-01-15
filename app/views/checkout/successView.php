@@ -7,7 +7,7 @@
     <title>Checkout successfully</title>
     <base href="<?php echo BASE_URL ?>">
     <?php include_once './app/components/link.php' ?>
-    <link rel="stylesheet" href="./public/css/common.css">
+    <link rel="stylesheet" href="./public/css/common.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./public/css/success.css?v=<?php echo time(); ?>">
   
 </head>
